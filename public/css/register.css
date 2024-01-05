@@ -1,0 +1,75 @@
+.header__logo {
+    font-size: 30px;
+    margin-top: 25px;
+    margin-left: 40px;
+}
+
+.main {
+    background-color: #eeeeee;
+    height: 500px;
+}
+
+h1 {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.nameinput,
+.emailinput,
+.passwordinput {
+    display: block;
+    margin: auto;
+    width: 300px;
+    background-color: #eeeeee;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border-color: lightgray;
+    height: 30px;
+}
+
+.register__button {
+    display: block;
+    margin: auto;
+    background-color: blue;
+    width: 300px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    border-color: lightgray;
+    height: 40px;
+    margin-bottom: 30px;
+}
+
+.registered {
+    text-align: center;
+}
+
+.registered__link {
+    color: blue;
+    text-decoration: none;
+}
+
+footer {
+    background-color: white;
+    text-align: center;
+    height: 50px;
+}
+
+.footer__copyright {
+    padding-top: 10px;
+}
+
+.validation {
+    text-decoration: none;
+    text-align: center;
+    color: red;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}

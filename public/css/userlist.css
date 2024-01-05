@@ -1,0 +1,127 @@
+.main {
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #eeeeee;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    height: 750px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__logo {
+    font-size: 30px;
+    margin-top: 25px;
+    margin-left: 40px;
+}
+
+.header__nav-menu {
+    display: flex;
+    padding: 20px;
+    list-style-type: none;
+}
+
+.header__nav-menu-list {
+    padding-right: 40px;
+}
+
+.header__nav-menu-list-link {
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+tr {
+    border-top: 1px solid gray;
+}
+
+.table th,
+.table td {
+    width: 200px;
+    max-width: 200px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.user__button {
+    display: block;
+    margin: auto;
+    background-color: green;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    border-color: lightgray;
+    height: 40px;
+}
+
+.footer {
+    background-color: white;
+    text-align: center;
+    height: 50px;
+    width: 100%;
+    position: relative;
+}
+
+.footer__copyright {
+    padding-top: 10px;
+}
+
+.search__form {
+    width: 400px;
+    border: 1px solid grey;
+    margin-bottom: 40px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.search__name,
+.search__email {
+    margin-bottom: 10px;
+}
+
+.search__name__label,
+.search__email__label {
+    text-align: left;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.search__name__input,
+.search__email__input {
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.search__button {
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+}
+
+.search__form-p {
+    text-align: center;
+    font-weight: bold;
+}

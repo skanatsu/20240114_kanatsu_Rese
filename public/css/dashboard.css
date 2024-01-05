@@ -1,0 +1,69 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__logo {
+    font-size: 30px;
+    margin-top: 25px;
+    margin-left: 40px;
+}
+
+.header__nav-menu {
+    display: flex;
+    padding: 20px;
+    list-style-type: none;
+}
+
+.header__nav-menu-list {
+    padding-right: 40px;
+}
+
+.header__nav-menu-list-link {
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.main {
+    background-color: #eeeeee;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.message {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+button {
+    border: none;
+}
+
+.punch__button {
+    margin-bottom: 100px;
+}
+
+.punch__button-1,
+.punch__button-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.punch__button form button {
+    width: 300px;
+    height: 100px;
+    background-color: white;
+    margin: 10px;
+}
+
+footer {
+    background-color: white;
+    text-align: center;
+    height: 50px;
+}
+
+.footer__copyright {
+    padding-top: 10px;
+}
