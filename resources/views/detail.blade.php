@@ -31,11 +31,57 @@
         </nav>
     </header>
     店舗詳細
-        <div class="shop-details">
-        <h2>{{ $shop->shopname }}</h2>
+    <div class="shop-details">
+        <h2 id="shopName">{{ $shop->shopname }}</h2>
         <p>エリア: {{ $shop->area }}</p>
         <p>ジャンル: {{ $shop->genre }}</p>
         <p>{{ $shop->description }}</p>
+        <input type="date" id="date" class="reservation__date" name="date"
+            value="{{ session('reservation.date') }}" onchange="updateTable()">
+        <input type="time" id="time" class="reservation__time" name="time"
+            value="{{ session('reservation.time') }}" onchange="updateTable()">
+        <select id="people" name="people" onchange="updateTable()">
+            <?php for ($i = 1; $i <= 10; $i++): ?>
+            <option value="<?= $i ?>"><?= $i ?>人</option>
+            <?php endfor; ?>
+        </select>
+        <table>
+            <tr>
+                <th>Shop</th>
+                <td id="shopNameCell">{{ $shop->shopname }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td id="reservationDate">{{ session('reservation.date') }}</td>
+            </tr>
+            <tr>
+                <th>Time</th>
+                <td id="reservationTime">{{ session('reservation.time') }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td id="reservationPeople">{{ session('reservation.people') }}人</td>
+            </tr>
+        </table>
     </div>
+
+    <script>
+        // 初期値を保持
+        var initialShopName = "{{ $shop->shopname }}";
+
+        function updateTable() {
+            // 入力された値を取得
+            var shopNameCell = document.getElementById('shopNameCell');
+            var reservationDate = document.getElementById('reservationDate');
+            var reservationTime = document.getElementById('reservationTime');
+            var reservationPeople = document.getElementById('reservationPeople');
+
+            // 表示を更新 (初期のshopnameは変更しない)
+            shopNameCell.innerHTML = initialShopName;
+            reservationDate.innerHTML = document.getElementById('date').value;
+            reservationTime.innerHTML = document.getElementById('time').value;
+            reservationPeople.innerHTML = document.getElementById('people').value + "人";
+        }
+    </script>
 </body>
 </html>
