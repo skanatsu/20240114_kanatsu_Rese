@@ -112,3 +112,4 @@ Atteは企業の社員の勤怠管理システムです。
 # 20240114_kanatsu_Rese
 # 20240114_kanatsu_Rese
 # 20240114_kanatsu_Rese
+# 20240114_kanatsu_Rese
