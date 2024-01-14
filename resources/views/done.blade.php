@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/dashboard.css">
-    <title>飲食店一覧ページ</title>
+    <title>予約完了</title>
 </head>
 
 <body>
@@ -30,12 +30,21 @@
             </ul>
         </nav>
     </header>
-    飲食店一覧
-    @foreach ($shops as $shop)
-        <p>店名: {{ $shop->shopname }}</p>
-        <p>エリア: {{ $shop->area }}</p>
-        <p>ジャンル: {{ $shop->genre }}</p>
-        <a href="{{ route('detail', ['id' => $shop->id]) }}" class="detail">詳しくみる</a>
-    @endforeach
+    ご予約ありがとうございます。
+<button class="back" id="backButton">
+    戻る
+</button>
 </body>
+
+<script>
+    // ボタン要素を取得
+    var backButton = document.getElementById('backButton');
+
+    // ボタンがクリックされたときの処理
+    backButton.addEventListener('click', function() {
+        // 指定のURLに遷移
+        window.location.href = 'http://localhost/';
+    });
+</script>
+
 </html>

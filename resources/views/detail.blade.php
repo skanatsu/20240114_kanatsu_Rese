@@ -30,12 +30,12 @@
             </ul>
         </nav>
     </header>
-    飲食店一覧
-    @foreach ($shops as $shop)
-        <p>店名: {{ $shop->shopname }}</p>
+    店舗詳細
+        <div class="shop-details">
+        <h2>{{ $shop->shopname }}</h2>
         <p>エリア: {{ $shop->area }}</p>
         <p>ジャンル: {{ $shop->genre }}</p>
-        <a href="{{ route('detail', ['id' => $shop->id]) }}" class="detail">詳しくみる</a>
-    @endforeach
+        <p>{{ $shop->description }}</p>
+    </div>
 </body>
 </html>

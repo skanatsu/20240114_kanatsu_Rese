@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/dashboard.css">
-    <title>飲食店一覧ページ</title>
+    <title>会員登録ありがとうございます</title>
 </head>
 
 <body>
@@ -30,12 +30,21 @@
             </ul>
         </nav>
     </header>
-    飲食店一覧
-    @foreach ($shops as $shop)
-        <p>店名: {{ $shop->shopname }}</p>
-        <p>エリア: {{ $shop->area }}</p>
-        <p>ジャンル: {{ $shop->genre }}</p>
-        <a href="{{ route('detail', ['id' => $shop->id]) }}" class="detail">詳しくみる</a>
-    @endforeach
+    会員登録ありがとうございます。
+<button class="login" id="loginButton">
+    ログインする
+</button>
 </body>
+
+<script>
+    // ボタン要素を取得
+    var loginButton = document.getElementById('loginButton');
+
+    // ボタンがクリックされたときの処理
+    loginButton.addEventListener('click', function() {
+        // ログインページに遷移
+        window.location.href = 'http://localhost/login';
+    });
+</script>
+
 </html>

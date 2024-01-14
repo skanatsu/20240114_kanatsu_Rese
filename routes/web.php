@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,14 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 |
 */
 
+
 Route::get('/', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
+
+Route::get('/', [ShopController::class, 'index'])->name('dashboard');
+
+Route::get('/shops/{id}', [ShopController::class, 'show'])->name('detail');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,5 +41,16 @@ Route::get('/userlist', [RegisteredUserController::class, 'index']);
 Route::post('/userlist', [RegisteredUserController::class, 'search']);
 
 Route::get('/attendance/{user}', [AttendanceController::class, 'show'])->name('attendanceshow');
+
+Route::get('/thanks', [RegisteredUserController::class, 'thanks'])->name('thanks');
+
+// Route::get('/mypage', [RegisteredUserController::class, 'mypage'])->name('mypage');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mypage', [RegisteredUserController::class, 'mypage'])->name('mypage');
+});
+
+Route::get('/done', [ReservationController::class, 'done'])->name('done');
+
 
 require __DIR__ . '/auth.php';

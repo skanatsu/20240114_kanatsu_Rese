@@ -75,4 +75,14 @@ class RegisteredUserController extends Controller
 
         return view('userlist', ['users' => $users]);
     }
+
+    public function thanks(): View
+    {
+        return view('thanks');
+    }
+
+    public function mypage(): View
+    {
+        return view('mypage');
+    }
 }
