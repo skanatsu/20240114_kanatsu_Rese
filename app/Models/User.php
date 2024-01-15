@@ -22,7 +22,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'last_status',
     ];
 
     /**
@@ -49,8 +48,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         parent::boot();
 
-        static::creating(function ($user) {
-            $user->last_status = 'OFF';
-        });
-    }
+   }
 }

@@ -36,16 +36,19 @@
         <p>エリア: {{ $shop->area }}</p>
         <p>ジャンル: {{ $shop->genre }}</p>
         <p>{{ $shop->description }}</p>
-        <input type="date" id="date" class="reservation__date" name="date"
-            value="{{ session('reservation.date') }}" onchange="updateTable()">
-        <input type="time" id="time" class="reservation__time" name="time"
-            value="{{ session('reservation.time') }}" onchange="updateTable()">
-        <select id="people" name="people" onchange="updateTable()">
-            <?php for ($i = 1; $i <= 10; $i++): ?>
-            <option value="<?= $i ?>"><?= $i ?>人</option>
-            <?php endfor; ?>
-        </select>
-        <table>
+
+<form method="POST" action="{{ route('reservation.store', ['shopId' => $shop->id]) }}">
+    @csrf
+    <input type="date" id="date" class="reservation__date" name="date" value="{{ session('reservation.date') }}"
+        onchange="updateTable()">
+    <input type="time" id="time" class="reservation__time" name="time" value="{{ session('reservation.time') }}"
+        onchange="updateTable()">
+    <select id="people" name="people" onchange="updateTable()">
+        <?php for ($i = 1; $i <= 10; $i++): ?>
+        <option value="<?= $i ?>"><?= $i ?>人</option>
+        <?php endfor; ?>
+    </select>
+<table>
             <tr>
                 <th>Shop</th>
                 <td id="shopNameCell">{{ $shop->shopname }}</td>
@@ -63,6 +66,10 @@
                 <td id="reservationPeople">{{ session('reservation.people') }}人</td>
             </tr>
         </table>
+    <button type="submit" class="reservation"> <!-- ボタンをsubmitに変更 -->
+        予約する
+    </button>
+</form>
     </div>
 
     <script>

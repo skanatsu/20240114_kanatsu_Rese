@@ -24,7 +24,10 @@ Route::get('/', function () {
 
 Route::get('/', [ShopController::class, 'index'])->name('dashboard');
 
-Route::get('/shops/{id}', [ShopController::class, 'show'])->name('detail');
+Route::get('detail/:shops_{id}', [ShopController::class, 'show'])->name('detail');
+
+Route::post('/reservation/{shopId}', [ReservationController::class, 'store'])
+    ->name('reservation.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
