@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Reservation;
+use App\Models\User;
 
 class Shop extends Model
 {
@@ -14,5 +16,9 @@ class Shop extends Model
     public function image()
     {
         return $this->belongsTo(Image::class);
+    }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'shop_id');
     }
 }

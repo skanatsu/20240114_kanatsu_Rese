@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/dashboard.css">
-    <title>会員登録ありがとうございます</title>
+    <title>マイページ</title>
 </head>
 
 <body>
@@ -31,5 +31,125 @@
         </nav>
     </header>
 mypage
+<h1 class="username">{{ auth()->user()->name }}さん</h1>
+<h2 class="reservation_status">予約状況</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Reservation</th>
+            @isset($reservations)
+                @foreach($reservations as $reservation)
+                    <th>{{ $reservation->shop->shopname }}</th>
+                @endforeach
+            @endisset
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Date</td>
+            @isset($reservations)
+                @foreach($reservations as $reservation)
+                    <td>{{ $reservation->date }}</td>
+                @endforeach
+            @endisset
+        </tr>
+        <tr>
+            <td>Time</td>
+            @isset($reservations)
+                @foreach($reservations as $reservation)
+                    <td>{{ $reservation->time }}</td>
+                @endforeach
+            @endisset
+        </tr>
+        <tr>
+            <td>Number</td>
+            @isset($reservations)
+                @foreach($reservations as $reservation)
+                    {{-- <td>{{ $reservation->number }}</td> --}}
+                    <td>{{ $reservation['number'] }}</td>
+                @endforeach
+            @endisset
+        </tr>
+    </tbody>
+</table>
 
+    {{-- ここから --}}
+    <div class="container">
+        @section('reservation_section')
+            @isset($reservations)
+                <h1 class="username">{{ auth()->user()->name }}さん</h1>
+                <h2 class="reservation_status">予約状況</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reservation</th>
+                            <th>Shop</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($reservations as $reservation)
+                            <tr>
+                                <td>{{ $reservation->id }}</td>
+                                <td>{{ $reservation->shop->shopname }}</td>
+                                <td>{{ $reservation->date }}</td>
+                                <td>{{ $reservation->time }}</td>
+                                <td>{{ $reservation->number }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5">予約がありません</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            @endisset
+        @show
+
+        <!-- 別のセクションに同じ変数を使用する場合 -->
+        @section('another_section')
+            <!-- 別のセクションでのコード -->
+        @show
+    </div>
+
+
+            <div class="container">
+        <h2 class="reservation_status">予約状況</h2>
+        @isset($reservations)
+        <table>
+            <thead>
+                <tr>
+                    <th>Reservation</th>
+                    <th>Shop</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($reservations as $reservation)
+                <tr>
+                    <td>{{ $reservation->id }}</td>
+                    <td>{{ $reservation->shop->shopname }}</td>
+                    <td>{{ $reservation->date }}</td>
+                    <td>{{ $reservation->time }}</td>
+                    <td>{{ $reservation->number }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="5">予約がありません</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+        @else
+        <p>予約がありません</p>
+        @endisset
+    </div>
+    {{-- ここまで --}}
+
+<h2 class="favorite_shop">お気に入り店舗</h2>
+</body>
 </html>
