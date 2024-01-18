@@ -81,8 +81,8 @@ class RegisteredUserController extends Controller
         return view('thanks');
     }
 
-    public function mypage(): View
-    {
-        return view('mypage');
-    }
+    // public function mypage(): View
+    // {
+    //     return view('mypage');
+    // }
 }

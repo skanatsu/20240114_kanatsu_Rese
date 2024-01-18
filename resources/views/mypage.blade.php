@@ -33,123 +33,46 @@
 mypage
 <h1 class="username">{{ auth()->user()->name }}さん</h1>
 <h2 class="reservation_status">予約状況</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Reservation</th>
-            @isset($reservations)
-                @foreach($reservations as $reservation)
-                    <th>{{ $reservation->shop->shopname }}</th>
-                @endforeach
-            @endisset
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Date</td>
-            @isset($reservations)
-                @foreach($reservations as $reservation)
-                    <td>{{ $reservation->date }}</td>
-                @endforeach
-            @endisset
-        </tr>
-        <tr>
-            <td>Time</td>
-            @isset($reservations)
-                @foreach($reservations as $reservation)
-                    <td>{{ $reservation->time }}</td>
-                @endforeach
-            @endisset
-        </tr>
-        <tr>
-            <td>Number</td>
-            @isset($reservations)
-                @foreach($reservations as $reservation)
-                    {{-- <td>{{ $reservation->number }}</td> --}}
-                    <td>{{ $reservation['number'] }}</td>
-                @endforeach
-            @endisset
-        </tr>
-    </tbody>
-</table>
 
-    {{-- ここから --}}
-    <div class="container">
-        @section('reservation_section')
-            @isset($reservations)
-                <h1 class="username">{{ auth()->user()->name }}さん</h1>
-                <h2 class="reservation_status">予約状況</h2>
+       <form action="/reservation/delete" method="post" class="reservation-form">
+            @csrf
+            @method('delete')
+
+            @foreach($reservations as $reservation)
+                <div class="reservation caset">
+                    予約{{ $loop->iteration }}
+                </div>
+
+                <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Reservation</th>
-                            <th>Shop</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Number</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($reservations as $reservation)
-                            <tr>
-                                <td>{{ $reservation->id }}</td>
-                                <td>{{ $reservation->shop->shopname }}</td>
-                                <td>{{ $reservation->date }}</td>
-                                <td>{{ $reservation->time }}</td>
-                                <td>{{ $reservation->number }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5">予約がありません</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
+                    <!-- 予約データの表示 -->
+
+                    <tr>
+                        <td>Shop</td>
+                        <td>{{ $reservation->shop->shopname }}</td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>{{ $reservation->date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Time</td>
+                        <td>{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Number</td>
+                        <td>{{ $reservation->number }}人</td>
+                    </tr>
                 </table>
-            @endisset
-        @show
 
-        <!-- 別のセクションに同じ変数を使用する場合 -->
-        @section('another_section')
-            <!-- 別のセクションでのコード -->
-        @show
-    </div>
-
-
-            <div class="container">
-        <h2 class="reservation_status">予約状況</h2>
-        @isset($reservations)
-        <table>
-            <thead>
-                <tr>
-                    <th>Reservation</th>
-                    <th>Shop</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Number</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($reservations as $reservation)
-                <tr>
-                    <td>{{ $reservation->id }}</td>
-                    <td>{{ $reservation->shop->shopname }}</td>
-                    <td>{{ $reservation->date }}</td>
-                    <td>{{ $reservation->time }}</td>
-                    <td>{{ $reservation->number }}</td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="5">予約がありません</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-        @else
-        <p>予約がありません</p>
-        @endisset
-    </div>
-    {{-- ここまで --}}
+                <button class="reservation__delete" name="id" value="{{ $reservation['id'] }}">❌</button>
+            @endforeach
+        </form>
 
 <h2 class="favorite_shop">お気に入り店舗</h2>
+
+
+
 </body>
 </html>

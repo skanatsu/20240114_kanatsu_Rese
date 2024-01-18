@@ -37,29 +37,20 @@ class ReservationController extends Controller
         return redirect('http://localhost/done');
     }
 
-    // public function showReservationStatus(Request $request): View
-    // {
-    //     // ログイン中のユーザーIDを取得
-    //     $userId = Auth::id();
-
-    //     // ユーザーに関連する予約情報を取得
-    //     $reservations = Reservation::where('user_id', $userId)->get();
-
-    //     // 変数 $reservations を compact 関数でビューに渡す
-    //     return view('mypage', compact('user', 'reservations'));
-    // }
-
     public function showReservationStatus()
     {
-        // 以下の行を削除
-        // $userId = Auth::id();
+        $userId = Auth::id();
 
         // 全ての予約情報を取得
         $reservations = Reservation::all();
 
-        //logger($reservations);
-
         // すべての予約情報をビューに渡す
         return view('mypage', compact('reservations'));
+    }
+
+    public function deleteReservations(Request $request)
+    {
+        Reservation::find($request->id)->delete();
+        return redirect('mypage');
     }
 }
