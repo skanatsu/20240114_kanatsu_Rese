@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>飲食店一覧ページ</title>
 </head>
 
@@ -56,10 +57,13 @@
             <p>エリア: {{ $shop->area }}</p>
             <p>ジャンル: {{ $shop->genre }}</p>
             <a href="{{ route('detail', ['id' => $shop->id]) }}" class="detail">詳しくみる</a>
+            {{-- <img src="{{ url('/images/heart.jpeg') }}" alt="" class="heart">
+            <img src="{{ url('/images/greyheart.png') }}" alt="" class="heart"> --}}
+            <img src="{{ url('/images/greyheart.png') }}" alt="" class="heart" onclick="toggleImage(this)" id="heartImage_{{ $loop->index }}">
         </div>
     @endforeach
 
-    <script>
+<script>
         function filterShops() {
             var selectedArea = document.getElementById("area").value;
             var selectedGenre = document.getElementById("genre").value;
@@ -88,8 +92,23 @@
                 filterShops();
             }
         }
+
+        // 画像の状態をトグルする関数
+                function toggleImage(element) {
+            var currentSrc = element.src;
+
+            if (currentSrc.includes('greyheart.png')) {
+                element.src = '{{ url('/images/heart.jpeg') }}';
+            } else {
+                element.src = '{{ url('/images/greyheart.png') }}';
+            }
+        }
+
+        // クリックイベントで画像の切り替えを実行
+        document.getElementById('heartImage').addEventListener('click', toggleImage);
+
+
     </script>
 
-Ï
 </body>
 </html>

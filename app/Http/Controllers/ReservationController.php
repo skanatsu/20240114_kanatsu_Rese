@@ -42,8 +42,11 @@ class ReservationController extends Controller
         $userId = Auth::id();
 
         // 全ての予約情報を取得
-        $reservations = Reservation::all();
+        // $reservations = Reservation::all();
 
+        // ログイン中のユーザーが予約した予約情報を取得
+        $reservations = Reservation::where('user_id', $userId)->get();
+        
         // すべての予約情報をビューに渡す
         return view('mypage', compact('reservations'));
     }

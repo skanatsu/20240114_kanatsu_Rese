@@ -67,3 +67,7 @@ footer {
 .footer__copyright {
     padding-top: 10px;
 }
+
+.heart {
+    width: 30px;
+}
