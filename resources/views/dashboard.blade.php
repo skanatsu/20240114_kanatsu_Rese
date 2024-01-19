@@ -57,9 +57,8 @@
             <p>エリア: {{ $shop->area }}</p>
             <p>ジャンル: {{ $shop->genre }}</p>
             <a href="{{ route('detail', ['id' => $shop->id]) }}" class="detail">詳しくみる</a>
-            {{-- <img src="{{ url('/images/heart.jpeg') }}" alt="" class="heart">
-            <img src="{{ url('/images/greyheart.png') }}" alt="" class="heart"> --}}
-            <img src="{{ url('/images/greyheart.png') }}" alt="" class="heart" onclick="toggleImage(this)" id="heartImage_{{ $loop->index }}">
+            {{-- <img src="{{ url('/images/greyheart.png') }}" alt="" class="heart" onclick="toggleImage(this, {{ $shop->id }})" id="heartImage_{{ $loop->index }}"> --}}
+            <img src="{{ url('/images/'. ($shop->isFavorite ? 'heart.jpeg' : 'greyheart.png')) }}" alt="" class="heart" onclick="toggleImage(this, {{ $shop->id }})" id="heartImage_{{ $loop->index }}">
         </div>
     @endforeach
 
@@ -107,7 +106,31 @@
         // クリックイベントで画像の切り替えを実行
         document.getElementById('heartImage').addEventListener('click', toggleImage);
 
+// クリックイベントで画像の切り替えを実行
+    // 画像の状態をトグルする関数
+    function toggleImage(element, shopId) {
+        var currentSrc = element.src;
+        var newSrc = currentSrc.includes('greyheart.png') ? '{{ url('/images/heart.jpeg') }}' : '{{ url('/images/greyheart.png') }}';
 
+        element.src = newSrc;
+
+        // お気に入りのトグル処理を呼び出す
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('shop.toggle-favorite', ['shopId' => '__SHOP_ID__']) }}'.replace('__SHOP_ID__', shopId),
+            data: {
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                // 成功時の処理
+                console.log(response);
+            },
+            error: function(error) {
+                // エラー時の処理
+                console.error(error);
+            }
+        });
+    }
     </script>
 
 </body>

@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Reservation;
 use App\Models\Shop;
+use App\Models\Favorite;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -25,7 +26,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
     ];
-
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

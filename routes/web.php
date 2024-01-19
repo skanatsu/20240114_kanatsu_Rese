@@ -56,4 +56,7 @@ Route::get('/done', [ReservationController::class, 'done'])->name('done');
 
 Route::delete('/reservation/delete', [ReservationController::class, 'deleteReservations']);
 
+Route::post('/shop/toggle-favorite/{shopId}', [ShopController::class, 'toggleFavorite'])
+    ->name('shop.toggle-favorite');
+
 require __DIR__ . '/auth.php';
