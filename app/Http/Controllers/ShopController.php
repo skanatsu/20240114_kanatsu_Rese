@@ -18,4 +18,5 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($id);
         return view('detail', ['shop' => $shop]);
     }
+
 }

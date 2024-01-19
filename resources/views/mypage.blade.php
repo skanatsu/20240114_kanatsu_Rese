@@ -42,7 +42,7 @@ mypage
                 <div class="reservation caset">
                     予約{{ $loop->iteration }}
                 </div>
-
+                <button class="reservation__delete" name="id" value="{{ $reservation['id'] }}">❌</button>
                 <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
 
                 <table>
@@ -66,7 +66,7 @@ mypage
                     </tr>
                 </table>
 
-                <button class="reservation__delete" name="id" value="{{ $reservation['id'] }}">❌</button>
+
             @endforeach
         </form>
 
