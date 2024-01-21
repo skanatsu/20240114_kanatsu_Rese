@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Reservation;
 use App\Models\User;
 use App\Models\Favorite;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Shop extends Model
 {
@@ -29,9 +30,13 @@ class Shop extends Model
         return $this->favorites()->where('user_id', auth()->id())->exists();
     }
 
-    public function favorites()
+    // public function favorites()
+    // {
+    //     // この店舗をお気に入りにしたユーザーとのリレーションシップ
+    //     return $this->belongsToMany(User::class, 'favorites');
+    // }
+    public function favorites(): HasMany
     {
-        // この店舗をお気に入りにしたユーザーとのリレーションシップ
-        return $this->belongsToMany(User::class, 'favorites');
+        return $this->hasMany(Favorite::class);
     }
 }

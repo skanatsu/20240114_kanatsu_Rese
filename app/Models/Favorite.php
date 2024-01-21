@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Shop;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Favorite extends Model
 {
@@ -16,17 +17,13 @@ class Favorite extends Model
         'shop_id',
     ];
 
-    // 他のモデルとのリレーションシップを定義する場合はここに記述する
 
-    // 例：FavoriteモデルとUserモデルのリレーションシップ
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
-    // 例：FavoriteモデルとShopモデルのリレーションシップ
-    public function shop()
+    public function shop(): BelongsTo
     {
-        return $this->belongsTo(Shop::class);
+        return $this->belongsTo(Shop::class, 'shop_id');
     }
 }

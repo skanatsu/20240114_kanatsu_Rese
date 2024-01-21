@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>マイページ</title>
 </head>
 
@@ -30,15 +31,15 @@
             </ul>
         </nav>
     </header>
-mypage
-<h1 class="username">{{ auth()->user()->name }}さん</h1>
-<h2 class="reservation_status">予約状況</h2>
+    mypage
+    <h1 class="username">{{ auth()->user()->name }}さん</h1>
+    <h2 class="reservation_status">予約状況</h2>
 
-       <form action="/reservation/delete" method="post" class="reservation-form">
-            @csrf
-            @method('delete')
+    <form action="/reservation/delete" method="post" class="reservation-form">
+        @csrf
+        @method('delete')
 
-            @foreach($reservations as $reservation)
+ @foreach($reservations as $reservation)
                 <div class="reservation caset">
                     予約{{ $loop->iteration }}
                 </div>
@@ -70,9 +71,98 @@ mypage
             @endforeach
         </form>
 
-<h2 class="favorite_shop">お気に入り店舗</h2>
+    <h2 class="favorite_status">お気に入り店舗</h2>
+    @foreach ($favoriteShops as $favorite)
+    <table>
+        <!-- お気に入り店舗データの表示 -->
+        <tr>
+            <td>{{ $favorite->shop->shopname }}</td>
+        </tr>
+        <tr>
+            <td>{{ $favorite->shop->area }}</td>
+        </tr>
+        <tr>
+            <td>{{ $favorite->shop->genre }}</td>
+        </tr>
+        <tr>
+            <a href="{{ route('detail', ['id' => $favorite->shop->id]) }}" class="detail">詳しくみる</a>
+
+            <img src="{{ url('/images/'. ($favorite->shop ? ($favorite->shop->isFavorite ? 'heart.jpeg' : 'greyheart.png') : 'default.png')) }}" alt="" class="heart" onclick="toggleImage(this, {{ $favorite->shop ? $favorite->shop->id : 0 }})" id="heartImage_{{ $loop->index }}">
+
+        </tr>
+    </table>
+@endforeach
 
 
 
+<script>
+        // function filterShops() {
+        //     var selectedArea = document.getElementById("area").value;
+        //     var selectedGenre = document.getElementById("genre").value;
+        //     var searchShopname = document.getElementById("shopname").value.toLowerCase();
+        //     var shops = document.getElementsByClassName("shop");
+
+        //     for (var i = 0; i < shops.length; i++) {
+        //         var shop = shops[i];
+        //         var area = shop.getAttribute("data-area");
+        //         var genre = shop.getAttribute("data-genre");
+        //         var shopname = shop.getAttribute("data-shopname").toLowerCase();
+
+        //         // 選択されたエリア、ジャンルか "allarea"、"allgenre" なら表示、それ以外は非表示
+        //         if ((selectedArea === "allarea" || area === selectedArea) &&
+        //             (selectedGenre === "allgenre" || genre === selectedGenre) &&
+        //             shopname.includes(searchShopname)) {
+        //             shop.style.display = "block";
+        //         } else {
+        //             shop.style.display = "none";
+        //         }
+        //     }
+        // }
+
+        // function searchOnEnter(event) {
+        //     if (event.key === "Enter") {
+        //         filterShops();
+        //     }
+        // }
+
+
+        //画像の状態をトグルする関数
+function toggleImage(element, shopId) {
+    var currentSrc = element.src;
+    var newSrc = currentSrc.includes('greyheart.png') ? '{{ url('/images/heart.jpeg') }}' : '{{ url('/images/greyheart.png') }}';
+
+    element.src = newSrc;
+
+    // お気に入りのトグル処理を呼び出す
+    if (shopId) {
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('mypage.toggle-favorite', ['shopId' => '__SHOP_ID__']) }}'.replace('__SHOP_ID__', shopId),
+            data: {
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                // 成功時の処理
+                console.log(response);
+
+                // ページをリロード
+                location.reload();
+
+            },
+            error: function(error) {
+                // エラー時の処理
+                console.error(error);
+            }
+        });
+    }
+}
+
+
+// クリックイベントで画像の切り替えを実行
+document.getElementById('heartImage').addEventListener('click', function() {
+    toggleImage(this, null);
+});
+    
+    </script>
 </body>
 </html>
