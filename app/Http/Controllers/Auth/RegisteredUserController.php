@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-use App\Http\Controllers\AttendanceController;
 
 class RegisteredUserController extends Controller
 {
@@ -48,33 +47,37 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);
-        return redirect('/');
+
+        // return redirect('/');
+        
+        // ユーザー作成後、メール検証ページにリダイレクト
+        return redirect()->route('verification.notice');
     }
 
-    public function index()
-    {
-        $users = User::paginate(5);
-        return view('userlist', ['users' => $users]);
-    }
-    public function search(Request $request)
-    {
-        $name = $request->input('name');
-        $email = $request->input('email');
+    // public function index()
+    // {
+    //     $users = User::paginate(5);
+    //     return view('userlist', ['users' => $users]);
+    // }
+    // public function search(Request $request)
+    // {
+    //     $name = $request->input('name');
+    //     $email = $request->input('email');
 
-        $query = User::query();
+    //     $query = User::query();
 
-        if (!empty($name)) {
-            $query->where('name', 'like', '%' . $name . '%');
-        }
+    //     if (!empty($name)) {
+    //         $query->where('name', 'like', '%' . $name . '%');
+    //     }
 
-        if (!empty($email)) {
-            $query->where('email', 'like', '%' . $email . '%');
-        }
+    //     if (!empty($email)) {
+    //         $query->where('email', 'like', '%' . $email . '%');
+    //     }
 
-        $users = $query->paginate(5);
+    //     $users = $query->paginate(5);
 
-        return view('userlist', ['users' => $users]);
-    }
+    //     return view('userlist', ['users' => $users]);
+    // }
 
     public function thanks(): View
     {

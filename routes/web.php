@@ -19,7 +19,8 @@ use App\Http\Controllers\MyPageController;
 */
 
 
-Route::get('/', [ShopController::class, 'index'])->name('dashboard');  // 修正
+// Route::get('/', [ShopController::class, 'index'])->name('dashboard');
+Route::get('/', [ShopController::class, 'index'])->name('/'); 
 
 Route::get('detail/{id}', [ShopController::class, 'show'])->name('detail');  // 修正
 
@@ -42,8 +43,8 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.reset');
 
-Route::get('/userlist', [RegisteredUserController::class, 'index']);
-Route::post('/userlist', [RegisteredUserController::class, 'search']);
+// Route::get('/userlist', [RegisteredUserController::class, 'index']);
+// Route::post('/userlist', [RegisteredUserController::class, 'search']);
 
 Route::get('/thanks', [RegisteredUserController::class, 'thanks'])->name('thanks');
 
