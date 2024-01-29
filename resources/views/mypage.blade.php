@@ -85,84 +85,50 @@
             <td>{{ $favorite->shop->genre }}</td>
         </tr>
         <tr>
-            <a href="{{ route('detail', ['id' => $favorite->shop->id]) }}" class="detail">詳しくみる</a>
+                            <a href="{{ route('detail', ['id' => $favorite->shop->id]) }}" class="detail">詳しくみる</a>
 
-            <img src="{{ url('/images/'. ($favorite->shop ? ($favorite->shop->isFavorite ? 'heart.jpeg' : 'greyheart.png') : 'default.png')) }}" alt="" class="heart" onclick="toggleImage(this, {{ $favorite->shop ? $favorite->shop->id : 0 }})" id="heartImage_{{ $loop->index }}">
+                     <img src="{{ url('/images/'. ($favorite->shop ? ($favorite->shop->isFavorite ? 'heart.jpeg' : 'greyheart.png') : 'default.png')) }}" alt="" class="heart" data-shop-id="{{ $favorite->shop ? $favorite->shop->id : 0 }}">
 
         </tr>
     </table>
 @endforeach
 
-
-
 <script>
-        // function filterShops() {
-        //     var selectedArea = document.getElementById("area").value;
-        //     var selectedGenre = document.getElementById("genre").value;
-        //     var searchShopname = document.getElementById("shopname").value.toLowerCase();
-        //     var shops = document.getElementsByClassName("shop");
+    function toggleImage(element, shopId) {
+        var currentSrc = element.src;
+        var newSrc = currentSrc.includes('greyheart.png') ? '{{ url('/images/heart.jpeg') }}' : '{{ url('/images/greyheart.png') }}';
+        element.src = newSrc;
 
-        //     for (var i = 0; i < shops.length; i++) {
-        //         var shop = shops[i];
-        //         var area = shop.getAttribute("data-area");
-        //         var genre = shop.getAttribute("data-genre");
-        //         var shopname = shop.getAttribute("data-shopname").toLowerCase();
-
-        //         // 選択されたエリア、ジャンルか "allarea"、"allgenre" なら表示、それ以外は非表示
-        //         if ((selectedArea === "allarea" || area === selectedArea) &&
-        //             (selectedGenre === "allgenre" || genre === selectedGenre) &&
-        //             shopname.includes(searchShopname)) {
-        //             shop.style.display = "block";
-        //         } else {
-        //             shop.style.display = "none";
-        //         }
-        //     }
-        // }
-
-        // function searchOnEnter(event) {
-        //     if (event.key === "Enter") {
-        //         filterShops();
-        //     }
-        // }
-
-
-        //画像の状態をトグルする関数
-function toggleImage(element, shopId) {
-    var currentSrc = element.src;
-    var newSrc = currentSrc.includes('greyheart.png') ? '{{ url('/images/heart.jpeg') }}' : '{{ url('/images/greyheart.png') }}';
-
-    element.src = newSrc;
-
-    // お気に入りのトグル処理を呼び出す
-    if (shopId) {
-        $.ajax({
-            type: 'POST',
-            url: '{{ route('mypage.toggle-favorite', ['shopId' => '__SHOP_ID__']) }}'.replace('__SHOP_ID__', shopId),
-            data: {
-                _token: '{{ csrf_token() }}',
-            },
-            success: function(response) {
-                // 成功時の処理
-                console.log(response);
-
-                // ページをリロード
-                location.reload();
-
-            },
-            error: function(error) {
-                // エラー時の処理
-                console.error(error);
-            }
-        });
+        // お気に入りのトグル処理を呼び出す
+        if (shopId) {
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('mypage.toggle-favorite', ['shopId' => '__SHOP_ID__']) }}'.replace('__SHOP_ID__', shopId),
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    // 成功時の処理
+                    console.log(response);
+                },
+                error: function(error) {
+                    // エラー時の処理
+                    console.error(error);
+                }
+            });
+        }
     }
-}
 
+    // クリックイベントで画像の切り替えを実行
+    document.querySelectorAll('.heart').forEach(function(element) {
+        element.addEventListener('click', function() {
+            var shopId = this.getAttribute('data-shop-id');
+            toggleImage(this, shopId);
+            // ページをリロード
+            location.reload();
+        });
+    });
 
-// クリックイベントで画像の切り替えを実行
-document.getElementById('heartImage').addEventListener('click', function() {
-    toggleImage(this, null);
-});
-    
     </script>
 </body>
 </html>
