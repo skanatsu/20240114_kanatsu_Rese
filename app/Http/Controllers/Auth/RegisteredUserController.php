@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Http\Controllers\AttendanceController;
 
 class RegisteredUserController extends Controller
 {
@@ -21,6 +22,7 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         return view('auth.register');
+
     }
 
     /**
@@ -32,7 +34,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -47,45 +49,42 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);
-
         // return redirect('/');
-        
-        // ユーザー作成後、メール検証ページにリダイレクト
         return redirect()->route('verification.notice');
     }
 
-    // public function index()
-    // {
-    //     $users = User::paginate(5);
-    //     return view('userlist', ['users' => $users]);
-    // }
-    // public function search(Request $request)
-    // {
-    //     $name = $request->input('name');
-    //     $email = $request->input('email');
+public function index()
+{
+  $users = User::paginate(5);
+  return view('userlist', ['users' => $users]);
+}
 
-    //     $query = User::query();
 
-    //     if (!empty($name)) {
-    //         $query->where('name', 'like', '%' . $name . '%');
-    //     }
 
-    //     if (!empty($email)) {
-    //         $query->where('email', 'like', '%' . $email . '%');
-    //     }
+public function search(Request $request)
+{
+ $name = $request->input('name');
+ $email = $request->input('email');
 
-    //     $users = $query->paginate(5);
+ $query = User::query();
 
-    //     return view('userlist', ['users' => $users]);
-    // }
+ if (!empty($name)) {
+  $query->where('name', 'like', '%' . $name . '%');
+ }
 
-    public function thanks(): View
-    {
-        return view('thanks');
-    }
+ if (!empty($email)) {
+  $query->where('email', 'like', '%' . $email . '%');
+ }
 
-    // public function mypage(): View
-    // {
-    //     return view('mypage');
-    // }
+ $users = $query->paginate(5);
+
+ return view('userlist', ['users' => $users]);
+}
+
+
+
+
+
+
+
 }

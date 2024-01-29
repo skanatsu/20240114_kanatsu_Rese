@@ -37,6 +37,7 @@
         <p>ジャンル: {{ $shop->genre }}</p>
         <p>{{ $shop->description }}</p>
 
+@auth
 <form method="POST" action="{{ route('reservation.store', ['shopId' => $shop->id]) }}">
     @csrf
     <input type="date" id="date" class="reservation__date" name="date" value="{{ session('reservation.date') }}"
@@ -70,6 +71,7 @@
         予約する
     </button>
 </form>
+@endauth
     </div>
 
     <script>

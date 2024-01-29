@@ -58,7 +58,9 @@
             <p>ジャンル: {{ $shop->genre }}</p>
             <a href="{{ route('detail', ['id' => $shop->id]) }}" class="detail">詳しくみる</a>
             {{-- <img src="{{ url('/images/greyheart.png') }}" alt="" class="heart" onclick="toggleImage(this, {{ $shop->id }})" id="heartImage_{{ $loop->index }}"> --}}
+            @auth
             <img src="{{ url('/images/'. ($shop->isFavorite ? 'heart.jpeg' : 'greyheart.png')) }}" alt="" class="heart" onclick="toggleImage(this, {{ $shop->id }})" id="heartImage_{{ $loop->index }}">
+            @endauth
         </div>
     @endforeach
 
@@ -109,6 +111,7 @@
 // クリックイベントで画像の切り替えを実行
     // 画像の状態をトグルする関数
     function toggleImage(element, shopId) {
+
         var currentSrc = element.src;
         var newSrc = currentSrc.includes('greyheart.png') ? '{{ url('/images/heart.jpeg') }}' : '{{ url('/images/greyheart.png') }}';
 
@@ -131,6 +134,9 @@
             }
         });
     }
+
+
+
     </script>
 
 </body>
