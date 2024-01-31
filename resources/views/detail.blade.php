@@ -37,41 +37,66 @@
         <p>ジャンル: {{ $shop->genre }}</p>
         <p>{{ $shop->description }}</p>
 
-@auth
-<form method="POST" action="{{ route('reservation.store', ['shopId' => $shop->id]) }}">
-    @csrf
-    <input type="date" id="date" class="reservation__date" name="date" value="{{ session('reservation.date') }}"
-        onchange="updateTable()">
-    <input type="time" id="time" class="reservation__time" name="time" value="{{ session('reservation.time') }}"
-        onchange="updateTable()">
-    <select id="people" name="people" onchange="updateTable()">
-        <?php for ($i = 1; $i <= 10; $i++): ?>
-        <option value="<?= $i ?>"><?= $i ?>人</option>
-        <?php endfor; ?>
-    </select>
-<table>
-            <tr>
-                <th>Shop</th>
-                <td id="shopNameCell">{{ $shop->shopname }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td id="reservationDate">{{ session('reservation.date') }}</td>
-            </tr>
-            <tr>
-                <th>Time</th>
-                <td id="reservationTime">{{ session('reservation.time') }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td id="reservationPeople">{{ session('reservation.people') }}人</td>
-            </tr>
-        </table>
-    <button type="submit" class="reservation"> <!-- ボタンをsubmitに変更 -->
-        予約する
-    </button>
-</form>
-@endauth
+        @auth
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('reservation.store', ['shopId' => $shop->id]) }}">
+                @csrf
+                <input type="date" id="date" class="reservation__date" name="date"
+                    value="{{ session('reservation.date') }}" onchange="updateTable()">
+                <select id="time" class="reservation__time" name="time">
+                    <?php
+                    // 30分ごとのオプションを生成
+                    for ($hour = 0; $hour < 24; $hour++) {
+                        for ($minute = 0; $minute < 60; $minute += 30) {
+                            $timeValue = sprintf('%02d:%02d', $hour, $minute);
+                            $selected = $timeValue === session('reservation.time') ? 'selected' : '';
+                            echo "<option value=\"$timeValue\" $selected>$timeValue</option>";
+                        }
+                    }
+                    ?>
+                </select>
+                <select id="people" name="people" onchange="updateTable()">
+                    <?php for ($i = 1; $i <= 10; $i++): ?>
+                    <option value="<?= $i ?>"><?= $i ?>人</option>
+                    <?php endfor; ?>
+                </select>
+                <table>
+                    <tr>
+                        <th>Shop</th>
+                        <td id="shopNameCell">{{ $shop->shopname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td id="reservationDate">{{ session('reservation.date') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Time</th>
+                        <td id="reservationTime">{{ session('reservation.time') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Number</th>
+                        <td id="reservationPeople">{{ session('reservation.people') }}人</td>
+                    </tr>
+                </table>
+                <button type="submit" class="reservation"> <!-- ボタンをsubmitに変更 -->
+                    予約する
+                </button>
+
+                <div id="errorMessages" class="error-messages"></div>
+
+
+
+            </form>
+        @endauth
     </div>
 
     <script>
@@ -91,6 +116,58 @@
             reservationTime.innerHTML = document.getElementById('time').value;
             reservationPeople.innerHTML = document.getElementById('people').value + "人";
         }
+
+        function submitForm() {
+            var form = document.getElementById('reservationForm');
+
+            // フォームのデータを取得
+            var formData = new FormData(form);
+
+            // Ajaxでフォームを送信
+            fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // 成功時の処理（例: リダイレクト）
+                        window.location.href = data.redirect;
+                    } else {
+                        // 失敗時の処理（例: エラーメッセージの表示）
+                        displayErrorMessages(data.errors);
+                    }
+                })
+                .catch(error => {
+                    console.error('予約時にエラーが発生しました', error);
+                });
+        }
+
+        function displayErrorMessages(errors) {
+            // 以前のエラーメッセージをクリア
+            var errorContainer = document.getElementById('errorMessages');
+            errorContainer.innerHTML = '';
+
+            // エラーメッセージを表示するためのリスト要素を作成
+            var errorList = document.createElement('ul');
+
+            for (var field in errors) {
+                if (errors.hasOwnProperty(field)) {
+                    for (var i = 0; i < errors[field].length; i++) {
+                        var errorMessage = errors[field][i];
+                        var errorListItem = document.createElement('li');
+                        errorListItem.textContent = errorMessage;
+                        errorList.appendChild(errorListItem);
+                    }
+                }
+            }
+            // リストをエラーコンテナに追加
+            errorContainer.appendChild(errorList);
+        }
     </script>
 </body>
+
 </html>

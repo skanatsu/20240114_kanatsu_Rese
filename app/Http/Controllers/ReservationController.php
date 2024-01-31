@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ReservationRequest;
 
 class ReservationController extends Controller
 {
@@ -14,13 +15,27 @@ class ReservationController extends Controller
         return view('done');
     }
 
-    public function store(Request $request, $shopId)
+ 
+    public function store(ReservationRequest $request, $shopId)
     {
+        // バリデーションルールを通過した場合
+        $validatedData = $request->validated();
+
+        // 過去の日時での予約かどうかを確認
+        $date = $validatedData['date'];
+        $isPastDate = strtotime($date) < strtotime('today');
+
+        // if ($isPastDate) {
+        //     // 過去の日時の場合はエラーメッセージをフラッシュしてリダイレクト
+        //     return redirect()->route('detail',
+        //         ['id' => $shopId]
+        //     )->with('error', '過去の日時での予約はできません。');
+        // }
+
         // ログイン中のユーザーIDを取得
         $userId = Auth::id();
 
         // リクエストからデータを取得
-        $date = $request->input('date');
         $time = $request->input('time');
         $number = $request->input('people');
 
@@ -37,21 +52,8 @@ class ReservationController extends Controller
         return redirect('http://localhost/done');
     }
 
-    // public function showReservationStatus()
-    // {
-    //     $userId = Auth::id();
 
-    //     // 全ての予約情報を取得
-    //     // $reservations = Reservation::all();
-
-    //     // ログイン中のユーザーが予約した予約情報を取得
-    //     $reservations = Reservation::where('user_id', $userId)->get();
-        
-    //     // すべての予約情報をビューに渡す
-    //     return view('mypage', compact('reservations'));
-    // }
-
-    public function deleteReservations(Request $request)
+   public function deleteReservations(Request $request)
     {
         Reservation::find($request->id)->delete();
         return redirect('mypage');
