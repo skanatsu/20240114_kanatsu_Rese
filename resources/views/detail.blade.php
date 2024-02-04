@@ -50,6 +50,9 @@
 
             <form method="POST" action="{{ route('reservation.store', ['shopId' => $shop->id]) }}">
                 @csrf
+
+
+
                 <input type="date" id="date" class="reservation__date" name="date"
                     value="{{ session('reservation.date') }}" onchange="updateTable()">
                 <select id="time" class="reservation__time" name="time">
@@ -91,11 +94,7 @@
                     予約する
                 </button>
 
-                <div id="errorMessages" class="error-messages"></div>
-
-
-
-            </form>
+               </form>
         @endauth
     </div>
 

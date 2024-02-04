@@ -56,6 +56,49 @@ class ReservationController extends Controller
    public function deleteReservations(Request $request)
     {
         Reservation::find($request->id)->delete();
-        return redirect('mypage');
+        // return redirect('mypage');
+        return redirect()->route('mypage.show');
+    }
+
+
+
+    public function reservationDetail($id)
+    {
+        $reservation = Reservation::find($id);
+
+        if (!$reservation) {
+            // 予約が見つからない場合の処理をここに追加する（例: エラーページ表示）
+            abort(404, 'Reservation not found');
+        }
+
+        // 予約詳細ページに予約データを渡してビューを表示
+        return view('reservation.detail', compact('reservation'));
+    }
+
+    public function showUpdateForm($id)
+    {
+        $reservation = Reservation::find($id);
+        return view('reservation.update', compact('reservation'));
+    }
+
+    // 予約変更処理
+    public function update(ReservationRequest $request, $id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->date = $request->input('date');
+        $reservation->time = $request->input('time');
+        $reservation->number = $request->input('people');
+        $reservation->save();
+
+        return redirect()->route('mypage.show'); // マイページにリダイレクトするか、適切なルートに変更
+    }
+    
+    // 予約削除処理
+    public function delete($id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->delete();
+
+        return redirect()->route('mypage.show'); // マイページにリダイレクトするか、適切なルートに変更
     }
 }

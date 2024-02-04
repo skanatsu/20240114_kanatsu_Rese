@@ -48,6 +48,8 @@ Route::get('/done', [ReservationController::class, 'done'])->name('done');
 
 Route::delete('/reservation/delete', [ReservationController::class, 'deleteReservations']);
 
+
+
 Route::post('/shop/toggle-favorite/{shopId}', [ShopController::class, 'toggleFavorite'])
     ->name('shop.toggle-favorite');
 
@@ -61,4 +63,8 @@ Route::get('/thanks', [App\Http\Controllers\HomeController::class, 'index'])->na
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('reservation')->group(function () {
+    Route::delete('/delete/{id}', [ReservationController::class, 'delete'])->name('reservation.delete');
+    Route::get('/update/{id}', [ReservationController::class, 'showUpdateForm'])->name('reservation.update.form');
+    Route::put('/update/{id}', [ReservationController::class, 'update'])->name('reservation.update');
+});
