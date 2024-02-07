@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Review;
 
 
 class ShopController extends Controller
@@ -23,7 +24,13 @@ class ShopController extends Controller
     public function show($id)
     {
         $shop = Shop::findOrFail($id);
-        return view('detail', ['shop' => $shop]);
+
+        // 店舗に関連する評価データを取得
+        $reviews = Review::where('shop_id', $id)->get();
+
+        return view('detail', compact('shop', 'reviews'));
+
+        
     }
 
     public function toggleFavorite($shopId)
@@ -50,17 +57,5 @@ class ShopController extends Controller
         return redirect()->route('dashboard');
     }
 
-    // public function getFavoriteShops()
-    // {
-    //     // ログイン中のユーザーIDを取得
-    //     $userId = Auth::id();
-    //     // ログイン中のユーザーのお気に入り店舗情報を取得
-    //     // $favoriteShops = auth()->user()->favorites;
 
-    //     $favoriteShops = Favorite::where('user_id', $userId)->get();
-    //     // 取得したお気に入り店舗情報をmypage.blade.phpに渡す
-    //     // return view('mypage', ['favorite-shops' => $favoriteShops]);
-    //     return view('mypage', compact('favoriteShops'));
-    
-    // }
 }

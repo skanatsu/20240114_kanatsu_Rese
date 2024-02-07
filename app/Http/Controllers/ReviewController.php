@@ -8,36 +8,6 @@ use App\Models\Review;
 
 class ReviewController extends Controller
 {
-    // public function evaluate(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'score' => 'required|integer|min:1|max:5',
-    //         'comment' => 'required|string|max:255',
-    //     ]);
-
-    //     $reservation = Reservation::find($id);
-        
-
-    //     if (!$reservation) {
-    //         // 予約が存在しない場合の処理を追加する
-    //         return redirect()->back()->with('error', '予約が見つかりませんでした');
-    //     }
-
-    //     // ログイン中のユーザーに関連付けてレビューを作成
-    //     $review = new Review([
-    //         'user_id' => auth()->user()->id,
-    //         'shop_id' => $reservation->shop_id,
-    //         'reservation_id' => $reservation->id,
-    //         'score' => $request->input('score'),
-    //         'comment' => $request->input('comment'),
-    //     ]);
-
-    //     $review->save();
-
-    //     return redirect()->back()->with('success', '評価が保存されました'); // 保存後に元のページにリダイレクト
-    // }
-
-
     public function evaluate(Request $request, $id)
     {
         $request->validate([
@@ -74,4 +44,5 @@ class ReviewController extends Controller
 
         return redirect()->back()->with('success', '評価が保存されました');
     }
+
 }

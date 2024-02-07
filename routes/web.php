@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [ShopController::class, 'index'])->name('dashboard');
 // Route::get('/', [ShopController::class, 'index'])->name('/'); 
 
-Route::get('detail/{id}', [ShopController::class, 'show'])->name('detail');  // 修正
+Route::get('detail/{id}', [ShopController::class, 'show'])->name('detail');
 
 Route::post('/reservation/{shopId}', [ReservationController::class, 'store'])
     ->name('reservation.store');

@@ -93,10 +93,27 @@
                 <button type="submit" class="reservation"> <!-- ボタンをsubmitに変更 -->
                     予約する
                 </button>
-
                </form>
         @endauth
     </div>
+
+        <h3 class="review">お客様の声</h3>
+        <table>
+    <thead>
+        <tr>
+            <th>評価</th>
+            <th>コメント</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($reviews as $review)
+        <tr>
+            <td>{{ $review->score }}</td>
+            <td>{{ $review->comment }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
     <script>
         // 初期値を保持
