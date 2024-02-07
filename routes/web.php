@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ShopController;
@@ -68,3 +69,12 @@ Route::prefix('reservation')->group(function () {
     Route::get('/update/{id}', [ReservationController::class, 'showUpdateForm'])->name('reservation.update.form');
     Route::put('/update/{id}', [ReservationController::class, 'update'])->name('reservation.update');
 });
+
+// web.php (or routes/web.php)
+// Route::post('/reservation/{id}/evaluate', 'ReservationController@evaluate')->name('reservation.evaluate');
+
+
+
+// Route::post('/reservation/{id}/evaluate', 'ReviewController@evaluate')->name('reservation.evaluate');
+
+Route::post('/reservation/{id}/evaluate', [ReviewController::class, 'evaluate'])->name('reservation.evaluate');

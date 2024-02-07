@@ -107,6 +107,36 @@
             </tr>
 
         </table>
+
+    @php
+        $reservationDateTime = strtotime($reservation->date . ' ' . $reservation->time);
+        $currentDateTime = strtotime(date('Y-m-d H:i:s'));
+        $isReservationPast = $currentDateTime > $reservationDateTime;
+    @endphp
+    @if (!$reservation->review && $isReservationPast)
+        <button class="reservation__evaluate" data-reservation-id="{{ $reservation->id }}">評価</button>
+    @endif
+
+<div class="reservation__evaluate-form" style="display: none;">
+    @if(!$reservation->review)
+        <form action="{{ route('reservation.evaluate', ['id' => $reservation->id]) }}" method="post">
+            @csrf
+            <label for="rating">評価:</label>
+            <select name="score" id="rating">
+                @for ($i = 1; $i <= 5; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+            </select>
+            <br>
+            <label for="comment">評価コメント:</label>
+            <textarea name="comment" id="comment" rows="3"></textarea>
+            <br>
+            <button type="submit">送信</button>
+        </form>
+    @endif
+</div>
+
+
     @endforeach
 
 
@@ -169,6 +199,23 @@
                 location.reload();
             });
         });
+
+
+
+    //         // 評価ボタンがクリックされたときの処理
+    // document.querySelector('.reservation__evaluate').addEventListener('click', function () {
+    //     // 関連する評価入力フォームを表示
+    //     var evaluateForm = this.nextElementSibling;
+    //     evaluateForm.style.display = 'block';
+    // });
+
+        document.querySelectorAll('.reservation__evaluate').forEach(function (evaluateButton) {
+        evaluateButton.addEventListener('click', function () {
+            // 関連する評価入力フォームを表示
+            var evaluateForm = this.nextElementSibling;
+            evaluateForm.style.display = 'block';
+        });
+    });
     </script>
 </body>
 
