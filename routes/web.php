@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\MyPageController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -83,3 +84,7 @@ Route::post('/reservation/{id}/evaluate', [ReviewController::class, 'evaluate'])
 // Route::get('/get_request_image', 'ShopController@get_request_image');
 
 // Route::get('/image', 'ImageController@showImage')->name('image.show');
+
+Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+
+Route::get('/mypage', [MenuController::class, 'mypage'])->middleware('auth');

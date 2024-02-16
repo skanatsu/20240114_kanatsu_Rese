@@ -45,6 +45,8 @@
         </div>
     @endif
 
+@if(isset($reservations) && count($reservations) > 0)
+
     @foreach ($reservations as $reservation)
         <div class="reservation caset">
             予約{{ $loop->iteration }}
@@ -139,8 +141,12 @@
 
     @endforeach
 
+@endif
 
     <h2 class="favorite_status">お気に入り店舗</h2>
+
+@if(isset($favoriteShops) && count($favoriteShops) > 0)
+
     @foreach ($favoriteShops as $favorite)
         <table>
             <!-- お気に入り店舗データの表示 -->
@@ -161,6 +167,8 @@
             </tr>
         </table>
     @endforeach
+
+@endif
 
     <script>
         function toggleImage(element, shopId) {

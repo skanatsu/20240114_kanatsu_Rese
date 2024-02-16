@@ -12,6 +12,9 @@
 
 <body>
     <header class="header">
+        <a href="{{ url('menu') }}">
+  <img src="{{ asset('images/menu.png') }}" alt="メニュー">
+</a>
         <p class="header__logo">Atte</p>
         <nav class="header__nav">
             <ul class="header__nav-menu">
