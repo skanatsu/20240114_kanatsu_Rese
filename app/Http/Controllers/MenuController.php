@@ -12,8 +12,8 @@ class MenuController extends Controller
         return view('menu');
     }
 
-    public function mypage()
-    {
-        return view('mypage');
-    }
+    // public function mypage()
+    // {
+    //     return view('mypage');
+    // }
 }

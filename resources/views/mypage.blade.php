@@ -11,25 +11,12 @@
 </head>
 
 <body>
-    <header class="header">
-        <p class="header__logo">Atte</p>
-        <nav class="header__nav">
-            <ul class="header__nav-menu">
-                <li class="header__nav-menu-list"><a href="http://localhost/" class="header__nav-menu-list-link">ホーム</a>
-                </li>
-                <li class="header__nav-menu-list"><a href="http://localhost/attendance"
-                        class="header__nav-menu-list-link">日付一覧</a></li>
-                <li class="header__nav-menu-list"><a href="http://localhost/userlist"
-                        class="header__nav-menu-list-link">ユーザー一覧</a></li>
-                <li class="header__nav-menu-list">
-                    <form method="POST" action="{{ route('logout') }}" id="logout-form">
-                        @csrf
-                        <a href="#" class="header__nav-menu-list-link"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
-                    </form>
-                </li>
-            </ul>
-        </nav>
+     <header class="header">
+        <a href="{{ url('menu') }}">
+  <img src="{{ asset('images/menu.png') }}" alt="メニュー">
+</a>
+        <p class="header__logo">Rese</p>
+
     </header>
     mypage
     <h1 class="username">{{ auth()->user()->name }}さん</h1>
@@ -148,8 +135,8 @@
 @if(isset($favoriteShops) && count($favoriteShops) > 0)
 
     @foreach ($favoriteShops as $favorite)
+    <img src="{{ $favorite->shop->image_url }}" alt="店舗画像">
         <table>
-            <!-- お気に入り店舗データの表示 -->
             <tr>
                 <td>{{ $favorite->shop->shopname }}</td>
             </tr>
@@ -161,13 +148,11 @@
             </tr>
             <tr>
                 <a href="{{ route('detail', ['id' => $favorite->shop->id]) }}" class="detail">詳しくみる</a>
-
                 <img src="{{ url('/images/' . ($favorite->shop ? ($favorite->shop->isFavorite ? 'heart.jpeg' : 'greyheart.png') : 'default.png')) }}"
                     alt="" class="heart" data-shop-id="{{ $favorite->shop ? $favorite->shop->id : 0 }}">
             </tr>
         </table>
     @endforeach
-
 @endif
 
     <script>

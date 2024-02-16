@@ -11,28 +11,19 @@
 
 <body>
     <header class="header">
-        <p class="header__logo">Atte</p>
-        <nav class="header__nav">
-            <ul class="header__nav-menu">
-                <li class="header__nav-menu-list"><a href="http://localhost/" class="header__nav-menu-list-link">ホーム</a>
-                </li>
-                <li class="header__nav-menu-list"><a href="http://localhost/attendance"
-                        class="header__nav-menu-list-link">日付一覧</a></li>
-                <li class="header__nav-menu-list"><a href="http://localhost/userlist"
-                        class="header__nav-menu-list-link">ユーザー一覧</a></li>
-                <li class="header__nav-menu-list">
-                    <form method="POST" action="{{ route('logout') }}" id="logout-form">
-                        @csrf
-                        <a href="#" class="header__nav-menu-list-link"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
-                    </form>
-                </li>
-            </ul>
-        </nav>
+        <a href="{{ url('menu') }}">
+            <img src="{{ asset('images/menu.png') }}" alt="メニュー">
+        </a>
+        <p class="header__logo">Rese</p>
+
     </header>
     店舗詳細
     <div class="shop-details">
+        <a href="javascript:history.back()">
+  <img src="{{ asset('images/back.png') }}" alt="メニュー">
+</a>
         <h2 id="shopName">{{ $shop->shopname }}</h2>
+        <img src="{{ asset($shop->image_url) }}" alt="{{ $shop->shopname }}">
         <p>エリア: {{ $shop->area }}</p>
         <p>ジャンル: {{ $shop->genre }}</p>
         <p>{{ $shop->description }}</p>
@@ -93,27 +84,27 @@
                 <button type="submit" class="reservation"> <!-- ボタンをsubmitに変更 -->
                     予約する
                 </button>
-               </form>
+            </form>
         @endauth
     </div>
 
-        <h3 class="review">お客様の声</h3>
-        <table>
-    <thead>
-        <tr>
-            <th>評価</th>
-            <th>コメント</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($reviews as $review)
-        <tr>
-            <td>{{ $review->score }}</td>
-            <td>{{ $review->comment }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    <h3 class="review">お客様の声</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>評価</th>
+                <th>コメント</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($reviews as $review)
+                <tr>
+                    <td>{{ $review->score }}</td>
+                    <td>{{ $review->comment }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
     <script>
         // 初期値を保持

@@ -86,5 +86,3 @@ Route::post('/reservation/{id}/evaluate', [ReviewController::class, 'evaluate'])
 // Route::get('/image', 'ImageController@showImage')->name('image.show');
 
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
-
-Route::get('/mypage', [MenuController::class, 'mypage'])->middleware('auth');
