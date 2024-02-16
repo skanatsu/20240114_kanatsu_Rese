@@ -44,5 +44,4 @@ class ReviewController extends Controller
 
         return redirect()->back()->with('success', '評価が保存されました');
     }
-
 }

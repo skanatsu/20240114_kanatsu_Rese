@@ -17,9 +17,8 @@ return new class extends Migration
             $table->string('area');
             $table->string('genre');
             $table->string('description');
-            $table->unsignedBigInteger('image_id')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
-            $table->foreign('image_id')->references('id')->on('images')->onDelete('set null');
         });
     }
 

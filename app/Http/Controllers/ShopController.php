@@ -7,7 +7,8 @@ use App\Models\Shop;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
-
+// use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
 {
@@ -57,5 +58,26 @@ class ShopController extends Controller
         return redirect()->route('dashboard');
     }
 
+    // public function getShopImage($filename)
+    // {
+    //     // 追加: 画像ファイルの保存場所を`public`ディスクに変更
+    //     $path = Storage::disk('public')->path($filename);
 
+    //     // 変更: ファイルが存在しない場合は404エラーを返す
+    //     if (!file_exists($path)) {
+    //         abort(404);
+    //     }
+
+    //     // 同じ: 画像ファイルが存在する場合は画像ファイルの内容を返す
+    //     return response()->file($path);
+    // }
+
+    // public function showImage()
+    // {
+    //     // 画像ファイルの内容を取得
+    //     $file = Storage::disk('public')->get('images/attendance.png');
+
+    //     // 画像ファイルの内容を返す
+    //     return response($file)->header('Content-Type', 'image/png');
+    // }
 }

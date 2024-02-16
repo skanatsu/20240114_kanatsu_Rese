@@ -9,6 +9,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\MyPageController;
 use Illuminate\Support\Facades\Auth;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,3 +79,7 @@ Route::prefix('reservation')->group(function () {
 // Route::post('/reservation/{id}/evaluate', 'ReviewController@evaluate')->name('reservation.evaluate');
 
 Route::post('/reservation/{id}/evaluate', [ReviewController::class, 'evaluate'])->name('reservation.evaluate');
+
+// Route::get('/get_request_image', 'ShopController@get_request_image');
+
+// Route::get('/image', 'ImageController@showImage')->name('image.show');
