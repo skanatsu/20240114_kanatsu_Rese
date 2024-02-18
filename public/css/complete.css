@@ -1,0 +1,54 @@
+body {
+    background-color: whitesmoke;
+}
+
+.logo {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.menu_image {
+    margin-top: 35px;
+    margin-right: 15px;
+}
+
+.header__logo {
+    font-size: 35px;
+    color: rgb(42, 70, 231);
+    font-weight: 800;
+}
+
+.complete__card {
+    text-align: center;
+        background-color: white;
+    width: 450px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    margin: 0 auto;
+    height: 280px;
+}
+
+.compete__message {
+    font-size: 25px;
+    padding-top: 100px;
+}
+
+.login__button {
+        background-color: rgb(42, 70, 231);
+    color: white;
+    padding: 5px 15px;
+    text-decoration: none;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    border: none;
+}
+
+.back__button {
+        background-color: rgb(42, 70, 231);
+    color: white;
+    padding: 5px 15px;
+    text-decoration: none;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    border: none;
+}

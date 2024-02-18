@@ -12,56 +12,62 @@
 
 <body>
     <header class="header">
-        <a href="{{ url('menu') }}">
-  <img src="{{ asset('images/menu.png') }}" alt="メニュー">
-</a>
-        <p class="header__logo">Rese</p>
+        <div class="logo">
+            <div class="logo_link">
+                <a href="{{ url('menu') }}">
+                    <img src="{{ asset('images/menu.png') }}" class="menu_image" alt="メニュー">
+                </a>
+            </div>
+            <div class="logo_title">
+                <p class="header__logo">Rese</p>
+            </div>
+        </div>
 
+        <div class="search">
+            <select id="area" class="search__select" name="area" onchange="filterShops()">
+                <option value="allarea">All area</option>
+                <option value="東京都">東京都</option>
+                <option value="大阪府">大阪府</option>
+                <option value="福岡県">福岡県</option>
+            </select>
+            <p class="bar">|</p>
+            <select id="genre" class="search__select" name="genre" onchange="filterShops()">
+                <option value="allgenre">All genre</option>
+                <option value="居酒屋">居酒屋</option>
+                <option value="焼肉">焼肉</option>
+                <option value="寿司">寿司</option>
+                <option value="ラーメン">ラーメン</option>
+                <option value="イタリアン">イタリアン</option>
+            </select>
+            <p class="bar">|</p>
+            {{-- {!! Form::file('document', ['class' => 'form-control']) !!} --}}
+
+            <input type="text" id="shopname" class="search__shopname" name="shopname" placeholder="Search..."
+                onkeydown="searchOnEnter(event)">
+
+        </div>
     </header>
-    飲食店一覧
 
-    <select id="area" name="area" onchange="filterShops()">
-        <option value="allarea">All area</option>
-        <option value="東京都">東京都</option>
-        <option value="大阪府">大阪府</option>
-        <option value="福岡県">福岡県</option>
-    </select>
-
-    <select id="genre" name="genre" onchange="filterShops()">
-        <option value="allgenre">All genre</option>
-        <option value="居酒屋">居酒屋</option>
-        <option value="焼肉">焼肉</option>
-        <option value="寿司">寿司</option>
-        <option value="ラーメン">ラーメン</option>
-        <option value="イタリアン">イタリアン</option>
-    </select>
-
-    {{-- {!! Form::file('document', ['class' => 'form-control']) !!} --}}
-
-    {{-- <img src="/get_request_image?name=attendance.png"> --}}
-
-    <input type="text" id="shopname" class="search__shopname" name="shopname" placeholder="Search..."
-        onkeydown="searchOnEnter(event)">
-
+    <div class="shops-container">
     @foreach ($shops as $shop)
         <div class="shop" data-area="{{ $shop->area }}" data-genre="{{ $shop->genre }}"
             data-shopname="{{ $shop->shopname }}">
-
-
-            <img src="{{ asset($shop->image_url) }}" alt="{{ $shop->shopname }}">
-
-
-            <p>店名: {{ $shop->shopname }}</p>
-            <p>エリア: {{ $shop->area }}</p>
-            <p>ジャンル: {{ $shop->genre }}</p>
-            <a href="{{ route('detail', ['id' => $shop->id]) }}" class="detail">詳しくみる</a>
-            {{-- <img src="{{ url('/images/greyheart.png') }}" alt="" class="heart" onclick="toggleImage(this, {{ $shop->id }})" id="heartImage_{{ $loop->index }}"> --}}
-            @auth
-                <img src="{{ url('/images/' . ($shop->isFavorite ? 'heart.jpeg' : 'greyheart.png')) }}" alt=""
-                    class="heart" onclick="toggleImage(this, {{ $shop->id }})" id="heartImage_{{ $loop->index }}">
-            @endauth
+                <img src="{{ asset($shop->image_url) }}" class="shop__image" alt="{{ $shop->shopname }}">
+                <p class="shop__name">{{ $shop->shopname }}</p>
+                <div class="shop__tag">
+                    <p class="shop__area">#{{ $shop->area }}</p>
+                    <p>#{{ $shop->genre }}</p>
+                </div>
+                <a href="{{ route('detail', ['id' => $shop->id]) }}" class="shop__detail">詳しくみる</a>
+                @auth
+                    <img src="{{ url('/images/' . ($shop->isFavorite ? 'heart.png' : 'greyheart.png')) }}" alt=""
+                        class="heart" onclick="toggleImage(this, {{ $shop->id }})"
+                        id="heartImage_{{ $loop->index }}">
+                @endauth
         </div>
     @endforeach
+    </div>
+
     <script>
         function filterShops() {
             var selectedArea = document.getElementById("area").value;
@@ -97,7 +103,7 @@
             var currentSrc = element.src;
 
             if (currentSrc.includes('greyheart.png')) {
-                element.src = '{{ url('/images/heart.jpeg') }}';
+                element.src = '{{ url('/images/heart.png') }}';
             } else {
                 element.src = '{{ url('/images/greyheart.png') }}';
             }
@@ -111,7 +117,7 @@
         function toggleImage(element, shopId) {
 
             var currentSrc = element.src;
-            var newSrc = currentSrc.includes('greyheart.png') ? '{{ url('/images/heart.jpeg') }}' :
+            var newSrc = currentSrc.includes('greyheart.png') ? '{{ url('/images/heart.png') }}' :
                 '{{ url('/images/greyheart.png') }}';
 
             element.src = newSrc;

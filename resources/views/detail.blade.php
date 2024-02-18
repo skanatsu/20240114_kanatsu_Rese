@@ -5,29 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <title>飲食店一覧ページ</title>
+    <link rel="stylesheet" href={{ asset('css/detail.css') }}>
+    <title>{{ $shop->shopname }}</title>
 </head>
 
 <body>
-    <header class="header">
-        <a href="{{ url('menu') }}">
-            <img src="{{ asset('images/menu.png') }}" alt="メニュー">
-        </a>
-        <p class="header__logo">Rese</p>
 
-    </header>
-    店舗詳細
-    <div class="shop-details">
-        <a href="javascript:history.back()">
-  <img src="{{ asset('images/back.png') }}" alt="メニュー">
+    <div class="detail__content">
+<div class="detail__content__shop">
+
+        <div class="logo">
+            <div class="logo_link">
+                <a href="{{ url('menu') }}">
+                    <img src="{{ asset('images/menu.png') }}" class="menu_image" alt="メニュー">
+                </a>
+            </div>
+            <div class="logo_title">
+                <p class="header__logo">Rese</p>
+            </div>
+        </div>
+
+        <div class="shop__detail__shopname">
+                <a href="javascript:history.back()">
+<img src="{{ asset('images/back.png') }}" alt="戻る">
 </a>
-        <h2 id="shopName">{{ $shop->shopname }}</h2>
-        <img src="{{ asset($shop->image_url) }}" alt="{{ $shop->shopname }}">
-        <p>エリア: {{ $shop->area }}</p>
-        <p>ジャンル: {{ $shop->genre }}</p>
-        <p>{{ $shop->description }}</p>
+    <div class="shop-details">
 
+        <h2 id="shopName" class="shop__detail__title">{{ $shop->shopname }}</h2>
+</div>
+</div>
+
+        <img src="{{ asset($shop->image_url) }}" class="shop__image" alt="{{ $shop->shopname }}">
+        <div class="shop__tag">
+        <p class="shop__area">#{{ $shop->area }}</p>
+        <p>#{{ $shop->genre }}</p>
+        </div>
+        <p class="shop__description">{{ $shop->description }}</p>
+
+        <div class="review">
+   <h3 class="review__title">お客様の声</h3>
+    <table class="review__table">
+        <thead>
+            <tr>
+                <th class="review__score">評価スコア</th>
+                <th class="review__comment">評価コメント</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($reviews as $review)
+                <tr>
+                    <td class="review__score">{{ $review->score }}</td>
+                    <td class="review__comment">{{ $review->comment }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
         @auth
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -39,10 +72,12 @@
                 </div>
             @endif
 
+            </div>
+
+            <div class="detail__content__reservation">
+               <h3 class="reservation">予約</h3>
             <form method="POST" action="{{ route('reservation.store', ['shopId' => $shop->id]) }}">
                 @csrf
-
-
 
                 <input type="date" id="date" class="reservation__date" name="date"
                     value="{{ session('reservation.date') }}" onchange="updateTable()">
@@ -58,53 +93,37 @@
                     }
                     ?>
                 </select>
-                <select id="people" name="people" onchange="updateTable()">
+                <select id="people" name="people" class="reservation__number" onchange="updateTable()">
                     <?php for ($i = 1; $i <= 10; $i++): ?>
                     <option value="<?= $i ?>"><?= $i ?>人</option>
                     <?php endfor; ?>
                 </select>
-                <table>
-                    <tr>
+                <table class="reservation__check">
+                    <tr class="reservation__item">
                         <th>Shop</th>
-                        <td id="shopNameCell">{{ $shop->shopname }}</td>
+                        <td id="shopNameCell" class="reservation__data">{{ $shop->shopname }}</td>
                     </tr>
-                    <tr>
+                    <tr class="reservation__item">
                         <th>Date</th>
                         <td id="reservationDate">{{ session('reservation.date') }}</td>
                     </tr>
-                    <tr>
+                    <tr class="reservation__item">
                         <th>Time</th>
                         <td id="reservationTime">{{ session('reservation.time') }}</td>
                     </tr>
-                    <tr>
+                    <tr class="reservation__item">
                         <th>Number</th>
                         <td id="reservationPeople">{{ session('reservation.people') }}人</td>
                     </tr>
                 </table>
-                <button type="submit" class="reservation"> <!-- ボタンをsubmitに変更 -->
+                <button type="submit" class="reservation__button"> <!-- ボタンをsubmitに変更 -->
                     予約する
                 </button>
             </form>
         @endauth
     </div>
+</div>
 
-    <h3 class="review">お客様の声</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>評価</th>
-                <th>コメント</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($reviews as $review)
-                <tr>
-                    <td>{{ $review->score }}</td>
-                    <td>{{ $review->comment }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
 
     <script>
         // 初期値を保持

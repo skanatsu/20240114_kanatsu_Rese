@@ -5,20 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/complete.css">
     <title>予約完了</title>
 </head>
 
 <body>
-    <header class="header">
-        <a href="{{ url('menu') }}">
-  <img src="{{ asset('images/menu.png') }}" alt="メニュー">
-</a>
-        <p class="header__logo">Rese</p>
-
-    </header>
+<div class="logo">
+            <div class="logo_link">
+                <a href="{{ url('menu') }}">
+                    <img src="{{ asset('images/menu.png') }}" class="menu_image" alt="メニュー">
+                </a>
+            </div>
+            <div class="logo_title">
+                <p class="header__logo">Rese</p>
+            </div>
+        </div>
+               <div class="complete__card">
+            <p class="compete__message">
     ご予約ありがとうございます。
-<button class="back" id="backButton">
+         </p>
+<button class="back__button" id="backButton">
     戻る
 </button>
 </body>

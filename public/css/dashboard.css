@@ -1,73 +1,140 @@
+body {
+    background-color: whitesmoke;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
 }
 
+.logo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu_image {
+    margin-top: 35px;
+    margin-right: 15px;
+}
+
 .header__logo {
-    font-size: 30px;
-    margin-top: 25px;
-    margin-left: 40px;
+    font-size: 35px;
+    color: rgb(42, 70, 231);
+    font-weight: 800;
 }
 
-.header__nav-menu {
-    display: flex;
-    padding: 20px;
-    list-style-type: none;
+.search {
+    margin-top: 35px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    height: 25px;
 }
 
-.header__nav-menu-list {
-    padding-right: 40px;
+.bar {
+    display: inline;
+    color: lightgray;
 }
 
-.header__nav-menu-list-link {
-    text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
-}
-
-.main {
-    background-color: #eeeeee;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.message {
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-button {
+.search__select {
     border: none;
+    width: 100px;
+
+        /* ブラウザのデフォルトのスタイルを無効化 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    /* 矢印の背景画像を指定 */
+    background-image: url('/images/search_select.png');
+    /* 矢印のサイズや位置を調整 */
+    background-size: 20px; /* 矢印のサイズ */
+    background-repeat: no-repeat;
+    background-position: right center; /* 矢印の位置 */
+    padding-right: 30px; /* 矢印の右側に余白を設定 */
 }
 
-.punch__button {
-    margin-bottom: 100px;
-}
-
-.punch__button-1,
-.punch__button-2 {
-    display: flex;
-    justify-content: center;
-}
-
-.punch__button form button {
+.search__shopname {
+    border: none;
     width: 300px;
-    height: 100px;
-    background-color: white;
-    margin: 10px;
-}
-
-footer {
-    background-color: white;
-    text-align: center;
-    height: 50px;
-}
-
-.footer__copyright {
-    padding-top: 10px;
+        background-image: url('/images/search_shopname.png');
+    background-size: 20px; /* 画像のサイズ */
+    background-repeat: no-repeat;
+    background-position: left center; /* 画像の位置 */
+    padding-left: 30px; /* 画像の左側に余白を設定 */
 }
 
 .heart {
-    width: 30px;
+    width: 50px;
+    float: right;
+    margin-right: 20px;
+    margin-top: -10px;
+}
+
+.shop {
+    background-color: white;
+    max-width: 350px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    height: 320px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
+}
+
+.shop__image {
+    width: 100%;
+    object-fit: cover;
+    height: 170px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+}
+
+.shop__name {
+    font-size: 20px;
+    font-weight: bold;
+    height: 1px;
+    margin-left: 20px;
+}
+
+.shop__tag {
+        display: flex;
+    justify-content: flex-start;
+}
+
+.shop__area {
+    margin-right: 5px;
+    margin-left: 20px;
+}
+
+.shop__detail {
+    background-color: rgb(42, 70, 231);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 7px;
+    margin-left: 20px;
+}
+
+/* .shop クラスに対するスタイル */
+.shop {
+    width: calc(25% - 20px); /* 25%の幅を設定し、マージンを引く */
+    margin: 0 10px 20px; /* 左右に10pxのマージン、下に20pxのマージンを設定 */
+    box-sizing: border-box; /* 幅にボーダーやパディングを含める */
+    float: left; /* 左寄せに配置 */
+}
+
+/* 画面幅が小さい場合、1行に表示されるようにする */
+@media (max-width: 768px) {
+    .shop {
+        width: calc(50% - 20px); /* 50%の幅を設定し、マージンを引く */
+    }
+}
+
+/* 画面幅がさらに小さい場合、1列に表示されるようにする */
+@media (max-width: 480px) {
+    .shop {
+        width: 100%; /* 100%の幅を設定 */
+        margin: 0 0 20px; /* 左右にマージンをなくし、下に20pxのマージンを設定 */
+    }
 }

@@ -1,0 +1,247 @@
+body {
+    background-color: whitesmoke;
+}
+
+.logo {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.menu_image {
+    margin-top: 35px;
+    margin-right: 15px;
+}
+
+.header__logo {
+    font-size: 35px;
+    color: rgb(42, 70, 231);
+    font-weight: 800;
+}
+
+h1 {
+    text-align: center;
+}
+
+.mypage__content {
+        display: flex;
+    justify-content: flex-start;
+}
+
+.mypage__content__favorite {
+    margin-left: 70px;
+}
+
+.reservation__card {
+    background-color: rgb(42, 70, 231);
+    color: white;
+    margin-bottom: 20px;
+    padding: 30px;
+    width: 450px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
+}
+
+.reservation__card__header {
+        display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.clock_image {
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+}
+
+.reservation__clock__number {
+        display: flex;
+    justify-content: flex-start;
+}
+
+.reservation__number {
+    margin-left: 30px;
+    margin-top: 7px;
+}
+
+.reservation__delete {
+    background-color: rgb(42, 70, 231);
+    border: none;
+}
+
+.delete_image {
+    border-radius: 50%;
+        width: 38px;
+    height: 38px;
+}
+
+.reservation__item {
+    height: 40px;
+}
+
+.reservation__data {
+    padding-left: 35px;
+}
+
+.reservation__update {
+    background-color: rgb(100, 134, 237);
+    border-radius: 10px;
+    padding-top: 1px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+}
+
+.reservation__update__date, .reservation__update__time, .reservation__update__number {
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    width: 120px;
+    margin-right: 10px;
+}
+
+.reservation__update__button {
+    height: 40px;
+    border: none;
+    background-color: blue;
+    color: white;
+    margin-top: 20px;
+    margin-left: 310px;
+    padding: 0px 15px;
+}
+
+
+.heart {
+    width: 50px;
+    float: right;
+    margin-right: 20px;
+    margin-top: -10px;
+}
+
+.shop {
+    /* background-color: white;
+    width: 350px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    height: 320px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
+
+        width: calc(25% - 20px); 
+    margin: 0 10px 20px; 
+    box-sizing: border-box;
+    float: left;  */
+    max-width: 350px;
+    background-color: white;
+    width: calc(50% - 20px); /* 50%の幅を設定し、マージンを引く */
+    margin: 0 60px 50px 0;
+    height: 320px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
+    box-sizing: border-box; /* 幅にボーダーやパディングを含める */
+    float: left; /* 左寄せに配置 */
+}
+
+
+/* 画面幅が小さい場合、1行に表示されるようにする */
+@media (max-width: 768px) {
+    .shop {
+        width: calc(50% - 20px); /* 50%の幅を設定し、マージンを引く */
+    }
+}
+
+/* 画面幅がさらに小さい場合、1列に表示されるようにする */
+@media (max-width: 480px) {
+    .shop {
+        width: 100%; /* 100%の幅を設定 */
+        margin: 0 0 20px; /* 左右にマージンをなくし、下に20pxのマージンを設定 */
+    }
+}
+
+
+.shop__image {
+    width: 100%;
+    object-fit: cover;
+    height: 170px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+}
+
+.shop__name {
+    font-size: 20px;
+    font-weight: bold;
+    height: 1px;
+    margin-left: 20px;
+}
+
+.shop__tag {
+        display: flex;
+    justify-content: flex-start;
+}
+
+.shop__area {
+    margin-right: 5px;
+    margin-left: 20px;
+}
+
+.shop__detail {
+    background-color: rgb(42, 70, 231);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 7px;
+    margin-left: 20px;
+}
+
+.reservation__evaluate {
+        height: 40px;
+    border: none;
+    background-color: purple;
+    color: white;
+    margin-top: 20px;
+    padding: 0px 15px;
+}
+
+.reservation__evaluate-form {
+    background-color: rgb(180, 100, 237);
+    border-radius: 10px;
+    padding-top: 1px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+}
+
+.review__submit {
+        height: 40px;
+    border: none;
+    background-color: purple;
+    color: white;
+    margin-top: 20px;
+    padding: 0px 15px;
+        margin-left: 310px;
+}
+
+.review__item {
+    display: block;
+    margin-top: 20px;
+}
+
+.review__score {
+    margin-top: 10px;
+        height: 30px;
+    border: none;
+    border-radius: 7px;
+    width: 50px;
+    margin-right: 10px;
+}
+
+.review__comment {
+    margin-top: 10px;
+        height: 30px;
+    border: none;
+    border-radius: 7px;
+    width: 390px;
+    height: 100px;
+    margin-right: 10px;
+}
+

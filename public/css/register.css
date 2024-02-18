@@ -1,75 +1,76 @@
+body {
+    background-color: whitesmoke;
+}
+
+.logo {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.menu_image {
+    margin-top: 35px;
+    margin-right: 15px;
+}
+
 .header__logo {
-    font-size: 30px;
-    margin-top: 25px;
-    margin-left: 40px;
+    font-size: 35px;
+    color: rgb(42, 70, 231);
+    font-weight: 800;
 }
 
-.main {
-    background-color: #eeeeee;
-    height: 500px;
+.register__form {
+    background-color: white;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    margin: 0 auto;
 }
 
-h1 {
-    font-size: 20px;
-    text-align: center;
-    padding-top: 30px;
-    padding-bottom: 20px;
+.form__title {
+    background-color: rgb(42, 70, 231);
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-.nameinput,
-.emailinput,
-.passwordinput {
-    display: block;
-    margin: auto;
-    width: 300px;
-    background-color: #eeeeee;
+.register__item {
+    display: flex;
     margin-bottom: 15px;
-    border-radius: 5px;
-    border-color: lightgray;
-    height: 30px;
+}
+
+.item__image {
+    margin-right: 10px;
+    width: 40px;
+    margin-left: 20px;
+}
+
+.item__form {
+    border: none;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    width: 280px;
 }
 
 .register__button {
-    display: block;
-    margin: auto;
-    background-color: blue;
-    width: 300px;
-    text-align: center;
+    background-color: rgb(42, 70, 231);
     color: white;
-    border-radius: 5px;
-    border-color: lightgray;
-    height: 40px;
-    margin-bottom: 30px;
-}
-
-.registered {
-    text-align: center;
-}
-
-.registered__link {
-    color: blue;
+    padding: 5px 15px;
     text-decoration: none;
+    border-radius: 7px;
+    margin-left: 300px;
+    margin-bottom: 20px;
+    border: none;
 }
 
-footer {
-    background-color: white;
-    text-align: center;
-    height: 50px;
-}
-
-.footer__copyright {
-    padding-top: 10px;
-}
-
-.validation {
+.login__button {
+    background-color: rgb(42, 70, 231);
+    color: white;
+    padding: 5px 15px;
     text-decoration: none;
-    text-align: center;
-    color: red;
-    margin-bottom: 10px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+    border-radius: 7px;
+    margin-left: 270px;
+    margin-bottom: 20px;
+    border: none;
 }
