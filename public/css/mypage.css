@@ -27,8 +27,26 @@ h1 {
     justify-content: flex-start;
 }
 
+.mypage__content__reservation {
+    width: 1200px;
+}
+
+.favorite_status {
+    /* display: block; */
+    width: 1000px;
+}
+
 .mypage__content__favorite {
     margin-left: 70px;
+    /* test */
+    /* display: flex;
+    flex-wrap: wrap; /* コンテナ内の要素が折り返されるようにする */
+    /* justify-content: space-between; 要素をコンテナの両端に配置 */ 
+
+  display: flex;
+  flex-wrap: wrap; /* コンテナ内の要素が折り返されるようにする */
+  /* justify-content: space-between; 要素をコンテナの両端に配置  */
+justify-content: flex-start;
 }
 
 .reservation__card {
@@ -118,44 +136,43 @@ h1 {
 }
 
 .shop {
-    /* background-color: white;
-    width: 350px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    height: 320px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
-    border-radius: 10px;
 
-        width: calc(25% - 20px); 
-    margin: 0 10px 20px; 
-    box-sizing: border-box;
-    float: left;  */
-    max-width: 350px;
+    /* max-width: 350px;
     background-color: white;
-    width: calc(50% - 20px); /* 50%の幅を設定し、マージンを引く */
+    width: calc(50% - 20px); 
     margin: 0 60px 50px 0;
     height: 320px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
     border-radius: 10px;
-    box-sizing: border-box; /* 幅にボーダーやパディングを含める */
-    float: left; /* 左寄せに配置 */
+    box-sizing: border-box;
+    float: left;  */
+
+  max-width: 350px;
+  background-color: white;
+  width: calc(50% - 40px); /* 50%の幅を設定し、マージンを引く */
+  margin: 0 80px 40px 0; /* 上下左右にマージン */
+  height: 320px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+  border-radius: 10px;
+  box-sizing: border-box; /* 幅にボーダーやパディングを含める */
+
 }
 
 
 /* 画面幅が小さい場合、1行に表示されるようにする */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .shop {
-        width: calc(50% - 20px); /* 50%の幅を設定し、マージンを引く */
+        width: calc(50% - 20px); /
     }
-}
+} */
 
 /* 画面幅がさらに小さい場合、1列に表示されるようにする */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .shop {
-        width: 100%; /* 100%の幅を設定 */
-        margin: 0 0 20px; /* 左右にマージンをなくし、下に20pxのマージンを設定 */
+        width: 100%; 
+        margin: 0 0 20px; 
     }
-}
+} */
 
 
 .shop__image {

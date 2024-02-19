@@ -94,7 +94,6 @@ body {
     width: 300px;
 }
 
-
 .reservation__button {
     height: 60px;
     border: none;
@@ -226,4 +225,9 @@ body {
 
 .review__comment {
     width: 400px;
+}
+
+.alert {
+    color: red;
+    width: 500px;
 }

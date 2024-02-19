@@ -23,11 +23,11 @@ class MyPageController extends Controller
         return view('mypage', compact('reservations', 'favoriteShops'));
     }
 
-    public function deleteReservation(Request $request)
-    {
-        Reservation::find($request->id)->delete();
-        return redirect('mypage');
-    }
+    // public function deleteReservation(Request $request)
+    // {
+    //     Reservation::find($request->id)->delete();
+    //     return redirect('mypage');
+    // }
 
     public function toggleFavorite($shopId)
     {

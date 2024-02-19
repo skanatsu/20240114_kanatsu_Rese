@@ -62,24 +62,24 @@ class ReservationController extends Controller
 
 
 
-    public function reservationDetail($id)
-    {
-        $reservation = Reservation::find($id);
+    // public function reservationDetail($id)
+    // {
+    //     $reservation = Reservation::find($id);
 
-        if (!$reservation) {
-            // 予約が見つからない場合の処理をここに追加する（例: エラーページ表示）
-            abort(404, 'Reservation not found');
-        }
+    //     if (!$reservation) {
+    //         // 予約が見つからない場合の処理をここに追加する（例: エラーページ表示）
+    //         abort(404, 'Reservation not found');
+    //     }
 
-        // 予約詳細ページに予約データを渡してビューを表示
-        return view('reservation.detail', compact('reservation'));
-    }
+    //     // 予約詳細ページに予約データを渡してビューを表示
+    //     return view('reservation.detail', compact('reservation'));
+    // }
 
-    public function showUpdateForm($id)
-    {
-        $reservation = Reservation::find($id);
-        return view('reservation.update', compact('reservation'));
-    }
+    // public function showUpdateForm($id)
+    // {
+    //     $reservation = Reservation::find($id);
+    //     return view('reservation.update', compact('reservation'));　基本設計書作成中に不要と判明し消した
+    // }
 
     // 予約変更処理
     public function update(ReservationRequest $request, $id)

@@ -30,8 +30,6 @@ class ShopController extends Controller
         $reviews = Review::where('shop_id', $id)->get();
 
         return view('detail', compact('shop', 'reviews'));
-
-        
     }
 
     public function toggleFavorite($shopId)
