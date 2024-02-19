@@ -1,10 +1,13 @@
 body {
     background-color: whitesmoke;
+    margin-left: 30px;
+            width: 1500px;
 }
 
 .header {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: flex-start;
 }
 
 .logo {
@@ -29,6 +32,9 @@ body {
     background-color: white;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     height: 25px;
+    margin-left: 600px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
 }
 
 .bar {
@@ -56,7 +62,7 @@ body {
 
 .search__shopname {
     border: none;
-    width: 300px;
+    width: 405px;
         background-image: url('/images/search_shopname.png');
     background-size: 20px; /* 画像のサイズ */
     background-repeat: no-repeat;
@@ -69,6 +75,10 @@ body {
     float: right;
     margin-right: 20px;
     margin-top: -10px;
+}
+
+.shops-container {
+    margin-left: -10px;
 }
 
 .shop {

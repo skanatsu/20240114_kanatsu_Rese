@@ -197,22 +197,7 @@
                     <img src="{{ url('/images/' . ($favorite->shop ? ($favorite->shop->isFavorite ? 'heart.png' : 'greyheart.png') : 'default.png')) }}"
                     alt="" class="heart" data-shop-id="{{ $favorite->shop ? $favorite->shop->id : 0 }}">
     @endauth
-    {{-- <table>
-            <tr>
-                <td>{{ $favorite->shop->shopname }}</td>
-            </tr>
-            <tr>
-                <td>#{{ $favorite->shop->area }}</td>
-            </tr>
-            <tr>
-                <td>#{{ $favorite->shop->genre }}</td>
-            </tr>
-            <tr>
-                <a href="{{ route('detail', ['id' => $favorite->shop->id]) }}" class="detail">詳しくみる</a>
-                <img src="{{ url('/images/' . ($favorite->shop ? ($favorite->shop->isFavorite ? 'heart.png' : 'greyheart.png') : 'default.png')) }}"
-                    alt="" class="heart" data-shop-id="{{ $favorite->shop ? $favorite->shop->id : 0 }}">
-            </tr>
-        </table> --}}
+
       </div>
     @endforeach
 @endif

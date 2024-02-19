@@ -1,5 +1,6 @@
 body {
     background-color: whitesmoke;
+        margin-left: 30px;
 }
 
 .logo {
@@ -25,6 +26,8 @@ h1 {
 .mypage__content {
         display: flex;
     justify-content: flex-start;
+align-items: flex-start;
+
 }
 
 .mypage__content__reservation {
@@ -44,9 +47,12 @@ h1 {
     /* justify-content: space-between; 要素をコンテナの両端に配置 */ 
 
   display: flex;
-  flex-wrap: wrap; /* コンテナ内の要素が折り返されるようにする */
+  flex-wrap: wrap; 
+  /* コンテナ内の要素が折り返されるようにする */
   /* justify-content: space-between; 要素をコンテナの両端に配置  */
-justify-content: flex-start;
+/* justify-content: flex-start; */
+
+
 }
 
 .reservation__card {
@@ -155,6 +161,8 @@ justify-content: flex-start;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
   border-radius: 10px;
   box-sizing: border-box; /* 幅にボーダーやパディングを含める */
+
+
 
 }
 
