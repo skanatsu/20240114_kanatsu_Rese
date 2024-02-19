@@ -1,5 +1,15 @@
 version: '3'
 services:
+    stripe-cli:
+        image: stripe/stripe-cli
+        volumes:
+            - ./stripe:/home/stripe
+            - .env:/app/.env
+        ports:
+            - "4242:4242"
+        command: ["stripe", "login"]
+        environment:
+            - STRIPE_API_KEY  pk_test_51OlSW7H2PN2teyfS1jwGbE1IrJulRMOHg27kH0I6XfKjX17ZzGH4mfpJg8Kur96C92ijdrZ2dr90SfWmhsTQzcCu00yaa2MBWa
     laravel.test:
         build:
             context: ./vendor/laravel/sail/runtimes/8.2

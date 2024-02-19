@@ -287,3 +287,23 @@ align-items: flex-start;
     height: 20%;
 }
 
+.reservation__pay {
+            height: 40px;
+    border: none;
+    background-color: orangered;
+
+    margin-top: 20px;
+    padding: 0px 15px;
+        /* margin-left: 310px; */
+    /* display: inline-block; */
+        display: flex; /* 親要素をフレックスコンテナにする */
+    justify-content: center; /* テキストを水平方向に中央揃え */
+    align-items: center; /* テキストを垂直方向に中央揃え */
+    width: 160px;
+}
+
+.reservation__pay__link {
+        text-decoration: none;
+            color: white;
+       
+}

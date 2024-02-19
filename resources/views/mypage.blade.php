@@ -185,6 +185,16 @@
         </form>
     @endif
 </div>
+
+{{-- 決済 --}}
+        @if (!$isReservationPast)
+
+        <div class="reservation__pay">
+                <a href="{{ route('reservation.pay', ['id' => $reservation->id]) }}" class="reservation__pay__link">来店前の決済はこちら</a>
+
+            </div>
+        @endif
+
 </div>
     @endforeach
 

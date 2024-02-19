@@ -10,7 +10,7 @@ use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +79,12 @@ Route::post('/reservation/{id}/evaluate', [ReviewController::class, 'evaluate'])
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 
 Route::get('reservation/qrcode/{reservation_id}', 'ReservationController@generateQrCode')->name('reservation.qrcode');
+
+// タスクスケジューラーの実行をトリガーするためのルートを追加
+Route::get('/send-reminder', function () {
+    Artisan::call('reminder:send');
+    return 'Reminder emails sent successfully!';
+});
+
+//　決済
+Route::get('/reservation/{id}/pay', [ReservationController::class, 'pay'])->name('reservation.pay');
