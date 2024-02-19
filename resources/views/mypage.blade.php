@@ -40,8 +40,16 @@
     @endif
 
 @if(isset($reservations) && count($reservations) > 0)
-
     @foreach ($reservations as $reservation)
+
+
+        @php
+            $reservationDateTime = strtotime($reservation->date . ' ' . $reservation->time);
+            $currentDateTime = strtotime(date('Y-m-d H:i:s'));
+            $isReservationPast = $currentDateTime > $reservationDateTime;
+        @endphp
+
+
     <div class="reservation__card">
         <div class="reservation__card__header">
 <div class="reservation__clock__number">
@@ -50,16 +58,24 @@
             予約{{ $loop->iteration }}
         </div>
 </div>
+
+@if ($currentDateTime <= $reservationDateTime)
+
         <form action="/reservation/delete" method="post" class="reservation-form">
             @csrf
             @method('delete')
+
+
 
             <button class="reservation__delete" name="id" value="{{ $reservation['id'] }}">
                 <img src="{{ asset('images/delete.png') }}" class="delete_image" alt="予約削除ボタン">
             </button>
 
+
+
             <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
         </form>
+        @endif
         </div>
 
 
@@ -85,10 +101,14 @@
 
         </table>
 
+@if (!$isReservationPast)
+
         <div class="reservation__update">
             <p class="reservation__update__text">
                 ▼ 予約変更はこちら
             </p>
+
+
         <form action="{{ route('reservation.update', ['id' => $reservation->id]) }}" method="post"
             class="reservation__update-form">
             @csrf
@@ -119,6 +139,7 @@
         </form>
 </div>
 
+@endif
 
     @php
         $reservationDateTime = strtotime($reservation->date . ' ' . $reservation->time);
@@ -162,9 +183,9 @@
 
 
 @if(isset($favoriteShops) && count($favoriteShops) > 0)
-   
+
     @foreach ($favoriteShops as $favorite)
-     <div class="shop">
+    <div class="shop">
     <img src="{{ $favorite->shop->image_url }}" class="shop__image" alt="店舗画像">
                         <p class="shop__name">{{ $favorite->shop->shopname }}</p>
                 <div class="shop__tag">
