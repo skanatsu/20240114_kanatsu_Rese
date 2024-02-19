@@ -42,8 +42,7 @@
 @if(isset($reservations) && count($reservations) > 0)
     @foreach ($reservations as $reservation)
 
-
-        @php
+@php
             $reservationDateTime = strtotime($reservation->date . ' ' . $reservation->time);
             $currentDateTime = strtotime(date('Y-m-d H:i:s'));
             $isReservationPast = $currentDateTime > $reservationDateTime;
@@ -56,7 +55,10 @@
         <img src="{{ asset('images/clock.png') }}" class="clock_image" alt="時計">
         <div class="reservation__number">
             予約{{ $loop->iteration }}
-        </div>
+               @if ($isReservationPast)
+               <div class="reservation__status">ご来店済み</div>
+    @endif
+</div>
 </div>
 
 @if ($currentDateTime <= $reservationDateTime)
@@ -72,6 +74,7 @@
             </button>
 
 
+ 
 
             <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
         </form>
@@ -100,6 +103,18 @@
             </tr>
 
         </table>
+
+
+{{-- <div class="qr-code">
+        <img src="{{ route('reservation.qrcode', ['reservation_id' => $reservation->id]) }}" alt="QR Code">
+    </div> --}}
+@if (!$isReservationPast)
+<div class="qr-code">
+    <p class="qr-code__text">【QRコード】</p>
+    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(200)->generate($reservation->id)) !!}" class="qr-code__img" alt="QR Code">
+</div>
+@endif
+
 
 @if (!$isReservationPast)
 

@@ -77,3 +77,5 @@ Route::prefix('reservation')->group(function () {
 Route::post('/reservation/{id}/evaluate', [ReviewController::class, 'evaluate'])->name('reservation.evaluate');
 
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+
+Route::get('reservation/qrcode/{reservation_id}', 'ReservationController@generateQrCode')->name('reservation.qrcode');

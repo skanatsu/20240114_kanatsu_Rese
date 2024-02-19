@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReservationRequest;
-
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class ReservationController extends Controller
 {
     public function done(): View
@@ -100,5 +100,14 @@ class ReservationController extends Controller
         $reservation->delete();
 
         return redirect()->route('mypage.show'); // マイページにリダイレクトするか、適切なルートに変更
+    }
+
+    public function generateQrCode($reservation_id)
+    {
+        // 予約IDを使ってQRコードを生成
+        $qrCode = QrCode::size(200)->generate($reservation_id);
+
+        // 生成したQRコードのBase64エンコードを返す
+        return response()->json(['qr_code' => $qrCode]);
     }
 }
