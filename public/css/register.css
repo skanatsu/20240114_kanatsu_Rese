@@ -76,3 +76,30 @@ body {
     margin-bottom: 20px;
     border: none;
 }
+
+@media (max-width: 768px) { 
+    .register__form {
+        width: 80%; /* カードの幅を画面幅の80％に制限 */
+        max-width: 400px; /* カードの最大幅を設定 */
+        margin: 0 auto; /* カードの配置を調整 */
+        padding-bottom: 1px;
+
+    }
+
+    .form__title {
+        text-align: center; /* タイトルの配置を中央揃え */
+    }
+
+        .register__item {
+        align-items: flex-start; /* 項目を左寄せに配置 */
+    }
+
+    .item__form {
+        width: 90%; 
+    }
+
+        .register__button, .login__button {
+        margin: 20px auto; /* ボタンの上下にマージン */
+        display: block; /* 中央寄せになるようにblock要素として扱う */
+    }
+}
