@@ -307,3 +307,106 @@ align-items: flex-start;
             color: white;
        
 }
+
+
+/* 768px以下の場合 */
+@media (max-width: 768px) {
+    body {
+    background-color: whitesmoke;
+        /* margin-left: 30px; */
+}
+
+    .logo {
+        align-items: flex-start; /* 左寄せに変更 */
+        margin-bottom: 20px; /* マージンを追加 */
+    }
+
+
+    .mypage__content {
+        flex-direction: column; /* コンテンツを縦に配置 */
+        /* align-items: center;  */
+    }
+
+    .mypage__content__reservation {
+        width: auto; /* 幅を自動調整 */
+    }
+
+    .favorite_status {
+        width: calc(100% - 100px);
+        clear: both;
+        /* margin-left: 35px; */
+
+    }
+
+    .mypage__content__favorite {
+        margin-left: 0; /* マージンをリセット */
+
+    }
+
+    .reservation__card {
+        width: 90%; /* 幅を調整 */
+        max-width: 450px;
+        margin-bottom: 20px; /* マージンを追加 */
+    }
+
+    .shop {
+        width: 90%; /* 幅を調整 */
+        /* margin: 0 auto 20px; */
+        margin: 0 30px 20px 0;
+
+    }
+
+    .shop__name {
+        font-size: 18px; /* フォントサイズを調整 */
+        margin-left: 10px; /* マージンを調整 */
+    }
+
+    .shop__tag {
+        margin-left: 10px; /* マージンを調整 */
+    }
+
+    .shop__detail {
+        margin-left: 10px; /* マージンを調整 */
+    }
+
+    .heart {
+        margin-right: 10px; /* マージンを調整 */
+    }
+
+    .reservation__update {
+        margin-left: 0; /* マージンをリセット */
+        padding-left: 10px; /* パディングを調整 */
+        padding-right: 10px; /* パディングを調整 */
+        margin-top: 10px; /* マージンを追加 */
+    }
+
+    .reservation__update__button {
+        margin-left: auto; /* 左側に寄せる */
+        margin-right: auto; /* 右側に寄せる */
+    }
+
+    .reservation__evaluate {
+        width: 90%; /* 幅を調整 */
+        margin: 0 auto 20px; /* マージンを追加 */
+    }
+
+    .reservation__evaluate-form {
+        width: 90%; /* 幅を調整 */
+        margin: 0 auto 20px; /* マージンを追加 */
+        padding: 10px; /* パディングを追加 */
+    }
+
+    .review__submit {
+        margin-left: auto; /* 左側に寄せる */
+        margin-right: auto; /* 右側に寄せる */
+        margin-top: 20px; /* マージンを追加 */
+    }
+
+    .reservation__pay {
+        margin-top: 20px; /* マージンを追加 */
+        width: 90%; /* 幅を調整 */
+        margin-left: auto; /* 左側に寄せる */
+        margin-right: auto; /* 右側に寄せる */
+        margin-bottom: 20px; /* マージンを追加 */
+    }
+}

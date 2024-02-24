@@ -135,16 +135,49 @@ body {
 }
 
 /* 画面幅が小さい場合、1行に表示されるようにする */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .shop {
-        width: calc(50% - 20px); /* 50%の幅を設定し、マージンを引く */
+        width: calc(50% - 20px); 
     }
-}
+} */
 
 /* 画面幅がさらに小さい場合、1列に表示されるようにする */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .shop {
-        width: 100%; /* 100%の幅を設定 */
-        margin: 0 0 20px; /* 左右にマージンをなくし、下に20pxのマージンを設定 */
+        width: 100%; 
+        margin: 0 0 20px; 
+    }
+} */
+
+
+/* 画面幅が768px以下の場合 */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start; /* 左寄せに変更 */
+    }
+
+    .search {
+        margin-left: 0; /* マージンをリセット */
+        margin-top: 20px; /* 適切な間隔に変更 */
+        margin-bottom: 20px;
+    }
+
+    .search__shopname {
+        width: 100px;
+    }
+
+    .header__logo {
+        margin-left: 20px; /* ロゴの左側に適切な間隔を設定 */
+    }
+
+    .shops-container {
+        margin-left: 0; /* マージンをリセット */
+    }
+
+    .shop {
+        width: 100%; /* 幅を100%に変更 */
+        margin: 0 0 20px; /* 左右のマージンをリセットし、下に適切な間隔を設定 */
+        float: none; /* floatを解除 */
     }
 }

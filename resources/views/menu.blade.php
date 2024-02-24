@@ -12,7 +12,7 @@
 <body>
         <div class="logo">
             <div class="logo_link">
-                <a href="{{ url('menu') }}">
+                <a href="javascript:history.back()">
                     <img src="{{ asset('images/menu_close.png') }}" class="menu_image" alt="メニュー">
                 </a>
             </div>

@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(SendReservationReminder::class)->dailyAt('09:00');
+        // $schedule->command('reminder:send')->dailyAt('10:04');
+        $schedule->command('reminder:send')->everyMinute();
     }
 }

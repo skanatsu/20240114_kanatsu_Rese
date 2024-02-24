@@ -72,8 +72,6 @@
 
                 <h3 class="reservation">予約</h3>
 
-
-
                 <form method="POST" action="{{ route('reservation.store', ['shopId' => $shop->id]) }}">
                     @csrf
 
@@ -138,6 +136,21 @@
         // 初期値を保持
         var initialShopName = "{{ $shop->shopname }}";
 
+
+
+
+    // ページ読み込み時にイベントリスナーを設定
+    document.addEventListener('DOMContentLoaded', function() {
+        // 予約時間の要素を取得
+        var reservationTime = document.getElementById('time');
+        // 変更があった場合にupdateTableを呼び出す
+        reservationTime.addEventListener('change', updateTable);
+        
+        // 最初の選択時にも表を更新する
+        updateTable();
+    });
+
+
         function updateTable() {
             // 入力された値を取得
             var shopNameCell = document.getElementById('shopNameCell');
@@ -149,6 +162,12 @@
             shopNameCell.innerHTML = initialShopName;
             reservationDate.innerHTML = document.getElementById('date').value;
             reservationTime.innerHTML = document.getElementById('time').value;
+//             document.getElementById('time').addEventListener('change', function() {
+//     updateTable();
+// });
+
+
+
             reservationPeople.innerHTML = document.getElementById('people').value + "人";
         }
 
