@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ReservationRequest extends FormRequest
 {
@@ -26,9 +25,9 @@ class ReservationRequest extends FormRequest
             'date' => [
                 'required',
                 'date',
-                'after_or_equal:now', // 過去の日時ではないことを確認
+                'after_or_equal:now',
             ],
-            'time' => 'required|date_format:H:i', // 時刻のフォーマットは必要に応じて変更してください
+            'time' => 'required|date_format:H:i',
             'people' => 'required|integer|between:1,10',
         ];
     }

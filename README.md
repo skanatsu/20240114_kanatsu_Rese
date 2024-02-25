@@ -34,7 +34,7 @@ Reseは企業のグループ会社の飲食店予約サービスです。
 ![](public/images/login.png)
 
 ### ログアウト機能
-- メニューページの「Logout」を押すと、ログアウトできます。
+メニューページの「Logout」を押すと、ログアウトできます。
 
 ![](public/images/logout.png)
 
@@ -250,4 +250,4 @@ php artisan migrate:refresh
 - User20｜user20@example.com｜password20
 
 ### 作成済みの他ダミーデータ
-shops、reservations、reviews、favoritesテーブルについて、Seederファイルにてダミーデータを作成ずみ。
+shops、reservations、reviews、favoritesテーブルについて、Seederファイルにてダミーデータを作成済み。

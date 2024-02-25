@@ -13,7 +13,6 @@
 
     <div class="detail__content">
         <div class="detail__content__shop">
-
             <div class="logo">
                 <div class="logo_link">
                     <a href="{{ url('menu') }}">
@@ -24,24 +23,20 @@
                     <p class="header__logo">Rese</p>
                 </div>
             </div>
-
             <div class="shop__detail__shopname">
                 <a href="javascript:history.back()">
                     <img src="{{ asset('images/back.png') }}" alt="戻る">
                 </a>
                 <div class="shop-details">
-
                     <h2 id="shopName" class="shop__detail__title">{{ $shop->shopname }}</h2>
                 </div>
             </div>
-
             <img src="{{ asset($shop->image_url) }}" class="shop__image" alt="{{ $shop->shopname }}">
             <div class="shop__tag">
                 <p class="shop__area">#{{ $shop->area }}</p>
                 <p>#{{ $shop->genre }}</p>
             </div>
             <p class="shop__description">{{ $shop->description }}</p>
-
             <div class="review">
                 <h3 class="review__title">お客様の声</h3>
                 <table class="review__table">
@@ -62,24 +57,15 @@
                 </table>
             </div>
             @auth
-
-
             </div>
-
             <div class="detail__content__reservation">
-
-
-
                 <h3 class="reservation">予約</h3>
-
                 <form method="POST" action="{{ route('reservation.store', ['shopId' => $shop->id]) }}">
                     @csrf
-
                     <input type="date" id="date" class="reservation__date" name="date"
                         value="{{ session('reservation.date') }}" onchange="updateTable()">
                     <select id="time" class="reservation__time" name="time">
                         <?php
-                        // 30分ごとのオプションを生成
                         for ($hour = 0; $hour < 24; $hour++) {
                             for ($minute = 0; $minute < 60; $minute += 30) {
                                 $timeValue = sprintf('%02d:%02d', $hour, $minute);
@@ -112,72 +98,45 @@
                             <td id="reservationPeople">{{ session('reservation.people') }}人</td>
                         </tr>
                     </table>
-                    <button type="submit" class="reservation__button"> <!-- ボタンをsubmitに変更 -->
+                    <button type="submit" class="reservation__button">
                         予約する
                     </button>
                 </form>
             @endauth
-        @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
-        
-
     </div>
 
-
     <script>
-        // 初期値を保持
         var initialShopName = "{{ $shop->shopname }}";
-
-
-
-
-    // ページ読み込み時にイベントリスナーを設定
-    document.addEventListener('DOMContentLoaded', function() {
-        // 予約時間の要素を取得
-        var reservationTime = document.getElementById('time');
-        // 変更があった場合にupdateTableを呼び出す
-        reservationTime.addEventListener('change', updateTable);
-        
-        // 最初の選択時にも表を更新する
-        updateTable();
-    });
-
+        document.addEventListener('DOMContentLoaded', function() {
+            var reservationTime = document.getElementById('time');
+            reservationTime.addEventListener('change', updateTable);
+            updateTable();
+        });
 
         function updateTable() {
-            // 入力された値を取得
             var shopNameCell = document.getElementById('shopNameCell');
             var reservationDate = document.getElementById('reservationDate');
             var reservationTime = document.getElementById('reservationTime');
             var reservationPeople = document.getElementById('reservationPeople');
-
-            // 表示を更新 (初期のshopnameは変更しない)
             shopNameCell.innerHTML = initialShopName;
             reservationDate.innerHTML = document.getElementById('date').value;
             reservationTime.innerHTML = document.getElementById('time').value;
-//             document.getElementById('time').addEventListener('change', function() {
-//     updateTable();
-// });
-
-
-
             reservationPeople.innerHTML = document.getElementById('people').value + "人";
         }
 
         function submitForm() {
             var form = document.getElementById('reservationForm');
-
-            // フォームのデータを取得
             var formData = new FormData(form);
-
-            // Ajaxでフォームを送信
             fetch(form.action, {
                     method: 'POST',
                     body: formData,
@@ -188,10 +147,8 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // 成功時の処理（例: リダイレクト）
                         window.location.href = data.redirect;
                     } else {
-                        // 失敗時の処理（例: エラーメッセージの表示）
                         displayErrorMessages(data.errors);
                     }
                 })
@@ -201,13 +158,9 @@
         }
 
         function displayErrorMessages(errors) {
-            // 以前のエラーメッセージをクリア
             var errorContainer = document.getElementById('errorMessages');
             errorContainer.innerHTML = '';
-
-            // エラーメッセージを表示するためのリスト要素を作成
             var errorList = document.createElement('ul');
-
             for (var field in errors) {
                 if (errors.hasOwnProperty(field)) {
                     for (var i = 0; i < errors[field].length; i++) {
@@ -218,7 +171,6 @@
                     }
                 }
             }
-            // リストをエラーコンテナに追加
             errorContainer.appendChild(errorList);
         }
     </script>

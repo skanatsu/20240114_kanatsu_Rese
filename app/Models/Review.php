@@ -15,22 +15,6 @@ class Review extends Model
         'comment',
     ];
 
-    // リレーションシップを定義する例（必要に応じて編集）
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
-
-    // public function shop()
-    // {
-    //     return $this->belongsTo(Shop::class);
-    // }
-
-    // public function review()
-    // {
-    //     return $this->hasOne(Review::class, 'reservation_id');
-    // }
-
     public function reservation()
     {
         return $this->belongsTo(Reservation::class, 'reservation_id');
@@ -40,5 +24,4 @@ class Review extends Model
     {
         return $this->hasOne(Review::class);
     }
-
 }

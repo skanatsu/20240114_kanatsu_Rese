@@ -18,23 +18,17 @@ class ReviewController extends Controller
         $reservation = Reservation::find($id);
 
         if (!$reservation) {
-            // 予約が存在しない場合の処理を追加する
             return redirect()->back()->with('error', '予約が見つかりませんでした');
         }
 
-        // 予約に関連するレビューを取得
         $review = Review::where('reservation_id', $reservation->id)->first();
 
         if ($review) {
-            // レビューが既に存在する場合は内容を更新
             $review->score = $request->input('score');
             $review->comment = $request->input('comment');
             $review->save();
         } else {
-            // レビューが存在しない場合は新しいレビューを作成
             $review = new Review([
-            // 'user_id' => null,
-            // 'shop_id' => null,
                 'reservation_id' => $reservation->id,
                 'score' => $request->input('score'),
                 'comment' => $request->input('comment'),

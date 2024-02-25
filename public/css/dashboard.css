@@ -1,12 +1,11 @@
 body {
     background-color: whitesmoke;
     margin-left: 30px;
-            width: 1500px;
+    width: 1500px;
 }
 
 .header {
     display: flex;
-    /* justify-content: space-between; */
     justify-content: flex-start;
 }
 
@@ -33,7 +32,7 @@ body {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     height: 25px;
     margin-left: 600px;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
     border-radius: 10px;
 }
 
@@ -45,29 +44,24 @@ body {
 .search__select {
     border: none;
     width: 100px;
-
-        /* ブラウザのデフォルトのスタイルを無効化 */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    
-    /* 矢印の背景画像を指定 */
-    background-image: url('/images/search_select.png');
-    /* 矢印のサイズや位置を調整 */
-    background-size: 20px; /* 矢印のサイズ */
+    background-image: url("/images/search_select.png");
+    background-size: 20px;
     background-repeat: no-repeat;
-    background-position: right center; /* 矢印の位置 */
-    padding-right: 30px; /* 矢印の右側に余白を設定 */
+    background-position: right center;
+    padding-right: 30px;
 }
 
 .search__shopname {
     border: none;
     width: 405px;
-        background-image: url('/images/search_shopname.png');
-    background-size: 20px; /* 画像のサイズ */
+    background-image: url("/images/search_shopname.png");
+    background-size: 20px;
     background-repeat: no-repeat;
-    background-position: left center; /* 画像の位置 */
-    padding-left: 30px; /* 画像の左側に余白を設定 */
+    background-position: left center;
+    padding-left: 30px;
 }
 
 .heart {
@@ -97,7 +91,6 @@ body {
     height: 170px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-
 }
 
 .shop__name {
@@ -108,7 +101,7 @@ body {
 }
 
 .shop__tag {
-        display: flex;
+    display: flex;
     justify-content: flex-start;
 }
 
@@ -126,40 +119,22 @@ body {
     margin-left: 20px;
 }
 
-/* .shop クラスに対するスタイル */
 .shop {
-    width: calc(25% - 20px); /* 25%の幅を設定し、マージンを引く */
-    margin: 0 10px 20px; /* 左右に10pxのマージン、下に20pxのマージンを設定 */
-    box-sizing: border-box; /* 幅にボーダーやパディングを含める */
-    float: left; /* 左寄せに配置 */
+    width: calc(25% - 20px);
+    margin: 0 10px 20px;
+    box-sizing: border-box;
+    float: left;
 }
 
-/* 画面幅が小さい場合、1行に表示されるようにする */
-/* @media (max-width: 768px) {
-    .shop {
-        width: calc(50% - 20px); 
-    }
-} */
-
-/* 画面幅がさらに小さい場合、1列に表示されるようにする */
-/* @media (max-width: 480px) {
-    .shop {
-        width: 100%; 
-        margin: 0 0 20px; 
-    }
-} */
-
-
-/* 画面幅が768px以下の場合 */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
-        align-items: flex-start; /* 左寄せに変更 */
+        align-items: flex-start;
     }
 
     .search {
-        margin-left: 0; /* マージンをリセット */
-        margin-top: 20px; /* 適切な間隔に変更 */
+        margin-left: 0;
+        margin-top: 20px;
         margin-bottom: 20px;
     }
 
@@ -168,16 +143,16 @@ body {
     }
 
     .header__logo {
-        margin-left: 20px; /* ロゴの左側に適切な間隔を設定 */
+        margin-left: 20px;
     }
 
     .shops-container {
-        margin-left: 0; /* マージンをリセット */
+        margin-left: 0;
     }
 
     .shop {
-        width: 100%; /* 幅を100%に変更 */
-        margin: 0 0 20px; /* 左右のマージンをリセットし、下に適切な間隔を設定 */
-        float: none; /* floatを解除 */
+        width: 100%;
+        margin: 0 0 20px;
+        float: none;
     }
 }

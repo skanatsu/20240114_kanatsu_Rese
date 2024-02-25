@@ -1,6 +1,6 @@
 body {
     background-color: whitesmoke;
-        margin-left: 30px;
+    margin-left: 30px;
 }
 
 .logo {
@@ -21,7 +21,7 @@ body {
 
 .complete__card {
     text-align: center;
-        background-color: white;
+    background-color: white;
     width: 450px;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
@@ -35,7 +35,7 @@ body {
 }
 
 .login__button {
-        background-color: rgb(42, 70, 231);
+    background-color: rgb(42, 70, 231);
     color: white;
     padding: 5px 15px;
     text-decoration: none;
@@ -45,7 +45,7 @@ body {
 }
 
 .back__button {
-        background-color: rgb(42, 70, 231);
+    background-color: rgb(42, 70, 231);
     color: white;
     padding: 5px 15px;
     text-decoration: none;
@@ -54,12 +54,10 @@ body {
     border: none;
 }
 
-/* CSS for screens larger than 768px */
 @media (max-width: 768px) {
     .complete__card {
-        width: 80%; /* カードの幅を画面幅の80％に制限 */
+        width: 80%;
         max-width: 450px;
-        margin: 0 auto; /* カードを水平方向に中央配置 */
+        margin: 0 auto;
     }
-    
 }

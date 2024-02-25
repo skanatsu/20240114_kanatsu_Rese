@@ -10,33 +10,29 @@
 </head>
 
 <body>
-        <div class="logo">
-            <div class="logo_link">
-                <a href="{{ url('menu') }}">
-                    <img src="{{ asset('images/menu.png') }}" class="menu_image" alt="メニュー">
-                </a>
-            </div>
-            <div class="logo_title">
-                <p class="header__logo">Rese</p>
-            </div>
+    <div class="logo">
+        <div class="logo_link">
+            <a href="{{ url('menu') }}">
+                <img src="{{ asset('images/menu.png') }}" class="menu_image" alt="メニュー">
+            </a>
         </div>
-        <div class="complete__card">
-            <p class="compete__message">
-    会員登録ありがとうございます。
-            </p>
-<button class="login__button" id="loginButton">
-    ログインする
-</button>
-</div>
+        <div class="logo_title">
+            <p class="header__logo">Rese</p>
+        </div>
+    </div>
+    <div class="complete__card">
+        <p class="compete__message">
+            会員登録ありがとうございます。
+        </p>
+        <button class="login__button" id="loginButton">
+            ログインする
+        </button>
+    </div>
 </body>
 
 <script>
-    // ボタン要素を取得
     var loginButton = document.getElementById('loginButton');
-
-    // ボタンがクリックされたときの処理
     loginButton.addEventListener('click', function() {
-        // ログインページに遷移
         window.location.href = 'http://localhost/login';
     });
 </script>

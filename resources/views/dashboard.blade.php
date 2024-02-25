@@ -22,7 +22,6 @@
                 <p class="header__logo">Rese</p>
             </div>
         </div>
-
         <div class="search">
             <select id="area" class="search__select" name="area" onchange="filterShops()">
                 <option value="allarea">All area</option>
@@ -40,18 +39,15 @@
                 <option value="イタリアン">イタリアン</option>
             </select>
             <p class="bar">|</p>
-            {{-- {!! Form::file('document', ['class' => 'form-control']) !!} --}}
-
             <input type="text" id="shopname" class="search__shopname" name="shopname" placeholder="Search..."
                 onkeydown="searchOnEnter(event)">
-
         </div>
     </header>
 
     <div class="shops-container">
-    @foreach ($shops as $shop)
-        <div class="shop" data-area="{{ $shop->area }}" data-genre="{{ $shop->genre }}"
-            data-shopname="{{ $shop->shopname }}">
+        @foreach ($shops as $shop)
+            <div class="shop" data-area="{{ $shop->area }}" data-genre="{{ $shop->genre }}"
+                data-shopname="{{ $shop->shopname }}">
                 <img src="{{ asset($shop->image_url) }}" class="shop__image" alt="{{ $shop->shopname }}">
                 <p class="shop__name">{{ $shop->shopname }}</p>
                 <div class="shop__tag">
@@ -64,8 +60,8 @@
                         class="heart" onclick="toggleImage(this, {{ $shop->id }})"
                         id="heartImage_{{ $loop->index }}">
                 @endauth
-        </div>
-    @endforeach
+            </div>
+        @endforeach
     </div>
 
     <script>
@@ -80,8 +76,6 @@
                 var area = shop.getAttribute("data-area");
                 var genre = shop.getAttribute("data-genre");
                 var shopname = shop.getAttribute("data-shopname").toLowerCase();
-
-                // 選択されたエリア、ジャンルか "allarea"、"allgenre" なら表示、それ以外は非表示
                 if ((selectedArea === "allarea" || area === selectedArea) &&
                     (selectedGenre === "allgenre" || genre === selectedGenre) &&
                     shopname.includes(searchShopname)) {
@@ -98,10 +92,8 @@
             }
         }
 
-        // 画像の状態をトグルする関数
         function toggleImage(element) {
             var currentSrc = element.src;
-
             if (currentSrc.includes('greyheart.png')) {
                 element.src = '{{ url('/images/heart.png') }}';
             } else {
@@ -109,20 +101,14 @@
             }
         }
 
-        // クリックイベントで画像の切り替えを実行
         document.getElementById('heartImage').addEventListener('click', toggleImage);
 
-        // クリックイベントで画像の切り替えを実行
-        // 画像の状態をトグルする関数
         function toggleImage(element, shopId) {
-
             var currentSrc = element.src;
             var newSrc = currentSrc.includes('greyheart.png') ? '{{ url('/images/heart.png') }}' :
                 '{{ url('/images/greyheart.png') }}';
-
             element.src = newSrc;
 
-            // お気に入りのトグル処理を呼び出す
             $.ajax({
                 type: 'POST',
                 url: '{{ route('shop.toggle-favorite', ['shopId' => '__SHOP_ID__']) }}'.replace('__SHOP_ID__',
@@ -131,11 +117,9 @@
                     _token: '{{ csrf_token() }}',
                 },
                 success: function(response) {
-                    // 成功時の処理
                     console.log(response);
                 },
                 error: function(error) {
-                    // エラー時の処理
                     console.error(error);
                 }
             });

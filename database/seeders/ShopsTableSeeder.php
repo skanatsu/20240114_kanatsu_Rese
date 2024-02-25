@@ -2,26 +2,19 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Shop;
-// use Illuminate\Support\Facades\Storage;
 
 class ShopsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        
         Shop::create([
             'shopname' => '仙人',
             'area' => '東京都',
             'genre' => '寿司',
             'description' => '料理長厳選の食材から作る寿司を用いたコースをぜひお楽しみください。食材・味・価格、お客様の満足度を徹底的に追及したお店です。特別な日のお食事、ビジネス接待まで気軽に使用することができます。',
             'image_url' => asset('images/sushi.jpeg')
-
         ]);
 
         Shop::create([

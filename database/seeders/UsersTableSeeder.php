@@ -2,22 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-
-        // 既存のユーザーデータを削除
         User::query()->delete();
 
-        // 20名分のユーザーデータを生成
         $usersData = [
             [
                 'name' => 'User1',
@@ -121,13 +114,12 @@ class UsersTableSeeder extends Seeder
             ],
         ];
 
-        // 生成したユーザーデータをデータベースに挿入
         foreach ($usersData as $userData) {
             User::create([
                 'name' => $userData['name'],
                 'email' => $userData['email'],
-                'email_verified_at' => now(), // メール認証済みの状態として設定
-                'password' => bcrypt($userData['password']), // パスワードをハッシュ化
+                'email_verified_at' => now(),
+                'password' => bcrypt($userData['password']),
             ]);
         }
     }

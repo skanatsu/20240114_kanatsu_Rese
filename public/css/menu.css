@@ -1,10 +1,5 @@
 body {
-        margin-left: 30px;
-}
-
-.logo {
-    /* display: flex;
-    justify-content: flex-start; */
+    margin-left: 30px;
 }
 
 .menu_image {
@@ -19,13 +14,12 @@ body {
     margin: 0 auto;
     height: 280px;
     font-size: 30px;
-    
 }
 
 a {
-  text-decoration: none;
-  display: block;
-  margin-bottom: 20px;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 20px;
 }
 
 .compete__message {
@@ -34,7 +28,7 @@ a {
 }
 
 .login__button {
-        background-color: rgb(42, 70, 231);
+    background-color: rgb(42, 70, 231);
     color: white;
     padding: 5px 15px;
     text-decoration: none;
@@ -44,7 +38,7 @@ a {
 }
 
 .back__button {
-        background-color: rgb(42, 70, 231);
+    background-color: rgb(42, 70, 231);
     color: white;
     padding: 5px 15px;
     text-decoration: none;
@@ -56,8 +50,6 @@ a {
 @media (max-width: 768px) {
     .menu__list {
         width: 80%;
-
         margin: 0 auto;
     }
-    
 }

@@ -1,10 +1,10 @@
 body {
     background-color: whitesmoke;
-        margin-left: 30px;
+    margin-left: 30px;
 }
 
 .detail__content {
-        display: flex;
+    display: flex;
     justify-content: flex-start;
 }
 
@@ -28,11 +28,11 @@ body {
     margin-left: 80px;
     background-color: rgb(42, 70, 231);
     width: 550px;
-            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
     border-radius: 10px;
     margin-top: 35px;
-        color: white;
-        height: 700px;
+    color: white;
+    height: 700px;
 }
 
 .reservation {
@@ -41,12 +41,13 @@ body {
     margin-top: 30px;
 }
 
-
 .reservation__date {
     width: 160px;
 }
 
-.reservation__date, .reservation__time, .reservation__number {
+.reservation__date,
+.reservation__time,
+.reservation__number {
     height: 30px;
     border: none;
     border-radius: 7px;
@@ -57,24 +58,20 @@ body {
     padding: 0 10px;
 }
 
-    .review__table {
-        width: 95%;
-    }
+.review__table {
+    width: 95%;
+}
 
-.reservation__time, .reservation__number {
+.reservation__time,
+.reservation__number {
     width: 470px;
-        /* ブラウザのデフォルトのスタイルを無効化 */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    
-    /* 矢印の背景画像を指定 */
-    background-image: url('/images/search_select.png');
-    /* 矢印のサイズや位置を調整 */
-    background-size: 20px; /* 矢印のサイズ */
+    background-image: url("/images/search_select.png");
+    background-size: 20px;
     background-repeat: no-repeat;
-    background-position: right center; /* 矢印の位置 */
-
+    background-position: right center;
 }
 
 .reservation__item {
@@ -118,48 +115,20 @@ body {
 }
 
 .shop {
-    /* background-color: white;
-    width: 350px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    height: 320px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
-    border-radius: 10px;
-
-        width: calc(25% - 20px); 
-    margin: 0 10px 20px; 
-    box-sizing: border-box;
-    float: left;  */
     max-width: 350px;
     background-color: white;
-    width: calc(50% - 20px); /* 50%の幅を設定し、マージンを引く */
+    width: calc(50% - 20px);
     margin: 0 60px 50px 0;
     height: 320px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
     border-radius: 10px;
-    box-sizing: border-box; /* 幅にボーダーやパディングを含める */
-    float: left; /* 左寄せに配置 */
+    box-sizing: border-box;
+    float: left;
 }
-
-
-/* 画面幅が小さい場合、1行に表示されるようにする */
-/* @media (max-width: 768px) {
-    .shop {
-        width: calc(50% - 20px); 
-    }
-} */
-
-/* 画面幅がさらに小さい場合、1列に表示されるようにする */
-/* @media (max-width: 480px) {
-    .shop {
-        width: 100%; 
-        margin: 0 0 20px; 
-       }
-} */
 
 .shop__detail__shopname {
     display: flex;
-    justify-content: flex-start;    
+    justify-content: flex-start;
 }
 
 .shop__detail__title {
@@ -180,7 +149,7 @@ body {
 }
 
 .shop__tag {
-        display: flex;
+    display: flex;
     justify-content: flex-start;
 }
 
@@ -202,7 +171,7 @@ body {
 }
 
 .review {
-        background-color: rgb(180, 100, 237);
+    background-color: rgb(180, 100, 237);
     border-radius: 10px;
     padding-top: 1px;
     padding-left: 20px;
@@ -215,10 +184,12 @@ body {
     font-size: 25px;
 }
 
-.review__table, .review__score, .review__comment{
-      border-collapse: collapse;
+.review__table,
+.review__score,
+.review__comment {
+    border-collapse: collapse;
     border: 1px solid black;
-  padding: 8px;
+    padding: 8px;
 }
 
 .review__score {
@@ -235,18 +206,16 @@ body {
     width: 500px;
 }
 
-/* ブレークポイント768px未満の場合 */
 @media (max-width: 768px) {
     .detail__content {
-        flex-direction: column; /* コンテンツを縦に配置 */
-        /* align-items: center; 中央に配置 */
+        flex-direction: column;
     }
 
     .detail__content__reservation {
-        width: calc(100% - 10px); /* 画面幅から60pxを引いた幅に設定 */
+        width: calc(100% - 10px);
         max-width: 600px;
-        margin-left: 0px; 
-        margin-top: 20px; /* 上側のマージンを20pxに設定 */
+        margin-left: 0px;
+        margin-top: 20px;
     }
 
     .reservation__date {
@@ -254,35 +223,34 @@ body {
         max-width: 160px;
     }
 
-    .reservation__time, .reservation__number {
-        width: calc(100% - 60px); /* 幅を全体の幅から余白を引いた値に設定 */
+    .reservation__time,
+    .reservation__number {
+        width: calc(100% - 60px);
     }
 
     .reservation__button {
-        width: calc(100% - 60px); /* 幅を全体の幅から余白を引いた値に設定 */
+        width: calc(100% - 60px);
     }
 
-        .detail__content__shop {
-        flex-direction: column; /* 子要素を縦方向に配置 */
-        /* align-items: center;  */
+    .detail__content__shop {
+        flex-direction: column;
         max-width: 600px;
     }
-    .shop__detail__shopname {
-        /* margin-top: 20px; 上のマージンを追加 */
-    }
+
     .shop__image {
-        max-width: 100%; /* 画像を幅いっぱいに表示 */
+        max-width: 100%;
     }
+
     .shop__description {
-        width: 100%; /* 説明文を幅いっぱいに表示 */
-        margin-left: 0; /* 左のマージンを0に設定 */
+        width: 100%;
+        margin-left: 0;
     }
 
     .review__table {
         width: 95%;
     }
 
-    .reservation__check  {
+    .reservation__check {
         width: calc(100% - 60px);
     }
 
@@ -290,8 +258,7 @@ body {
         width: calc(100%);
     }
 
-.reservation__check {
-    max-width: 450px;
+    .reservation__check {
+        max-width: 450px;
+    }
 }
-}
-

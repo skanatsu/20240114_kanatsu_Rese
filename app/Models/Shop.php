@@ -13,12 +13,8 @@ class Shop extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['shopname', 'area', 'genre', 'description', 'image_id'];
+    protected $fillable = ['shopname', 'area', 'genre', 'description', 'image_url'];
 
-    public function image()
-    {
-        return $this->belongsTo(Image::class);
-    }
     public function reservations()
     {
         return $this->hasMany(Reservation::class, 'shop_id');
@@ -26,15 +22,8 @@ class Shop extends Model
 
     public function getIsFavoriteAttribute()
     {
-        // 現在のユーザーがこの店舗をお気に入りにしているかどうかをチェック
         return $this->favorites()->where('user_id', auth()->id())->exists();
     }
-
-    // public function favorites()
-    // {
-    //     // この店舗をお気に入りにしたユーザーとのリレーションシップ
-    //     return $this->belongsToMany(User::class, 'favorites');
-    // }
     public function favorites(): HasMany
     {
         return $this->hasMany(Favorite::class);

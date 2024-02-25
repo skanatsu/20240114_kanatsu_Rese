@@ -1,6 +1,6 @@
 body {
     background-color: whitesmoke;
-        margin-left: 30px;
+    margin-left: 30px;
 }
 
 .logo {
@@ -24,10 +24,9 @@ h1 {
 }
 
 .mypage__content {
-        display: flex;
+    display: flex;
     justify-content: flex-start;
-align-items: flex-start;
-
+    align-items: flex-start;
 }
 
 .mypage__content__reservation {
@@ -35,24 +34,13 @@ align-items: flex-start;
 }
 
 .favorite_status {
-    /* display: block; */
     width: 1000px;
 }
 
 .mypage__content__favorite {
     margin-left: 70px;
-    /* test */
-    /* display: flex;
-    flex-wrap: wrap; /* コンテナ内の要素が折り返されるようにする */
-    /* justify-content: space-between; 要素をコンテナの両端に配置 */ 
-
-  display: flex;
-  flex-wrap: wrap; 
-  /* コンテナ内の要素が折り返されるようにする */
-  /* justify-content: space-between; 要素をコンテナの両端に配置  */
-/* justify-content: flex-start; */
-
-
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .reservation__card {
@@ -61,12 +49,12 @@ align-items: flex-start;
     margin-bottom: 20px;
     padding: 30px;
     width: 450px;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
     border-radius: 10px;
 }
 
 .reservation__card__header {
-        display: flex;
+    display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
@@ -78,15 +66,13 @@ align-items: flex-start;
 }
 
 .reservation__clock__number {
-        display: flex;
+    display: flex;
     justify-content: flex-start;
 }
-
 
 .reservation__number {
     margin-left: 30px;
     margin-top: 7px;
-    /* display: inline; */
 }
 
 .reservation__status {
@@ -100,7 +86,7 @@ align-items: flex-start;
 
 .delete_image {
     border-radius: 50%;
-        width: 38px;
+    width: 38px;
     height: 38px;
 }
 
@@ -121,7 +107,9 @@ align-items: flex-start;
     margin-top: 10px;
 }
 
-.reservation__update__date, .reservation__update__time, .reservation__update__number {
+.reservation__update__date,
+.reservation__update__time,
+.reservation__update__number {
     height: 30px;
     border: none;
     border-radius: 7px;
@@ -139,7 +127,6 @@ align-items: flex-start;
     padding: 0px 15px;
 }
 
-
 .heart {
     width: 50px;
     float: right;
@@ -148,46 +135,15 @@ align-items: flex-start;
 }
 
 .shop {
-
-    /* max-width: 350px;
+    max-width: 350px;
     background-color: white;
-    width: calc(50% - 20px); 
-    margin: 0 60px 50px 0;
+    width: calc(50% - 40px);
+    margin: 0 80px 40px 0;
     height: 320px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
     border-radius: 10px;
     box-sizing: border-box;
-    float: left;  */
-
-  max-width: 350px;
-  background-color: white;
-  width: calc(50% - 40px); /* 50%の幅を設定し、マージンを引く */
-  margin: 0 80px 40px 0; /* 上下左右にマージン */
-  height: 320px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
-  border-radius: 10px;
-  box-sizing: border-box; /* 幅にボーダーやパディングを含める */
-
-
-
 }
-
-
-/* 画面幅が小さい場合、1行に表示されるようにする */
-/* @media (max-width: 768px) {
-    .shop {
-        width: calc(50% - 20px); /
-    }
-} */
-
-/* 画面幅がさらに小さい場合、1列に表示されるようにする */
-/* @media (max-width: 480px) {
-    .shop {
-        width: 100%; 
-        margin: 0 0 20px; 
-    }
-} */
-
 
 .shop__image {
     width: 100%;
@@ -195,7 +151,6 @@ align-items: flex-start;
     height: 170px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-
 }
 
 .shop__name {
@@ -206,7 +161,7 @@ align-items: flex-start;
 }
 
 .shop__tag {
-        display: flex;
+    display: flex;
     justify-content: flex-start;
 }
 
@@ -225,7 +180,7 @@ align-items: flex-start;
 }
 
 .reservation__evaluate {
-        height: 40px;
+    height: 40px;
     border: none;
     background-color: purple;
     color: white;
@@ -243,13 +198,13 @@ align-items: flex-start;
 }
 
 .review__submit {
-        height: 40px;
+    height: 40px;
     border: none;
     background-color: purple;
     color: white;
     margin-top: 20px;
     padding: 0px 15px;
-        margin-left: 310px;
+    margin-left: 310px;
 }
 
 .review__item {
@@ -259,7 +214,7 @@ align-items: flex-start;
 
 .review__score {
     margin-top: 10px;
-        height: 30px;
+    height: 30px;
     border: none;
     border-radius: 7px;
     width: 50px;
@@ -268,7 +223,7 @@ align-items: flex-start;
 
 .review__comment {
     margin-top: 10px;
-        height: 30px;
+    height: 30px;
     border: none;
     border-radius: 7px;
     width: 390px;
@@ -282,131 +237,117 @@ align-items: flex-start;
 }
 
 .qr-code__img {
-    
     width: 20%;
     height: 20%;
 }
 
 .reservation__pay {
-            height: 40px;
+    height: 40px;
     border: none;
     background-color: orangered;
 
     margin-top: 20px;
     padding: 0px 15px;
-        /* margin-left: 310px; */
-    /* display: inline-block; */
-        display: flex; /* 親要素をフレックスコンテナにする */
-    justify-content: center; /* テキストを水平方向に中央揃え */
-    align-items: center; /* テキストを垂直方向に中央揃え */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 160px;
 }
 
 .reservation__pay__link {
-        text-decoration: none;
-            color: white;
-       
+    text-decoration: none;
+    color: white;
 }
 
-
-/* 768px以下の場合 */
 @media (max-width: 768px) {
     body {
-    background-color: whitesmoke;
-        /* margin-left: 30px; */
-}
-
-    .logo {
-        align-items: flex-start; /* 左寄せに変更 */
-        margin-bottom: 20px; /* マージンを追加 */
+        background-color: whitesmoke;
     }
 
+    .logo {
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
 
     .mypage__content {
-        flex-direction: column; /* コンテンツを縦に配置 */
-        /* align-items: center;  */
+        flex-direction: column;
     }
 
     .mypage__content__reservation {
-        width: auto; /* 幅を自動調整 */
+        width: auto;
     }
 
     .favorite_status {
         width: calc(100% - 100px);
         clear: both;
-        /* margin-left: 35px; */
-
     }
 
     .mypage__content__favorite {
-        margin-left: 0; /* マージンをリセット */
-
+        margin-left: 0;
     }
 
     .reservation__card {
-        width: 90%; /* 幅を調整 */
+        width: 90%;
         max-width: 450px;
-        margin-bottom: 20px; /* マージンを追加 */
+        margin-bottom: 20px;
     }
 
     .shop {
-        width: 90%; /* 幅を調整 */
-        /* margin: 0 auto 20px; */
+        width: 90%;
         margin: 0 30px 20px 0;
-
     }
 
     .shop__name {
-        font-size: 18px; /* フォントサイズを調整 */
-        margin-left: 10px; /* マージンを調整 */
+        font-size: 18px;
+        margin-left: 10px;
     }
 
     .shop__tag {
-        margin-left: 10px; /* マージンを調整 */
+        margin-left: 10px;
     }
 
     .shop__detail {
-        margin-left: 10px; /* マージンを調整 */
+        margin-left: 10px;
     }
 
     .heart {
-        margin-right: 10px; /* マージンを調整 */
+        margin-right: 10px;
     }
 
     .reservation__update {
-        margin-left: 0; /* マージンをリセット */
-        padding-left: 10px; /* パディングを調整 */
-        padding-right: 10px; /* パディングを調整 */
-        margin-top: 10px; /* マージンを追加 */
+        margin-left: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 10px;
     }
 
     .reservation__update__button {
-        margin-left: auto; /* 左側に寄せる */
-        margin-right: auto; /* 右側に寄せる */
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .reservation__evaluate {
-        width: 90%; /* 幅を調整 */
-        margin: 0 auto 20px; /* マージンを追加 */
+        width: 90%;
+        margin: 0 auto 20px;
     }
 
     .reservation__evaluate-form {
-        width: 90%; /* 幅を調整 */
-        margin: 0 auto 20px; /* マージンを追加 */
-        padding: 10px; /* パディングを追加 */
+        width: 90%;
+        margin: 0 auto 20px;
+        padding: 10px;
     }
 
     .review__submit {
-        margin-left: auto; /* 左側に寄せる */
-        margin-right: auto; /* 右側に寄せる */
-        margin-top: 20px; /* マージンを追加 */
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
     }
 
     .reservation__pay {
-        margin-top: 20px; /* マージンを追加 */
-        width: 90%; /* 幅を調整 */
-        margin-left: auto; /* 左側に寄せる */
-        margin-right: auto; /* 右側に寄せる */
-        margin-bottom: 20px; /* マージンを追加 */
+        margin-top: 20px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
     }
 }

@@ -2,15 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class ReviewsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+
     public function run(): void
     {
         $comments = [
@@ -73,7 +70,7 @@ class ReviewsTableSeeder extends Seeder
             "ランチメニューが豊富で、リーズナブルな価格設定が嬉しいお店でした。お得感を味わいながら食事が楽しめます。",
             "ワインリストが充実しており、料理との相性が抜群でした。ワイン好きにはたまらないお店です。",
             "カジュアルな雰囲気で、気軽に食事を楽しむことができました。友人や仲間との集まりに最適です。",
-            "ディナータイムの雰囲気がロマンティックで、特別な夜を演出してくれるお店でした。素敵な思い出ができます。",        
+            "ディナータイムの雰囲気がロマンティックで、特別な夜を演出してくれるお店でした。素敵な思い出ができます。",
         ];
 
         for ($i = 1; $i <= 60; $i++) {
