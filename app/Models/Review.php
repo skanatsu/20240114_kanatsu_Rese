@@ -10,23 +10,21 @@ class Review extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'shop_id',
         'reservation_id',
         'score',
         'comment',
     ];
 
     // リレーションシップを定義する例（必要に応じて編集）
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 
-    public function shop()
-    {
-        return $this->belongsTo(Shop::class);
-    }
+    // public function shop()
+    // {
+    //     return $this->belongsTo(Shop::class);
+    // }
 
     // public function review()
     // {

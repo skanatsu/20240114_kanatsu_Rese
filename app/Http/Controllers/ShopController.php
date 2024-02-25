@@ -7,6 +7,7 @@ use App\Models\Shop;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
+use App\Models\Reservation;
 // use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,7 +28,15 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($id);
 
         // 店舗に関連する評価データを取得
-        $reviews = Review::where('shop_id', $id)->get();
+        // $reviews = Review::where('shop_id', $id)->get();
+        // $reviews = Review::where('reservation_id', $id)->get();
+
+        // return view('detail', compact('shop', 'reviews'));
+        // 予約データから該当のショップIDに関連する予約IDを取得
+        $reservationIds = Reservation::where('shop_id', $id)->pluck('id');
+
+        // 予約IDを使って関連する評価データを取得
+        $reviews = Review::whereIn('reservation_id', $reservationIds)->get();
 
         return view('detail', compact('shop', 'reviews'));
     }

@@ -33,8 +33,8 @@ class ReviewController extends Controller
         } else {
             // レビューが存在しない場合は新しいレビューを作成
             $review = new Review([
-                'user_id' => auth()->user()->id,
-                'shop_id' => $reservation->shop_id,
+            // 'user_id' => null,
+            // 'shop_id' => null,
                 'reservation_id' => $reservation->id,
                 'score' => $request->input('score'),
                 'comment' => $request->input('comment'),
