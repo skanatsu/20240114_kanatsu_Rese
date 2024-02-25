@@ -101,6 +101,8 @@ Reseは企業のグループ会社の飲食店予約サービスです。
 - 「詳しくみる」ボタンを押下すると、店舗詳細ページに遷移します。
 - ハートマークを押下すると、お気に入りが解除され、「お気に入り店舗」欄から削除されます。
 
+![](public/images/mypage4.png)
+
 ## 使用技術（実行環境）
 - フロントエンド
   - HTML
@@ -114,40 +116,273 @@ Reseは企業のグループ会社の飲食店予約サービスです。
   - Docker（開発環境）
 - その他
   - GitHub
+  - Stripe（決済機能）
 
 ## テーブル設計
 ### usersテーブル
-![](./img/usertable.png)
+![](public/images/users_table.png)
 
 ### shopsテーブル
-![](./img/attendancetable.png)
+![](public/images/shops_table.png)
 
 ### favoritesテーブル
-![](./img/attendancetable.png)
+![](public/images/favorites_table.png)
 
 ### reservationsテーブル
-![](./img/attendancetable.png)
+![](public/images/reservations_table.png)
 
 ### reviewsテーブル
-![](./img/attendancetable.png)
+![](public/images/reviews_table.png)
 
 
 ## ER図
-![](./img/er.png)
+![](public/images/er.png)
 
-## 環境構築
+## 開発環境構築
+### 下記のとおり、.envファイルを作成します。
+
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:OQ7I3ELOq6ZMh5Hi9gX28BVPun2bfG6dG4pV7fLNypc=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=test_project
+DB_USERNAME=sail
+DB_PASSWORD=password
+WWWUSER=sail
+WWWGROUP=sail
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=database
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_HOST=redis
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=atte.master6@gmail.com
+MAIL_PASSWORD=dzrvqlmwbwkwfgip
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=atte.master6@gmail.com
+MAIL_FROM_NAME=Rese
+MAIL_DRIVER=log
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME=https
+PUSHER_APP_CLUSTER=mt1
+
+VITE_APP_NAME="${APP_NAME}"
+VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+VITE_PUSHER_HOST="${PUSHER_HOST}"
+VITE_PUSHER_PORT="${PUSHER_PORT}"
+VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+SCOUT_DRIVER=meilisearch
+MEILISEARCH_HOST=http://meilisearch:7700
+
+MEILISEARCH_NO_ANALYTICS=false
+
+SSTRIPE_API_KEY=pk_test_51OlSW7H2PN2teyfS1jwGbE1IrJulRMOHg27kH0I6XfKjX17ZzGH4mfpJg8Kur96C92ijdrZ2dr90SfWmhsTQzcCu00yaa2MBWa
+STRIPE_SECRET_KEY=sk_test_51OlSW7H2PN2teyfS0sHqv9qxRjiCFlohx0T7NLdgjnxGYBy6yUSPFb3LJtj33imVyyQf388yPeYQvLLNLSb7uZdI00gIx0vHU0
+
+### データベースのセットアップ
+プロジェクトで使用するデータベースは、Docker Composeを使用して設定します。以下はdocker-compose.ymlファイルです。
+
+version: '3'
+services:
+    stripe-cli:
+        image: stripe/stripe-cli
+        volumes:
+            - ./stripe:/home/stripe
+            - .env:/app/.env
+        ports:
+            - "4242:4242"
+        command: ["stripe", "login"]
+        environment:
+            - STRIPE_API_KEY  pk_test_51OlSW7H2PN2teyfS1jwGbE1IrJulRMOHg27kH0I6XfKjX17ZzGH4mfpJg8Kur96C92ijdrZ2dr90SfWmhsTQzcCu00yaa2MBWa
+    laravel.test:
+        build:
+            context: ./vendor/laravel/sail/runtimes/8.2
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.2/app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-80}:80'
+            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        depends_on:
+            - mysql
+            - redis
+            - meilisearch
+            - mailpit
+            - selenium
+    mysql:
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - 'sail-mysql:/var/lib/mysql'
+            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+        networks:
+            - sail
+        healthcheck:
+            test:
+                - CMD
+                - mysqladmin
+                - ping
+                - '-p${DB_PASSWORD}'
+            retries: 3
+            timeout: 5s
+    phpmyadmin:
+        image: 'phpmyadmin/phpmyadmin:latest'
+        ports:
+            - '8080:80'
+        depends_on:
+            - mysql
+        environment:
+            PMA_HOST: mysql
+            PMA_USER: '${DB_USERNAME}'
+            PMA_PASSWORD: '${DB_PASSWORD}'
+        networks:
+            - sail
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'sail-redis:/data'
+        networks:
+            - sail
+        healthcheck:
+            test:
+                - CMD
+                - redis-cli
+                - ping
+            retries: 3
+            timeout: 5s
+    meilisearch:
+        image: 'getmeili/meilisearch:latest'
+        ports:
+            - '${FORWARD_MEILISEARCH_PORT:-7700}:7700'
+        environment:
+            MEILI_NO_ANALYTICS: '${MEILISEARCH_NO_ANALYTICS:-false}'
+        volumes:
+            - 'sail-meilisearch:/meili_data'
+        networks:
+            - sail
+        healthcheck:
+            test:
+                - CMD
+                - wget
+                - '--no-verbose'
+                - '--spider'
+                - 'http://localhost:7700/health'
+            retries: 3
+            timeout: 5s
+    mailpit:
+        image: 'axllent/mailpit:latest'
+        ports:
+            - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+            - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+        networks:
+            - sail
+    selenium:
+        image: selenium/standalone-chrome
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        volumes:
+            - '/dev/shm:/dev/shm'
+        networks:
+            - sail
+networks:
+    sail:
+        driver: bridge
+volumes:
+    sail-mysql:
+        driver: local
+    sail-redis:
+        driver: local
+    sail-meilisearch:
+        driver: local
+
+
+### サーバーの立ち上げ、アクセスの確認
 - ローカル環境にてサーバーを立ち上げるには、下記コマンドを入力してください。
   - ./vendor/bin/sail up
 - その後、JavaScriptを有効にするため、下記コードも入力してください。
   - npm run dev
+- http://localhost/ にアクセスできるか確認。アクセスできたら成功です。
+
+### マイグレーションコマンド
+- 下記コマンドで、Sailコンテナ内でデータベースのマイグレーションが実行されます。
+  - ./vendor/bin/sail shell
+  - php artisan migrate
+
+### ダミーデータ作成コマンド
+- 下記コマンドで、ダミーデータを作成できます（Seederを使用）。
+  - ./vendor/bin/sail shell
+  - php artisan db:seed
+
+### データベースをリフレッシュするコマンド
+php artisan migrate:refresh
+
 
 ## 他
-### 作成済みのテスト用ユーザーデータ
-パスワードはいずれも「twiligor」。
-- Shimpei Kanatsu sk7@gmail.com
-- 5work9 5work9@gmail.com
-- magya6	magya6@tapi.re
-- yuhi175	yuhi175@tapi.re
-- 山田　太郎	hahihepu@instaddr.ch
-- 鈴木花子	byoryowa153@fuwamofu.com
+### 作成済みのテスト用ユーザーデータ（20件）
 
+- ユーザー名｜メールアドレス｜パスワード
+- User1｜user1@example.com｜password1
+- User2｜user2@example.com｜password2
+・・・
+- User20｜user20@example.com｜password20
+
+### 作成済みの他ダミーデータ
+shops、reservations、reviews、favoritesテーブルについて、Seederファイルにてダミーデータを作成ずみ。
