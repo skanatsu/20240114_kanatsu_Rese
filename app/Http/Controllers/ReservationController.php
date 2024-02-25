@@ -24,6 +24,8 @@ class ReservationController extends Controller
     }
 
  
+
+
     public function store(ReservationRequest $request, $shopId)
     {
         // バリデーションルールを通過した場合
@@ -50,31 +52,51 @@ class ReservationController extends Controller
         ]);
 
 
+        // try {
+        //     // Stripeの支払い処理
+        //     Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        //     $paymentIntent = PaymentIntent::create([
+        //         'amount' => 0, // 支払い金額（センツ単位）
+        //         'currency' => 'JPY', // 通貨
+        //     ]);
+
+        //     // 支払いが成功した場合の処理
+        //     if ($paymentIntent->status === 'succeeded') {
+        //         // 支払い成功の処理をここに記述する
+        //         return redirect('http://localhost/done');
+        //     } else {
+        //         // 支払い失敗の処理をここに記述する
+        //         return redirect()->back()->with('error', '支払いに失敗しました。');
+        //     }
+        // } catch (ApiErrorException $e) {
+        //     Log::error('Stripe payment error: ' . $e->getMessage());
+        //     return redirect()->back()->with('error', '支払い処理中にエラーが発生しました。');
+        // }
+
+
+        // // 予約が完了したら指定のURLにリダイレクト
+        // return redirect('http://localhost/done');
+
         try {
             // Stripeの支払い処理
             Stripe::setApiKey(env('STRIPE_SECRET'));
-
             $paymentIntent = PaymentIntent::create([
                 'amount' => 0, // 支払い金額（センツ単位）
                 'currency' => 'JPY', // 通貨
             ]);
 
-            // 支払いが成功した場合の処理
-            if ($paymentIntent->status === 'succeeded') {
-                // 支払い成功の処理をここに記述する
-                return redirect('http://localhost/done');
-            } else {
-                // 支払い失敗の処理をここに記述する
-                return redirect()->back()->with('error', '支払いに失敗しました。');
-            }
+            // 予約データを保存
+            // Reservation::create($reservationData);
+
+            // 支払いが成功しているかどうかに関わらず、Doneページにリダイレクト
+            return redirect('http://localhost/done');
         } catch (ApiErrorException $e) {
             Log::error('Stripe payment error: ' . $e->getMessage());
-            return redirect()->back()->with('error', '支払い処理中にエラーが発生しました。');
+
+            // Stripeの支払い処理でエラーが発生した場合もDoneページにリダイレクト
+            return redirect('http://localhost/done');
         }
-
-
-        // 予約が完了したら指定のURLにリダイレクト
-        return redirect('http://localhost/done');
     }
 
 
