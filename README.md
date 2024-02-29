@@ -139,7 +139,7 @@ Reseは企業のグループ会社の飲食店予約サービスです。
 ![](public/images/er.png)
 
 ## 開発環境構築
-### .envファイルの作成
+### ①.envファイルの作成
 - .env.example ファイルを .env ファイルとしてコピーし、下記のとおり編集します。
 
 APP_NAME=Laravel
@@ -213,25 +213,25 @@ MEILISEARCH_NO_ANALYTICS=false
 SSTRIPE_API_KEY=pk_test_51OlSW7H2PN2teyfS1jwGbE1IrJulRMOHg27kH0I6XfKjX17ZzGH4mfpJg8Kur96C92ijdrZ2dr90SfWmhsTQzcCu00yaa2MBWa
 STRIPE_SECRET_KEY=sk_test_51OlSW7H2PN2teyfS0sHqv9qxRjiCFlohx0T7NLdgjnxGYBy6yUSPFb3LJtj33imVyyQf388yPeYQvLLNLSb7uZdI00gIx0vHU0
 
-### Docker Compose を利用した開発環境構築
+### ②Docker Compose を利用した開発環境構築
 - Docker Desktopをインストールし、さらにDocker Composeをインストールします。
 - docker-compose.yml ファイルの内容を確認します。
 - 下記コマンドにて、コンテナを起動します。
   - docker-compose up -d
 
-### サーバーの立ち上げ、アクセスの確認
+### ③サーバーの立ち上げ、アクセスの確認
 - ローカル環境にてサーバーを立ち上げるには、下記コマンドを入力してください。
   - ./vendor/bin/sail up
 - その後、JavaScriptを有効にするため、下記コードも入力してください。
   - npm run dev
 - http://localhost/ にアクセスできるか確認。アクセスできたら成功です。
 
-### マイグレーションコマンド
+### ④マイグレーションコマンド
 - 下記コマンドで、Sailコンテナ内でデータベースのマイグレーションが実行されます。
   - ./vendor/bin/sail shell
   - php artisan migrate
 
-### ダミーデータ作成コマンド
+### ⑤ダミーデータ作成コマンド
 - 下記コマンドで、ダミーデータを作成できます（Seederを使用）。
   - ./vendor/bin/sail shell
   - php artisan db:seed
@@ -241,13 +241,13 @@ php artisan migrate:refresh
 
 
 ## 他
-### 作成済みのテスト用ユーザーデータ（20件）
-
+### テスト用ユーザーデータ（20件）
+Seederファイルにて、ダミーデータを作成可能。
 - ユーザー名｜メールアドレス｜パスワード
 - User1｜user1@example.com｜password1
 - User2｜user2@example.com｜password2
 ・・・
 - User20｜user20@example.com｜password20
 
-### 作成済みの他ダミーデータ
-shops、reservations、reviews、favoritesテーブルについて、Seederファイルにてダミーデータを作成済み。
+### その他のダミーデータ
+shops、reservations、reviews、favoritesテーブルについて、Seederファイルにてダミーデータを作成可能。
