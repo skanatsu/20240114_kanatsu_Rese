@@ -37,29 +37,49 @@
                 <p>#{{ $shop->genre }}</p>
             </div>
             <p class="shop__description">{{ $shop->description }}</p>
-<div class="review_page">
-    <a href="{{ route('review', ['id' => $shop->id]) }}" class="review_page">口コミを投稿する</a>
-</div>
+            @if (Auth::check() && Auth::user()->type == 'general')
+    <div class="review_page">
+        <a href="{{ route('review', ['id' => $shop->id]) }}" class="review_page">口コミを投稿する</a>
+    </div>
+@endif
+
 
             <div class="review">
-                <h3 class="review__title">お客様の声</h3>
-                <table class="review__table">
-                    <thead>
-                        <tr>
-                            <th class="review__score">評価スコア</th>
-                            <th class="review__comment">評価コメント</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- @foreach ($reviews as $review)
-                            <tr>
-                                <td class="review__score">{{ $review->score }}</td>
-                                <td class="review__comment">{{ $review->comment }}</td>
-                            </tr>
-                        @endforeach --}}
-                    </tbody>
-                </table>
+                <h3 class="review__title">全ての口コミ情報</h3>
+                @foreach ($reviews as $review)
+        @if (Auth::check() && $review->user_id == Auth::id() && Auth::user()->type == 'general')
+    <a href="{{ route('review', ['id' => $shop->id]) }}" class="review_page">口コミを編集</a>
+@endif
+
+                    <div class="review__set">
+                        <div class="review__set__score">
+                            @if ($review->score == 1)
+                                <span>大変不満です</span>
+                            @elseif ($review->score == 2)
+                                <span>不満です</span>
+                            @elseif ($review->score == 3)
+                                <span>普通です</span>
+                            @elseif ($review->score == 4)
+                                <span>満足です</span>
+                            @elseif ($review->score == 5)
+                                <span>大変満足です</span>
+                            @endif
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $review->score)
+                                    <img src="{{ asset('images/bluestar.png') }}">
+                                @else
+                                    <img src="{{ asset('images/greystar.png') }}">
+                                @endif
+                            @endfor
+                        </div>
+                        <div class="review__set__comment">
+                            {{ $review->comment }}
+                        </div>
+                    </div>
+                @endforeach
             </div>
+
+
             @auth
             </div>
             <div class="detail__content__reservation">

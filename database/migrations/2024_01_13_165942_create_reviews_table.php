@@ -10,19 +10,21 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('reservation_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('shop_id');
             $table->integer('score');
             $table->text('comment')->nullable()->max(400);
             $table->string('review_image_url')->nullable();
             $table->timestamps();
-            // $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
         });
     }
 
+            // $table->unsignedBigInteger('reservation_id');
+                // $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+
+                
     public function down(): void
     {
         Schema::dropIfExists('reviews');
