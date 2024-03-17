@@ -104,6 +104,8 @@ document.getElementById('comment').value = '{{ $review->comment }}';
     <span>クリックして写真を選択またはドラッグ＆ドロップ</span>
 </label>
         <div id="photo-preview"></div>
+        <div id="photo-error" class="error-message" style="color: red;"></div>
+        <button id="clearPhotoButton" onclick="clearPhoto()">画像を削除</button>
 
     <button type="submit" id="submitReviewButton">口コミを投稿</button>
 
@@ -234,9 +236,24 @@ function restoreImages(element) {
         }
 
 
+// function previewPhoto(event) {
+//     var input = event.target;
+//     var reader = new FileReader();
+//     reader.onload = function () {
+//         var photoPreview = document.getElementById('photo-preview');
+//         var img = document.createElement('img');
+//         img.src = reader.result;
+//         photoPreview.innerHTML = '';
+//         photoPreview.appendChild(img);
+//     };
+//     reader.readAsDataURL(input.files[0]);
+// }
+
 function previewPhoto(event) {
     var input = event.target;
+    var file = input.files[0];
     var reader = new FileReader();
+
     reader.onload = function () {
         var photoPreview = document.getElementById('photo-preview');
         var img = document.createElement('img');
@@ -245,9 +262,36 @@ function previewPhoto(event) {
         photoPreview.appendChild(img);
     };
 
-    
-    reader.readAsDataURL(input.files[0]);
+    // ファイルの拡張子をチェック
+    var allowedExtensions = ['jpg', 'jpeg', 'png'];
+    var fileExtension = file.name.split('.').pop().toLowerCase();
+    if (!allowedExtensions.includes(fileExtension)) {
+        // 非対応の拡張子の場合、エラーメッセージを表示して処理を中断
+        document.getElementById('photo-preview').innerHTML = '';
+        document.getElementById('photo-error').innerText = '非対応のファイル形式です。jpegまたはpngのみアップロード可能です。';
+        input.value = ''; // アップロードされたファイルをクリア
+        return;
+    } else {
+        document.getElementById('photo-error').innerText = ''; // エラーメッセージをクリア
+    }
+
+    reader.readAsDataURL(file);
 }
+
+
+function clearPhoto() {
+    // プレビュー用の要素を取得
+    var photoPreview = document.getElementById('photo-preview');
+    // プレビュー用の要素の中身をクリア
+    photoPreview.innerHTML = '';
+    // ファイルアップロード用のinput要素の値をクリア
+    var fileInput = document.getElementById('photo');
+    fileInput.value = '';
+    // エラーメッセージをクリア
+    document.getElementById('photo-error').innerText = '';
+}
+
+
 
 
 
