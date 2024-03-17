@@ -75,7 +75,8 @@ class ReviewsTableSeeder extends Seeder
 
         for ($i = 1; $i <= 60; $i++) {
             DB::table('reviews')->insert([
-                'reservation_id' => $i,
+                'user_id' => rand(1, 20),
+                'shop_id' => rand(1, 20),
                 'score' => rand(1, 5),
                 'comment' => $comments[$i - 1],
                 'created_at' => now(),

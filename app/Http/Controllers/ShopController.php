@@ -22,9 +22,9 @@ class ShopController extends Controller
     {
         $shop = Shop::findOrFail($id);
         $reservationIds = Reservation::where('shop_id', $id)->pluck('id');
-        $reviews = Review::whereIn('reservation_id', $reservationIds)->get();
+        // $reviews = Review::whereIn('reservation_id', $reservationIds)->get();
 
-        return view('detail', compact('shop', 'reviews'));
+        return view('detail', compact('shop'));
     }
 
     public function toggleFavorite($shopId)

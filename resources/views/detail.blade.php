@@ -51,12 +51,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($reviews as $review)
+                        {{-- @foreach ($reviews as $review)
                             <tr>
                                 <td class="review__score">{{ $review->score }}</td>
                                 <td class="review__comment">{{ $review->comment }}</td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>

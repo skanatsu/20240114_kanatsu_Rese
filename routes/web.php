@@ -67,3 +67,7 @@ Route::get('reservation/qrcode/{reservation_id}', 'ReservationController@generat
 Route::get('/reservation/{id}/pay', [ReservationController::class, 'pay'])->name('reservation.pay');
 
 Route::get('review/{id}', [ReviewController::class, 'show'])->name('review');
+
+Route::post('/upload-photo', [ReviewController::class, 'uploadPhoto'])->name('upload.photo');
+
+Route::post('/review/submit', [ReviewController::class, 'submit'])->name('review.submit');

@@ -311,3 +311,8 @@ body {
     border-radius: 7px;
     margin-left: 20px;
 }
+
+.image__upload__button {
+    width: 500px;
+    height: 100px;
+}

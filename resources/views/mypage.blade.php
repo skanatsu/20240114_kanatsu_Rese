@@ -137,7 +137,7 @@
                             <button class="reservation__evaluate"
                                 data-reservation-id="{{ $reservation->id }}">評価を送る</button>
                         @endif
-                        <div class="reservation__evaluate-form" style="display: none;">
+                        {{-- <div class="reservation__evaluate-form" style="display: none;">
                             @if (!$reservation->review)
                                 <form action="{{ route('reservation.evaluate', ['id' => $reservation->id]) }}"
                                     method="post">
@@ -155,7 +155,7 @@
                                     <button type="submit" class="review__submit">評価送信</button>
                                 </form>
                             @endif
-                        </div>
+                        </div> --}}
                         @if (!$isReservationPast)
                             <div class="reservation__pay">
                                 <a href="{{ route('reservation.pay', ['id' => $reservation->id]) }}"

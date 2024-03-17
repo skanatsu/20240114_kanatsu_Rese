@@ -46,9 +46,13 @@
                 @endauth
             </div>
 
-            @auth
+
             </div>
             <div class="review__form">
+                    <form id="reviewForm" action="{{ route('review.submit', ['shop_id' => $shop->id]) }}" method="POST">
+    @csrf
+    <input type="hidden" name="score" id="reviewScore" value="0"> <!-- 評価スコアを保持するための隠しフィールド -->
+
                 <h3 class="reservation">体験を評価してください</h3>
 
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
@@ -56,7 +60,40 @@
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
-            @endauth
+
+                <h3 class="reservation">口コミを投稿</h3>
+    <textarea name="comment" id="comment" rows="3" class="review__comment" placeholder="カジュアルな夜のお出かけにおすすめのスポット" oninput="countCharacters(this)"></textarea>
+    <div id="character-count">0/400（最高文字数）</div>
+
+                <h3 class="reservation">画像の追加</h3>
+    {{-- <form action="{{ route('upload.photo') }}" method="POST" enctype="multipart/form-data">
+        @csrf --}}
+
+
+        {{-- <input type="file" name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)">
+        <label for="photo">クリックして写真を追加<br>またはドラッグアンドドロップ</label> --}}
+
+{{-- <label for="photo" class="custom-file-upload">
+    <input type="file" name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)">
+    クリックして写真を追加またはドラッグアンドドロップ
+</label> --}}
+
+
+<input type="file" name="photo" id="photo" accept="image/*"  onchange="previewPhoto(event)" class="image__upload__button">
+
+<!-- カスタムスタイルを適用したボタン -->
+<label for="photo" class="custom-file-upload">
+    <span>クリックして写真を選択またはドラッグ＆ドロップ</span>
+</label>
+        <div id="photo-preview"></div>
+
+        {{-- <button type="submit">アップロード</button> --}}
+    {{-- </form> --}}
+
+    <button type="submit" onclick="postReview()">口コミを投稿</button>
+    
+</form>
+
         </div>
     </div>
 
@@ -120,6 +157,8 @@
         }
 
 
+                var clickedImage = null;
+
         // function changeImages(element) {
         //     var imgs = document.getElementsByClassName("rating-star");
         //     var index = Array.prototype.indexOf.call(imgs, element);
@@ -128,36 +167,98 @@
         //     }
         // }
 
+function changeImages(element) {
+    var imgs = document.getElementsByClassName("rating-star");
+    var index = Array.prototype.indexOf.call(imgs, element);
+    var score = index + 1; // クリックされた画像の位置に応じて評価を設定
+    document.getElementById('reviewScore').value = score; // 隠しフィールドに評価をセット
+    for (var i = 0; i <= index; i++) {
+        imgs[i].src = "{{ asset('images/bluestar.png') }}";
+    }
+}
+
+
         // function restoreImages(element) {
-        //     var imgs = document.getElementsByClassName("rating-star");
-        //     for (var i = 0; i < imgs.length; i++) {
-        //         imgs[i].src = "{{ asset('images/greystar.png') }}";
+        //     if (element !== clickedImage) {
+        //         var imgs = document.getElementsByClassName("rating-star");
+        //         for (var i = 0; i < imgs.length; i++) {
+        //             imgs[i].src = "{{ asset('images/greystar.png') }}";
+        //         }
         //     }
         // }
-
-                var clickedImage = null;
-
-        function changeImages(element) {
-            var imgs = document.getElementsByClassName("rating-star");
-            var index = Array.prototype.indexOf.call(imgs, element);
-            for (var i = 0; i <= index; i++) {
-                imgs[i].src = "{{ asset('images/bluestar.png') }}";
-            }
+function restoreImages(element) {
+    if (element !== clickedImage) {
+        var imgs = document.getElementsByClassName("rating-star");
+        for (var i = 0; i < imgs.length; i++) {
+            imgs[i].src = "{{ asset('images/greystar.png') }}";
         }
+    }
+}
 
-        function restoreImages(element) {
-            if (element !== clickedImage) {
-                var imgs = document.getElementsByClassName("rating-star");
-                for (var i = 0; i < imgs.length; i++) {
-                    imgs[i].src = "{{ asset('images/greystar.png') }}";
-                }
-            }
-        }
 
         function saveClickedImage(element) {
             clickedImage = element;
         }
+
+
+
+                function countCharacters(element) {
+            var text = element.value;
+            var count = text.length;
+            var characterCountElement = document.getElementById("character-count");
+            characterCountElement.textContent = count + "/400";
+        }
+
+                function previewPhoto(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var photoPreview = document.getElementById('photo-preview');
+                var img = document.createElement('img');
+                img.src = reader.result;
+                photoPreview.innerHTML = '';
+                photoPreview.appendChild(img);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        // 口コミデータを送信
+
+        function postReview() {
+    var comment = document.getElementById('comment').value; // コメントを取得
+    var score = document.getElementById('reviewScore').value; // 評価スコアを取得
+
+    // フォームデータを作成
+    var formData = new FormData();
+    formData.append('score', score); // 評価スコアを追加
+    formData.append('comment', comment); // コメントを追加
+    formData.append('shop_id', {{ $shop->id }});
+
+    // フォームデータを送信するAjaxリクエストを作成
+    fetch("{{ route('review.submit') }}", {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        // 成功時の処理
+        if (data.success) {
+            window.location.href = data.redirect; // 成功時のリダイレクト
+        } else {
+            // エラーメッセージを表示するなどの処理
+        }
+    })
+    .catch(error => {
+        console.error('口コミの投稿時にエラーが発生しました', error);
+    });
+}
+
     </script>
+
+    
 </body>
 
 </html>
