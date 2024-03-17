@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Review;
+use App\Models\Shop;
 
 class ReviewController extends Controller
 {
@@ -37,5 +38,12 @@ class ReviewController extends Controller
         }
 
         return redirect()->back()->with('success', '評価が保存されました');
+    }
+
+    public function show($id)
+    {
+        $shop = Shop::findOrFail($id); // IDに基づいてShopモデルのインスタンスを取得
+
+        return view('review', ['shop' => $shop]); // $detailをビューに渡す
     }
 }

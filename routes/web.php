@@ -65,3 +65,5 @@ Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::get('reservation/qrcode/{reservation_id}', 'ReservationController@generateQrCode')->name('reservation.qrcode');
 
 Route::get('/reservation/{id}/pay', [ReservationController::class, 'pay'])->name('reservation.pay');
+
+Route::get('review/{id}', [ReviewController::class, 'show'])->name('review');

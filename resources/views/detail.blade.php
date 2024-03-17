@@ -37,6 +37,10 @@
                 <p>#{{ $shop->genre }}</p>
             </div>
             <p class="shop__description">{{ $shop->description }}</p>
+<div class="review_page">
+    <a href="{{ route('review', ['id' => $shop->id]) }}" class="review_page">口コミを投稿する</a>
+</div>
+
             <div class="review">
                 <h3 class="review__title">お客様の声</h3>
                 <table class="review__table">
