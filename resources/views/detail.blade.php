@@ -47,8 +47,16 @@
             <div class="review">
                 <h3 class="review__title">全ての口コミ情報</h3>
                 @foreach ($reviews as $review)
-        @if (Auth::check() && $review->user_id == Auth::id() && Auth::user()->type == 'general')
+        {{-- @if (Auth::check() && $review->user_id == Auth::id() && Auth::user()->type == 'general')
     <a href="{{ route('review', ['id' => $shop->id]) }}" class="review_page">口コミを編集</a>
+@endif --}}
+@if (Auth::check() && Auth::user()->type == 'general')
+    @if ($review->user_id == Auth::id())
+        <a href="{{ route('review', ['id' => $shop->id]) }}" class="review_page">口コミを編集</a>
+        <a href="{{ route('review.delete', ['id' => $review->id]) }}" class="review_page">口コミを削除</a>
+    @endif
+@elseif (Auth::check() && Auth::user()->type == 'manage')
+    <a href="{{ route('review.delete', ['id' => $review->id]) }}" class="review_page">口コミを削除</a>
 @endif
 
                     <div class="review__set">

@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use App\Models\Review;
 use App\Models\Shop;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -110,5 +111,25 @@ class ReviewController extends Controller
             ->first();
 
         return response()->json(['review' => $review]);
+    }
+
+    public function delete($id)
+    {
+        $review = Review::findOrFail($id);
+
+        // ログイン中のユーザーが管理者であるか、口コミの所有者であるかを確認する必要があります。
+        if (Auth::check() && Auth::user()->type == 'manage') {
+            // 管理者の場合は条件を満たす必要がないので、直接削除処理を実行します。
+            $review->delete();
+        } elseif (Auth::check() && $review->user_id == Auth::id()) {
+            // ログイン中のユーザーが口コミの所有者である場合のみ、口コミを削除します。
+            $review->delete();
+        } else {
+            // 権限がない場合はリダイレクトし、エラーメッセージを表示します。
+            return redirect()->back()->with('error', '口コミの削除権限がありません');
+        }
+
+        // 口コミが削除された後は、現在の detail ページにリダイレクトします。
+        return redirect()->route('detail', ['id' => $review->shop_id]);
     }
 }

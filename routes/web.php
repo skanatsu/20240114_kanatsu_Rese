@@ -73,3 +73,7 @@ Route::post('/upload-photo', [ReviewController::class, 'uploadPhoto'])->name('up
 Route::post('/review/submit', [ReviewController::class, 'submit'])->name('review.submit');
 
 Route::post('/review/fetch', [ReviewController::class, 'fetchReview'])->name('review.fetch');
+
+// Route::get('/review/delete/{id}', 'ReviewController@delete')->name('review.delete');
+
+Route::get('/review/delete/{id}', [ReviewController::class, 'delete'])->name('review.delete');
