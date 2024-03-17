@@ -50,6 +50,7 @@
             </div>
             <div class="review__form">
                     <form id="reviewForm" action="{{ route('review.submit', ['shop_id' => $shop->id]) }}" method="POST">
+                        {{-- <form id="reviewForm" method="POST"> --}}
     @csrf
     <input type="hidden" name="score" id="reviewScore" value="0"> <!-- 評価スコアを保持するための隠しフィールド -->
 
@@ -90,7 +91,11 @@
         {{-- <button type="submit">アップロード</button> --}}
     {{-- </form> --}}
 
-    <button type="submit" onclick="postReview()">口コミを投稿</button>
+    {{-- <button type="submit" onclick="postReview()">口コミを投稿</button> --}}
+    {{-- <button type="button" onclick="postReview()">口コミを投稿</button> --}}
+    {{-- <button type="button" id="submitReviewButton">口コミを投稿</button> --}}
+    <button type="submit" id="submitReviewButton">口コミを投稿</button>
+
     
 </form>
 
@@ -159,14 +164,6 @@
 
                 var clickedImage = null;
 
-        // function changeImages(element) {
-        //     var imgs = document.getElementsByClassName("rating-star");
-        //     var index = Array.prototype.indexOf.call(imgs, element);
-        //     for (var i = 0; i <= index; i++) {
-        //         imgs[i].src = "{{ asset('images/bluestar.png') }}";
-        //     }
-        // }
-
 function changeImages(element) {
     var imgs = document.getElementsByClassName("rating-star");
     var index = Array.prototype.indexOf.call(imgs, element);
@@ -178,14 +175,6 @@ function changeImages(element) {
 }
 
 
-        // function restoreImages(element) {
-        //     if (element !== clickedImage) {
-        //         var imgs = document.getElementsByClassName("rating-star");
-        //         for (var i = 0; i < imgs.length; i++) {
-        //             imgs[i].src = "{{ asset('images/greystar.png') }}";
-        //         }
-        //     }
-        // }
 function restoreImages(element) {
     if (element !== clickedImage) {
         var imgs = document.getElementsByClassName("rating-star");
@@ -224,7 +213,26 @@ function restoreImages(element) {
 
         // 口コミデータを送信
 
+// var isSubmitting = false; // 送信中のフラグ
+
+//     document.getElementById('submitReviewButton').addEventListener('click', function (event) {
+//     event.preventDefault(); 
+//     postReview(); // 口コミを投稿する関数を呼び出す
+// });
+
+document.getElementById('submitReviewButton').addEventListener('click', function (event) {
+    // event.preventDefault(); 
+    if (!isSubmitting) { // 送信中でない場合のみ処理を実行
+        postReview(); // 口コミを投稿する関数を呼び出す
+    }
+});
+
+
         function postReview() {
+
+                // 送信中フラグを立てる
+    // isSubmitting = true;
+
     var comment = document.getElementById('comment').value; // コメントを取得
     var score = document.getElementById('reviewScore').value; // 評価スコアを取得
 
@@ -243,18 +251,24 @@ function restoreImages(element) {
         },
     })
     .then(response => response.json())
-    .then(data => {
-        // 成功時の処理
-        if (data.success) {
-            window.location.href = data.redirect; // 成功時のリダイレクト
-        } else {
-            // エラーメッセージを表示するなどの処理
-        }
-    })
+ .then(data => {
+    // 成功時の処理
+    if (data.success) {
+        // リダイレクト先の詳細ページ URL を構築してリダイレクト
+        var shopId = "{{ $shop->id }}"; // Blade テンプレートからショップの ID を取得
+        var redirectUrl = "{{ url('/detail/') }}" + '/' + shopId;
+        window.location.href = redirectUrl;
+    } else {
+        // エラーメッセージを表示するなどの処理
+        console.error('口コミの投稿に失敗しました:', data.message);
+    }
+})
     .catch(error => {
-        console.error('口コミの投稿時にエラーが発生しました', error);
-    });
+    console.error('口コミの投稿時にエラーが発生しました', error);
+})
+
 }
+
 
     </script>
 

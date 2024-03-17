@@ -92,6 +92,8 @@ class ReviewController extends Controller
 
         $shopId = $validatedData['shop_id'];
         $redirectUrl = route('detail', ['id' => $shopId]); // 'detail' ルートに shop_id を渡して遷移先のURLを構築
-        return redirect($redirectUrl);
+        // return redirect($redirectUrl);
+        return redirect()->route('detail', ['id' => $shopId]);
+
     }
 }
