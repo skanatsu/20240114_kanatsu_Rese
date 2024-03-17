@@ -66,34 +66,28 @@
     <textarea name="comment" id="comment" rows="3" class="review__comment" placeholder="カジュアルな夜のお出かけにおすすめのスポット" oninput="countCharacters(this)"></textarea>
     <div id="character-count">0/400（最高文字数）</div>
 
+
+@if (isset($review))
+<script>
+document.getElementById('comment').value = '{{ $review->comment }}';
+</script>
+@endif
+
+<div class="review__form" data-review="{{ $review ? json_encode($review) : null }}">
+
+
                 <h3 class="reservation">画像の追加</h3>
-    {{-- <form action="{{ route('upload.photo') }}" method="POST" enctype="multipart/form-data">
-        @csrf --}}
 
-
-        {{-- <input type="file" name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)">
-        <label for="photo">クリックして写真を追加<br>またはドラッグアンドドロップ</label> --}}
-
-{{-- <label for="photo" class="custom-file-upload">
-    <input type="file" name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)">
-    クリックして写真を追加またはドラッグアンドドロップ
-</label> --}}
 
 
 <input type="file" name="photo" id="photo" accept="image/*"  onchange="previewPhoto(event)" class="image__upload__button">
 
-<!-- カスタムスタイルを適用したボタン -->
+
 <label for="photo" class="custom-file-upload">
     <span>クリックして写真を選択またはドラッグ＆ドロップ</span>
 </label>
         <div id="photo-preview"></div>
 
-        {{-- <button type="submit">アップロード</button> --}}
-    {{-- </form> --}}
-
-    {{-- <button type="submit" onclick="postReview()">口コミを投稿</button> --}}
-    {{-- <button type="button" onclick="postReview()">口コミを投稿</button> --}}
-    {{-- <button type="button" id="submitReviewButton">口コミを投稿</button> --}}
     <button type="submit" id="submitReviewButton">口コミを投稿</button>
 
     
@@ -211,14 +205,7 @@ function restoreImages(element) {
             reader.readAsDataURL(input.files[0]);
         }
 
-        // 口コミデータを送信
 
-// var isSubmitting = false; // 送信中のフラグ
-
-//     document.getElementById('submitReviewButton').addEventListener('click', function (event) {
-//     event.preventDefault(); 
-//     postReview(); // 口コミを投稿する関数を呼び出す
-// });
 
 document.getElementById('submitReviewButton').addEventListener('click', function (event) {
     // event.preventDefault(); 
@@ -268,7 +255,6 @@ document.getElementById('submitReviewButton').addEventListener('click', function
 })
 
 }
-
 
     </script>
 

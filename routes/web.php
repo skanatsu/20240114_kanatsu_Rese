@@ -71,3 +71,5 @@ Route::get('review/{id}', [ReviewController::class, 'show'])->name('review');
 Route::post('/upload-photo', [ReviewController::class, 'uploadPhoto'])->name('upload.photo');
 
 Route::post('/review/submit', [ReviewController::class, 'submit'])->name('review.submit');
+
+Route::post('/review/fetch', [ReviewController::class, 'fetchReview'])->name('review.fetch');
