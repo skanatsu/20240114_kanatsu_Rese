@@ -30,8 +30,8 @@
                     <h2 class="shop__detail__title">今回のご利用はいかがでしたか？</h2>
                 </div>
             </div>
-            
-                        <div class="shop" data-area="{{ $shop->area }}" data-genre="{{ $shop->genre }}"
+
+            <div class="shop" data-area="{{ $shop->area }}" data-genre="{{ $shop->genre }}"
                 data-shopname="{{ $shop->shopname }}">
                 <img src="{{ asset($shop->image_url) }}" class="shop__image" alt="{{ $shop->shopname }}">
                 <p class="shop__name">{{ $shop->shopname }}</p>
@@ -50,11 +50,12 @@
             </div>
             <div class="review__form">
                 <h3 class="reservation">体験を評価してください</h3>
-    <img src="{{ asset('images/greystar.png') }}" onmouseover="changeImage(this)" onmouseout="restoreImage(this)">
-    <img src="{{ asset('images/greystar.png') }}" onmouseover="changeImage(this)" onmouseout="restoreImage(this)">
-    <img src="{{ asset('images/greystar.png') }}" onmouseover="changeImage(this)" onmouseout="restoreImage(this)">
-    <img src="{{ asset('images/greystar.png') }}" onmouseover="changeImage(this)" onmouseout="restoreImage(this)">
-    <img src="{{ asset('images/greystar.png') }}" onmouseover="changeImage(this)" onmouseout="restoreImage(this)">
+
+<img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
+<img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
+<img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
+<img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
+<img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
             @endauth
         </div>
     </div>
@@ -119,12 +120,42 @@
         }
 
 
-                function changeImage(element) {
-            element.src = "{{ asset('images/bluestar.png') }}";
+        // function changeImages(element) {
+        //     var imgs = document.getElementsByClassName("rating-star");
+        //     var index = Array.prototype.indexOf.call(imgs, element);
+        //     for (var i = 0; i <= index; i++) {
+        //         imgs[i].src = "{{ asset('images/bluestar.png') }}";
+        //     }
+        // }
+
+        // function restoreImages(element) {
+        //     var imgs = document.getElementsByClassName("rating-star");
+        //     for (var i = 0; i < imgs.length; i++) {
+        //         imgs[i].src = "{{ asset('images/greystar.png') }}";
+        //     }
+        // }
+
+                var clickedImage = null;
+
+        function changeImages(element) {
+            var imgs = document.getElementsByClassName("rating-star");
+            var index = Array.prototype.indexOf.call(imgs, element);
+            for (var i = 0; i <= index; i++) {
+                imgs[i].src = "{{ asset('images/bluestar.png') }}";
+            }
         }
 
-        function restoreImage(element) {
-            element.src = "{{ asset('images/greystar.png') }}";
+        function restoreImages(element) {
+            if (element !== clickedImage) {
+                var imgs = document.getElementsByClassName("rating-star");
+                for (var i = 0; i < imgs.length; i++) {
+                    imgs[i].src = "{{ asset('images/greystar.png') }}";
+                }
+            }
+        }
+
+        function saveClickedImage(element) {
+            clickedImage = element;
         }
     </script>
 </body>
