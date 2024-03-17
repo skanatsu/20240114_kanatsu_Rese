@@ -80,6 +80,8 @@
     <textarea name="comment" id="comment" rows="3" class="review__comment" placeholder="カジュアルな夜のお出かけにおすすめのスポット" oninput="countCharacters(this)"></textarea>
     <div id="character-count">0/400（最高文字数）</div>
 
+    <!-- エラーメッセージを表示する要素 -->
+                <div id="comment-error" class="error-message" style="color: red;"></div>
 
 @if (isset($review))
 <script>
@@ -97,6 +99,7 @@ document.getElementById('comment').value = '{{ $review->comment }}';
 <input type="file" name="photo" id="photo" accept="image/*"  onchange="previewPhoto(event)" class="image__upload__button">
 
 
+
 <label for="photo" class="custom-file-upload">
     <span>クリックして写真を選択またはドラッグ＆ドロップ</span>
 </label>
@@ -104,7 +107,6 @@ document.getElementById('comment').value = '{{ $review->comment }}';
 
     <button type="submit" id="submitReviewButton">口コミを投稿</button>
 
-    
 </form>
 
         </div>
@@ -116,6 +118,12 @@ document.getElementById('comment').value = '{{ $review->comment }}';
             var reservationTime = document.getElementById('time');
             reservationTime.addEventListener('change', updateTable);
             updateTable();
+
+    var commentTextarea = document.getElementById('comment');
+    countCharacters(commentTextarea); // ページ読み込み時に文字数をカウントして表示
+    commentTextarea.addEventListener('input', function() {
+        countCharacters(this); // textareaに入力がある度に文字数をカウントして表示
+    });
         });
 
         function updateTable() {
@@ -197,27 +205,49 @@ function restoreImages(element) {
             clickedImage = element;
         }
 
+    var initialComment = document.getElementById('comment').value; // ページ読み込み時のtextareaの値を取得
+    countCharacters(document.getElementById('comment')); // ページ読み込み時に文字数をカウントして表示
 
+    // textareaに入力がある度に文字数をカウントして表示
+    document.getElementById('comment').addEventListener('input', function() {
+        countCharacters(this);
+    });
 
                 function countCharacters(element) {
-            var text = element.value;
-            var count = text.length;
-            var characterCountElement = document.getElementById("character-count");
-            characterCountElement.textContent = count + "/400";
+     var text = element.value;
+    var count = text.length;
+    var characterCountElement = document.getElementById("character-count");
+    characterCountElement.textContent = count + "/400";
+
+                        // エラーメッセージの表示とボタンの無効化
+            var errorMessageElement = document.getElementById("comment-error");
+            var submitButton = document.getElementById("submitReviewButton");
+            if (count > 400) {
+                errorMessageElement.textContent = "400文字以内で入力してください";
+                submitButton.disabled = true;
+                submitButton.style.opacity = "0.5"; // ボタンを薄くする
+            } else {
+                errorMessageElement.textContent = "";
+                submitButton.disabled = false;
+                submitButton.style.opacity = "1"; // ボタンの透明度を元に戻す
+            }
         }
 
-                function previewPhoto(event) {
-            var input = event.target;
-            var reader = new FileReader();
-            reader.onload = function () {
-                var photoPreview = document.getElementById('photo-preview');
-                var img = document.createElement('img');
-                img.src = reader.result;
-                photoPreview.innerHTML = '';
-                photoPreview.appendChild(img);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
+
+function previewPhoto(event) {
+    var input = event.target;
+    var reader = new FileReader();
+    reader.onload = function () {
+        var photoPreview = document.getElementById('photo-preview');
+        var img = document.createElement('img');
+        img.src = reader.result;
+        photoPreview.innerHTML = '';
+        photoPreview.appendChild(img);
+    };
+
+    
+    reader.readAsDataURL(input.files[0]);
+}
 
 
 
