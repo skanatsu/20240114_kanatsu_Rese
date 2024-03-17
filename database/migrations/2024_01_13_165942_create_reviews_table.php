@@ -13,6 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('reservation_id');
             $table->integer('score');
             $table->text('comment');
+            $table->string('review_image_url')->nullable();
             $table->timestamps();
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
         });
