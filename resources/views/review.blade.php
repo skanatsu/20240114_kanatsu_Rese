@@ -62,6 +62,20 @@
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
 
+
+{{-- 既存の口コミがある場合は、そのスコアに基づいて画像のマウスオーバー状態を設定する --}}
+@if ($review)
+    <script>
+        var score = {{ $review->score }};
+        var imgs = document.getElementsByClassName("rating-star");
+        for (var i = 0; i < score; i++) {
+            imgs[i].src = "{{ asset('images/bluestar.png') }}";
+        }
+    </script>
+@endif
+
+
+
                 <h3 class="reservation">口コミを投稿</h3>
     <textarea name="comment" id="comment" rows="3" class="review__comment" placeholder="カジュアルな夜のお出かけにおすすめのスポット" oninput="countCharacters(this)"></textarea>
     <div id="character-count">0/400（最高文字数）</div>
