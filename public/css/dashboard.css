@@ -126,6 +126,10 @@ body {
     float: left;
 }
 
+.shop__average-score {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .header {
         flex-direction: column;

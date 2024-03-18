@@ -66,9 +66,7 @@
                 <img src="{{ asset($shop->image_url) }}" class="shop__image" alt="{{ $shop->shopname }}">
                 <p class="shop__name">{{ $shop->shopname }}</p>
 
-
                 <p class="shop__average-score">{{ $averageScore }}</p> <!-- 平均スコアを表示 -->
-                
 
                 <div class="shop__tag">
                     <p class="shop__area">#{{ $shop->area }}</p>
@@ -177,13 +175,21 @@ function handleSortChange() {
             shopsContainer.appendChild(shop);
         });
     } else if (selectedValue === '評価が低い順') {
-        // 平均評価で昇順に並べ替え
+         // 平均評価で昇順に並べ替え
         var shops = Array.from(document.querySelectorAll('.shop'));
         shops.sort((a, b) => {
             var averageScoreA = parseFloat(a.querySelector('.shop__average-score').textContent);
             var averageScoreB = parseFloat(b.querySelector('.shop__average-score').textContent);
+            // 平均評価が0の場合、評価を6として扱う
+            if (averageScoreA === 0) {
+                averageScoreA = 6;
+            }
+            if (averageScoreB === 0) {
+                averageScoreB = 6;
+            }
             return averageScoreA - averageScoreB;
         });
+
 
         // 並び替え後のショップをDOMに追加
         var shopsContainer = document.querySelector('.shops-container');
