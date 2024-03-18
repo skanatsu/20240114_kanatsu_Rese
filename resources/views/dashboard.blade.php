@@ -177,7 +177,20 @@ function handleSortChange() {
             shopsContainer.appendChild(shop);
         });
     } else if (selectedValue === '評価が低い順') {
-        // 評価が低い順に並び替える処理
+        // 平均評価で昇順に並べ替え
+        var shops = Array.from(document.querySelectorAll('.shop'));
+        shops.sort((a, b) => {
+            var averageScoreA = parseFloat(a.querySelector('.shop__average-score').textContent);
+            var averageScoreB = parseFloat(b.querySelector('.shop__average-score').textContent);
+            return averageScoreA - averageScoreB;
+        });
+
+        // 並び替え後のショップをDOMに追加
+        var shopsContainer = document.querySelector('.shops-container');
+        shopsContainer.innerHTML = '';
+        shops.forEach(shop => {
+            shopsContainer.appendChild(shop);
+        });
     }
 }
 
