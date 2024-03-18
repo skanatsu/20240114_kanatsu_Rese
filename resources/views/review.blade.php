@@ -50,6 +50,7 @@
             </div>
             <div class="review__form">
                     <form id="reviewForm" action="{{ route('review.submit', ['shop_id' => $shop->id]) }}" method="POST">
+                    
                         {{-- <form id="reviewForm" method="POST"> --}}
     @csrf
     <input type="hidden" name="score" id="reviewScore" value="0"> <!-- 評価スコアを保持するための隠しフィールド -->
@@ -62,6 +63,7 @@
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
 
+{{-- <div id="score-error" class="error-message" style="color: red;"></div> --}}
 
 {{-- 既存の口コミがある場合は、そのスコアに基づいて画像のマウスオーバー状態を設定する --}}
 @if ($review)
@@ -117,10 +119,10 @@ document.getElementById('comment').value = '{{ $review->comment }}';
     <script>
         var initialShopName = "{{ $shop->shopname }}";
         document.addEventListener('DOMContentLoaded', function() {
-            var reservationTime = document.getElementById('time');
-            reservationTime.addEventListener('change', updateTable);
-            updateTable();
 
+
+
+            
     var commentTextarea = document.getElementById('comment');
     countCharacters(commentTextarea); // ページ読み込み時に文字数をカウントして表示
     commentTextarea.addEventListener('input', function() {
@@ -193,10 +195,13 @@ function changeImages(element) {
 }
 
 
+
+
+
 function restoreImages(element) {
     if (element !== clickedImage) {
         var imgs = document.getElementsByClassName("rating-star");
-        for (var i = 0; i < imgs.length; i++) {
+        for (var i = 1; i < imgs.length; i++) {
             imgs[i].src = "{{ asset('images/greystar.png') }}";
         }
     }
@@ -300,6 +305,8 @@ document.getElementById('submitReviewButton').addEventListener('click', function
     if (!isSubmitting) { // 送信中でない場合のみ処理を実行
         postReview(); // 口コミを投稿する関数を呼び出す
     }
+
+    
 });
 
 
@@ -343,6 +350,9 @@ document.getElementById('submitReviewButton').addEventListener('click', function
 })
 
 }
+
+
+
 
     </script>
 
