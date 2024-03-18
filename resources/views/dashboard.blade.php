@@ -22,6 +22,15 @@
                 <p class="header__logo">Rese</p>
             </div>
         </div>
+        @if (Auth::check() && Auth::user()->type == 'general')
+        <div class="sort">
+                        <select id="sort" class="sort__select" name="sort" onchange="handleSortChange()">
+                <option value="ランダム">ランダム</option>
+                <option value="評価が高い順">評価が高い順</option>
+                <option value="評価が低い順">評価が低い順</option>
+            </select>
+        </div>
+        @endif
         <div class="search">
             <select id="area" class="search__select" name="area" onchange="filterShops()">
                 <option value="allarea">All area</option>
@@ -124,6 +133,38 @@
                 }
             });
         }
+
+function shuffleShops() {
+    var shopsContainer = document.querySelector('.shops-container');
+    var shops = Array.from(shopsContainer.querySelectorAll('.shop'));
+    var randomShops = shops.sort(() => Math.random() - 0.5); // ランダムにシャッフル
+
+    // シャッフルされた店舗をDOMに追加
+    shopsContainer.innerHTML = '';
+    randomShops.forEach(shop => {
+        shopsContainer.appendChild(shop);
+    });
+}
+
+function handleSortChange() {
+    var selectedValue = document.getElementById('sort').value;
+    if (selectedValue === 'ランダム') {
+        shuffleShops();
+    } else if (selectedValue === '評価が高い順') {
+        // 評価が高い順に並び替える処理
+    } else if (selectedValue === '評価が低い順') {
+        // 評価が低い順に並び替える処理
+    }
+}
+
+// ページ読み込み時にはランダムシャッフルを行わないため、DOMContentLoadedイベントリスナーを使用します
+document.addEventListener('DOMContentLoaded', function() {
+    // ランダムオプションが選択されたときにシャッフル
+    document.getElementById('sort').addEventListener('change', handleSortChange);
+});
+
+
+
     </script>
 
 </body>
