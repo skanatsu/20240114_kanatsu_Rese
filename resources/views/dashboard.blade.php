@@ -22,6 +22,17 @@
                 <p class="header__logo">Rese</p>
             </div>
         </div>
+
+@if (Auth::check() && Auth::user()->type == 'manage')
+<div class="csv">
+    <form action="{{ route('shops.import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="csv_file" accept=".csv">
+        <button type="submit">CSVをインポート</button>
+    </form>
+</div>
+@endif
+
         @if (Auth::check() && Auth::user()->type == 'general')
         <div class="sort">
                         <select id="sort" class="sort__select" name="sort" onchange="handleSortChange()">

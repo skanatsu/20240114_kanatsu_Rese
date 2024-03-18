@@ -77,3 +77,5 @@ Route::post('/review/fetch', [ReviewController::class, 'fetchReview'])->name('re
 // Route::get('/review/delete/{id}', 'ReviewController@delete')->name('review.delete');
 
 Route::get('/review/delete/{id}', [ReviewController::class, 'delete'])->name('review.delete');
+
+Route::post('/shops/import', [ShopController::class, 'import'])->name('shops.import');

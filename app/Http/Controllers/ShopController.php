@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Database\Seeders\ShopCsvSeeder;
 
 class ShopController extends Controller
 {
@@ -55,5 +59,30 @@ class ShopController extends Controller
         }
 
         return redirect()->route('dashboard');
+    }
+
+    public function import(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'csv_file' => 'required|file|mimes:csv,txt',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        // CSVファイルを取得し、一時的に保存する
+        $file = $request->file('csv_file');
+        $fileName = 'shops.csv';
+        Storage::putFileAs('temp', $file, $fileName);
+
+        // CSVファイルの処理をShopCsvSeederに委譲する
+        $seeder = new ShopCsvSeeder;
+        $seeder->run();
+
+        // 一時ファイルを削除する
+        Storage::delete('temp/' . $fileName);
+
+        return redirect()->route('dashboard')->with('success', 'CSVファイルが正常にインポートされました');
     }
 }
