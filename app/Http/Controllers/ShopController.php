@@ -7,6 +7,7 @@ use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -15,7 +16,15 @@ class ShopController extends Controller
         $user = Auth::user();
         $shops = Shop::with('favorites')->get();
 
-        return view('dashboard', compact('shops', 'user'));
+        // 各店舗のレビューの平均スコアを取得
+        $shopsWithAverageScore = Shop::with('favorites')
+        ->select('shops.*', DB::raw('COALESCE(AVG(reviews.score), 0) as average_score'))
+        ->leftJoin('reviews', 'shops.id', '=', 'reviews.shop_id')
+        ->groupBy('shops.id')
+        ->get();
+
+
+        return view('dashboard', compact('shops', 'user', 'shopsWithAverageScore'));
     }
 
     public function show($id)

@@ -55,10 +55,21 @@
 
     <div class="shops-container">
         @foreach ($shops as $shop)
+
+        @php
+            // $shopsWithAverageScoreから該当する店舗の平均スコアを取得
+            $averageScore = $shopsWithAverageScore->firstWhere('id', $shop->id)->average_score ?? 0;
+        @endphp
+
             <div class="shop" data-area="{{ $shop->area }}" data-genre="{{ $shop->genre }}"
                 data-shopname="{{ $shop->shopname }}">
                 <img src="{{ asset($shop->image_url) }}" class="shop__image" alt="{{ $shop->shopname }}">
                 <p class="shop__name">{{ $shop->shopname }}</p>
+
+
+                <p class="shop__average-score">{{ $averageScore }}</p> <!-- 平均スコアを表示 -->
+                
+
                 <div class="shop__tag">
                     <p class="shop__area">#{{ $shop->area }}</p>
                     <p>#{{ $shop->genre }}</p>
@@ -151,7 +162,20 @@ function handleSortChange() {
     if (selectedValue === 'ランダム') {
         shuffleShops();
     } else if (selectedValue === '評価が高い順') {
-        // 評価が高い順に並び替える処理
+        // 平均評価で降順に並べ替え
+        var shops = Array.from(document.querySelectorAll('.shop'));
+        shops.sort((a, b) => {
+            var averageScoreA = parseFloat(a.querySelector('.shop__average-score').textContent);
+            var averageScoreB = parseFloat(b.querySelector('.shop__average-score').textContent);
+            return averageScoreB - averageScoreA;
+        });
+
+        // 並び替え後のショップをDOMに追加
+        var shopsContainer = document.querySelector('.shops-container');
+        shopsContainer.innerHTML = '';
+        shops.forEach(shop => {
+            shopsContainer.appendChild(shop);
+        });
     } else if (selectedValue === '評価が低い順') {
         // 評価が低い順に並び替える処理
     }
