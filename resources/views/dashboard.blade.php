@@ -33,6 +33,16 @@
 </div>
 @endif
 
+@if ($errors->any())
+<div class="error-messages">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
         @if (Auth::check() && Auth::user()->type == 'general')
         <div class="sort">
                         <select id="sort" class="sort__select" name="sort" onchange="handleSortChange()">

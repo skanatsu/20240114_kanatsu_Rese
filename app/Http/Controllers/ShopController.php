@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Database\Seeders\ShopCsvSeeder;
+use App\Http\Requests\ImportCsvRequest;
 
 class ShopController extends Controller
 {
@@ -61,7 +62,7 @@ class ShopController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function import(Request $request)
+    public function import(ImportCsvRequest $request)
     {
         $validator = Validator::make($request->all(), [
             'csv_file' => 'required|file|mimes:csv,txt',
@@ -85,4 +86,5 @@ class ShopController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'CSVファイルが正常にインポートされました');
     }
+
 }
