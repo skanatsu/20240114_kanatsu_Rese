@@ -49,7 +49,7 @@
 
             </div>
             <div class="review__form">
-                    <form id="reviewForm" action="{{ route('review.submit', ['shop_id' => $shop->id]) }}" method="POST">
+                    <form id="reviewForm" action="{{ route('review.submit', ['shop_id' => $shop->id]) }}" method="POST" enctype="multipart/form-data">
                     
                         {{-- <form id="reviewForm" method="POST"> --}}
     @csrf
@@ -323,6 +323,13 @@ document.getElementById('submitReviewButton').addEventListener('click', function
     formData.append('score', score); // 評価スコアを追加
     formData.append('comment', comment); // コメントを追加
     formData.append('shop_id', {{ $shop->id }});
+
+    // 画像ファイルを取得してフォームデータに追加
+    var photoInput = document.getElementById('photo');
+    if (photoInput.files.length > 0) {
+        var photoFile = photoInput.files[0];
+        formData.append('photo', photoFile);
+    }
 
     // フォームデータを送信するAjaxリクエストを作成
     fetch("{{ route('review.submit') }}", {

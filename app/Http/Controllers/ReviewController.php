@@ -88,9 +88,10 @@ class ReviewController extends Controller
             $fileName = $file->getClientOriginalName(); // アップロードされたファイルのオリジナル名を取得
             $path = $file->store('public/images'); // ファイルを保存し、保存先のパスを取得
             $review->review_image_url = $fileName; // ファイル名をreview_image_urlに設定
+            $review->save(); 
         }
 
-        $review->save(); // データベースに保存
+        // $review->save(); // データベースに保存
 
         // リダイレクト先のURLを構築してリダイレクト
         $shopId = $validatedData['shop_id'];
