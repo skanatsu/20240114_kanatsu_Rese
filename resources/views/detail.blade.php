@@ -38,29 +38,33 @@
             </div>
             <p class="shop__description">{{ $shop->description }}</p>
             @if (Auth::check() && Auth::user()->type == 'general')
-    <div class="review_page">
-        <a href="{{ route('review', ['id' => $shop->id]) }}" class="review_page">口コミを投稿する</a>
+    <div class="review__page">
+        <a href="{{ route('review', ['id' => $shop->id]) }}" class="review__page__a">口コミを投稿する</a>
     </div>
 @endif
 
 
             <div class="review">
                 <h3 class="review__title">全ての口コミ情報</h3>
+                <div class="review__content">
                 @foreach ($reviews as $review)
-        {{-- @if (Auth::check() && $review->user_id == Auth::id() && Auth::user()->type == 'general')
-    <a href="{{ route('review', ['id' => $shop->id]) }}" class="review_page">口コミを編集</a>
-@endif --}}
+<div class="review__wrap">
 @if (Auth::check() && Auth::user()->type == 'general')
     @if ($review->user_id == Auth::id())
-        <a href="{{ route('review', ['id' => $shop->id]) }}" class="review_page">口コミを編集</a>
-        <a href="{{ route('review.delete', ['id' => $review->id]) }}" class="review_page">口コミを削除</a>
+    <div class="review__links">
+        <a href="{{ route('review', ['id' => $shop->id]) }}" class="review__edit__link">口コミを編集</a>
+        <a href="{{ route('review.delete', ['id' => $review->id]) }}" class="review__delete__link">口コミを削除</a>
+                </div>
     @endif
 @elseif (Auth::check() && Auth::user()->type == 'manage')
-    <a href="{{ route('review.delete', ['id' => $review->id]) }}" class="review_page">口コミを削除</a>
+    <div class="review__links">
+    <a href="{{ route('review.delete', ['id' => $review->id]) }}" class="review__delete__link">口コミを削除</a>
+                    </div>
 @endif
 
                     <div class="review__set">
                         <div class="review__set__score">
+                            <div class="review__set__score__title">
                             @if ($review->score == 1)
                                 <span>大変不満です</span>
                             @elseif ($review->score == 2)
@@ -72,11 +76,12 @@
                             @elseif ($review->score == 5)
                                 <span>大変満足です</span>
                             @endif
+</div>
                             @for ($i = 1; $i <= 5; $i++)
                                 @if ($i <= $review->score)
-                                    <img src="{{ asset('images/bluestar.png') }}">
+                                    <img src="{{ asset('images/bluestar.png') }}" class="review__star">
                                 @else
-                                    <img src="{{ asset('images/greystar.png') }}">
+                                    <img src="{{ asset('images/greystar.png') }}" class="review__star">
                                 @endif
                             @endfor
                         </div>
@@ -84,7 +89,9 @@
                             {{ $review->comment }}
                         </div>
                     </div>
+                    </div>
                 @endforeach
+                </div>
             </div>
 
 
