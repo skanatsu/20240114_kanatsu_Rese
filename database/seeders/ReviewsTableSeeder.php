@@ -73,12 +73,21 @@ class ReviewsTableSeeder extends Seeder
             "ディナータイムの雰囲気がロマンティックで、特別な夜を演出してくれるお店でした。素敵な思い出ができます。",
         ];
 
+        $image_urls = [
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhIuWhwHtXVHyExbS9rtQghA59O5OT_8MgpklcyoJW3yXvf1__qLSZHr83fFWzb0iT6Uq1BZXC-nslm6WriYI0P8ePSev4yqQs6Uq6M5k60WZQ6_9znHmV80bkw28o2pWfZ5mwTO4rCWtE/s400/nomikai_joshikai.png",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJQIBsYarzVoWzA3qC81xgHFclLXo9SXIxbjPZEtlENTG6B7BwkvTcVWBIE3tt7Kvx3hc8HzU1b5ag7Jr9DNmCNzAISAGpt103zV64C2TG7WKdR4VsOgnrkoU-J1p8pdipowKgb9geIyya/s400/sushi_kaitenzushi.png",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4CYOxEZUV1W36QZywM0FnJmxFUwqUYKVFHwsRQUvmpE78x7xnzAq-fAz5Mtp57iXjj1_eqjcQ5_-y7isYqD8bSGGhoNmqh1OQew4hn78Frf3RH3vVhxAE4ofIRAq97pt_F9KrcJRnHmKH/s400/ramen_tonkotsu.png",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgV6ir-u5ZfQgL_JfXDLhkL5Ubz0_-UBlxWU0Oh4RZLCWeNsvRuNvU4IL7Sxi_ZDCc3JZuWqfc9B0NMwMQpSy5fGr4bB7BbxIBdMiavr-EALp3KBT3iUqOBklepvm8nU5KTbx38oIje3t4W/s400/food_spaghetti_vongole_bianco.png",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0jHS7zmJMykCecYXSvRS11ECY0CLpozrAL0eIfbI1aTw9YMHUjpgMcan0rrBsc1KQdDZEenkL-046erTMZYNTBS0cdKBplwTSXLDIY8kk9VJQZ0gN93XRTwRZzlzZQgx0hZMW5avnaQPH/s400/yakiniku_family.png",
+        ];
+
         for ($i = 1; $i <= 60; $i++) {
             DB::table('reviews')->insert([
                 'user_id' => rand(1, 20),
                 'shop_id' => rand(1, 20),
                 'score' => rand(1, 5),
                 'comment' => $comments[$i - 1],
+                'review_image_url' => $image_urls[array_rand($image_urls)],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
