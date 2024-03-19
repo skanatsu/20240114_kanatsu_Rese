@@ -280,7 +280,12 @@ review__comment. {
 
 @media (max-width: 768px) {
     .detail__content {
+        width: 100%;
         flex-direction: column;
+    }
+
+    .detail__content__shop {
+        width: 100%;
     }
 
     .detail__content__reservation {
@@ -434,14 +439,60 @@ review__comment. {
     }
 
     .submit__button {
-            position: absolute;
-                top: 1500px;
-        left: 60px;
+position: static;
         background-color: white;
         border: none;
-        padding: 15px 130px;
+        padding: 15px 30px;
         font-size: 20px;
         border-radius: 30px;
+        max-width: calc(100% - 10px);
 
     }
+
+        .shop {
+        width: calc(100% - 100px);
+        /* margin: 0 30px 20px 0; */
+    }
+
+    .shop__name {
+        font-size: 18px;
+        /* margin-left: 10px; */
+    }
+
+    .shop__tag {
+        /* margin-left: 10px; */
+    }
+
+    .shop__detail {
+        /* margin-left: 10px; */
+    }
+
+    .heart {
+        /* margin-right: 10px; */
+    }
+
+    .shop__detail__title {
+        font-size: 30px;
+    }
+
+    .shop-details {
+    padding-right: 5px;
+    width: calc(100% - 60px);
+}
+
+.review__comment__input {
+    width: calc(100% - 60px);
+    max-width: 300px;
+}
+
+.custom-file-upload, .image__upload__button {
+    width: calc(100% - 60px);
+    max-width: 300px;
+}
+
+.image__delete__button {
+    display: block;
+    margin-bottom: 30px;
+}
+
 }
