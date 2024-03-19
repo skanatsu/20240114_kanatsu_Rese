@@ -24,6 +24,12 @@
                     <p class="header__logo">Rese</p>
                 </div>
             </div>
+
+
+<div class="vertical__line"></div>
+
+
+
             <div class="shop__detail__shopname">
 
                 <div class="shop-details">
@@ -44,6 +50,7 @@
                     <img src="{{ url('/images/' . ($shop->isFavorite ? 'heart.png' : 'greyheart.png')) }}" alt=""
                         class="heart" onclick="toggleImage(this, {{ $shop->id }})"">
                 @endauth
+                
             </div>
 
 
@@ -78,9 +85,9 @@
 
 
 
-                <h3 class="reservation">口コミを投稿</h3>
-    <textarea name="comment" id="comment" rows="3" class="review__comment" placeholder="カジュアルな夜のお出かけにおすすめのスポット" oninput="countCharacters(this)"></textarea>
-    <div id="character-count">0/400（最高文字数）</div>
+                <h3 class="review__comment">口コミを投稿</h3>
+    <textarea name="comment" id="comment" rows="3" class="review__comment__input" placeholder="カジュアルな夜のお出かけにおすすめのスポット" oninput="countCharacters(this)"></textarea>
+    <div id="character-count" class="character-count">0/400（最高文字数）</div>
 
     <!-- エラーメッセージを表示する要素 -->
                 <div id="comment-error" class="error-message" style="color: red;"></div>
@@ -91,10 +98,10 @@ document.getElementById('comment').value = '{{ $review->comment }}';
 </script>
 @endif
 
-<div class="review__form" data-review="{{ $review ? json_encode($review) : null }}">
+<div class="image__attach__div" data-review="{{ $review ? json_encode($review) : null }}">
 
 
-                <h3 class="reservation">画像の追加</h3>
+                <h3 class="image__attach">画像の追加</h3>
 
 
 
@@ -112,9 +119,9 @@ document.getElementById('comment').value = '{{ $review->comment }}';
 
         <div id="photo-preview"></div>
         <div id="photo-error" class="error-message" style="color: red;"></div>
-        <button id="clearPhotoButton" onclick="clearPhoto()">画像を削除</button>
+        <button id="clearPhotoButton"  class="image__delete__button" onclick="clearPhoto()">画像を削除</button>
 
-    <button type="submit" id="submitReviewButton">口コミを投稿</button>
+    <button type="submit" class="submit__button" id="submitReviewButton">口コミを投稿</button>
 
 </form>
 

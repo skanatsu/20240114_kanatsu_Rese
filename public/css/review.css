@@ -1,11 +1,12 @@
 body {
-    background-color: whitesmoke;
+    background-color: rgb(238, 238, 238);
     margin-left: 30px;
 }
 
 .detail__content {
     display: flex;
     justify-content: flex-start;
+    width: 1100px;
 }
 
 .logo {
@@ -24,6 +25,12 @@ body {
     font-weight: 800;
 }
 
+.shop-details {
+    width: 450px;
+    padding-right: 100px;
+    /* border-right: 1px solid black; */
+}
+
 .detail__content__reservation {
     margin-left: 80px;
     background-color: rgb(42, 70, 231);
@@ -37,7 +44,7 @@ body {
 
 .reservation {
     font-size: 25px;
-    margin-left: 30px;
+    /* margin-left: 30px; */
     margin-top: 30px;
 }
 
@@ -114,16 +121,29 @@ body {
     margin-top: -10px;
 }
 
+.vertical__line {
+    position: absolute;
+    left: 590px;
+    top: 200px;
+    bottom: 0;
+    width: 1px;
+    border-left: 1px solid darkgray;
+    height: 510px;
+}
+
+
 .shop {
-    max-width: 350px;
+    /* max-width: 350px; */
+    width: 600px;
     background-color: white;
-    width: calc(50% - 20px);
-    margin: 0 60px 50px 0;
+    /* width: calc(50% - 20px); */
+    margin: 30px 60px 50px 60px;
     height: 320px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
     border-radius: 10px;
     box-sizing: border-box;
     float: left;
+    /* border-right: 1px solid black; */
 }
 
 .shop__detail__shopname {
@@ -132,9 +152,9 @@ body {
 }
 
 .shop__detail__title {
-    margin-left: 10px;
-    margin-top: -5px;
-    font-size: 35px;
+    margin-left: 60px;
+    margin-top: 60px;
+    font-size: 45px;
 }
 
 .shop__image {
@@ -161,6 +181,13 @@ body {
     width: 600px;
 }
 
+.detail__content__shop {
+    /* border-right: 1px solid black; */
+    /* height: 500px; */
+    /* margin-top: 600px; */
+    /* padding-top: 300px; */
+}
+
 .shop__detail {
     background-color: rgb(42, 70, 231);
     color: white;
@@ -180,31 +207,76 @@ body {
     color: white;
 }
 
+.review__form {
+    margin-left: 100px;
+    margin-top: 70px;
+}
+
 .review__title {
     font-size: 25px;
 }
 
-.review__table,
+.review__comment, .image__attach {
+    font-size: 25px;
+    margin-top: 40px;
+}
+
+.review__comment__input {
+    width: 650px;
+    height: 120px;
+    background-color: rgb(238, 238, 238);
+    font-size: 20px;
+    padding: 15px;
+}
+
+.character-count {
+    /* width: 650px; */
+    text-align: right;
+}
+
+/* .review__table,
 .review__score,
-.review__comment {
+review__comment. {
     border-collapse: collapse;
     border: 1px solid black;
     padding: 8px;
-}
+} */
 
 .review__score {
     width: 100px;
     text-align: center;
 }
 
-.review__comment {
+/* .review__comment {
     width: 400px;
-}
+} */
 
 .alert {
     color: red;
     width: 500px;
 }
+
+.image__delete__button {
+    background-color: rgb(42, 70, 231);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 7px;
+    margin-top: 5px;
+    border: none;
+}
+
+.submit__button {
+        position: absolute;
+            top: 850px;
+    left: 350px;
+    background-color: white;
+    border: none;
+    padding: 15px 250px;
+    font-size: 20px;
+    border-radius: 30px;
+}
+
 
 @media (max-width: 768px) {
     .detail__content {
@@ -235,6 +307,7 @@ body {
     .detail__content__shop {
         flex-direction: column;
         max-width: 600px;
+        
     }
 
     .shop__image {
@@ -303,14 +376,7 @@ body {
     margin-left: 20px;
 }
 
-.shop__detail {
-    background-color: rgb(42, 70, 231);
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 7px;
-    margin-left: 20px;
-}
+
 
 /* .image__upload__button {
     width: 500px;
@@ -321,13 +387,61 @@ body {
 
 .custom-file-upload {
     background-color: white; /* 背景色 */
-    padding: 50px 200px; /* 内側の余白 */
+    padding: 50px 190px; /* 内側の余白 */
     cursor: pointer; /* カーソルをポインターに変更 */
     display: inline-block; /* インラインブロック要素にする */
     text-align: center; /* テキストを中央揃えにする */
-    width: fit-content; /* コンテンツに合わせて幅を調整 */
+    width: 300px; 
+
 }
 
 .custom-file-upload span {
     pointer-events: none; /* テキストがクリック可能でないようにする */
+}
+
+
+@media (max-width: 768px) {
+    .detail__content__shop {
+        border-right: none; /* 768px以下では縦線を非表示にする */
+        height: auto; /* 高さを自動に設定 */
+    }
+
+    .vertical__line {
+        display: none; /* 768px以下では縦線を非表示にする */
+    }
+
+    /* その他の要素に対するスタイル調整 */
+    .shop__detail__shopname {
+        padding-top: 20px; /* ショップ名の上部の余白を追加 */
+    }
+
+    .review__form {
+        margin-top: 20px; /* 口コミフォームの上部の余白を追加 */
+        margin-left: 55px;
+    }
+
+    .review__comment__input{
+        width: 300px;
+    }
+
+        .character-count {
+        text-align: left;
+    }
+
+    .custom-file-upload, .image__upload__button {
+        width: 300px;
+        padding: 20px 20px;
+    }
+
+    .submit__button {
+            position: absolute;
+                top: 1500px;
+        left: 60px;
+        background-color: white;
+        border: none;
+        padding: 15px 130px;
+        font-size: 20px;
+        border-radius: 30px;
+
+    }
 }
