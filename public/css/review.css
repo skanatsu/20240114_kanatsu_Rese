@@ -312,7 +312,22 @@ body {
     margin-left: 20px;
 }
 
-.image__upload__button {
+/* .image__upload__button {
     width: 500px;
     height: 100px;
+
+    
+} */
+
+.custom-file-upload {
+    background-color: white; /* 背景色 */
+    padding: 50px 200px; /* 内側の余白 */
+    cursor: pointer; /* カーソルをポインターに変更 */
+    display: inline-block; /* インラインブロック要素にする */
+    text-align: center; /* テキストを中央揃えにする */
+    width: fit-content; /* コンテンツに合わせて幅を調整 */
+}
+
+.custom-file-upload span {
+    pointer-events: none; /* テキストがクリック可能でないようにする */
 }

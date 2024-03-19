@@ -98,13 +98,18 @@ document.getElementById('comment').value = '{{ $review->comment }}';
 
 
 
+{{-- <label for="photo" class="custom-file-upload">
+    クリックして写真を選択またはドラッグ＆ドロップ
 <input type="file" name="photo" id="photo" accept="image/*"  onchange="previewPhoto(event)" class="image__upload__button">
+</label> --}}
 
 
+<div role="button" tabindex="0" class="custom-file-upload" ondragover="handleDragOver(event)" ondrop="handleFileDrop(event)">
+    <span>クリックして写真を追加<br>またはドラッグアンドドロップ</span>
+</div>
+<input type="file"  name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)" class="image__upload__button" style="display: none;">
 
-<label for="photo" class="custom-file-upload">
-    <span>クリックして写真を選択またはドラッグ＆ドロップ</span>
-</label>
+
         <div id="photo-preview"></div>
         <div id="photo-error" class="error-message" style="color: red;"></div>
         <button id="clearPhotoButton" onclick="clearPhoto()">画像を削除</button>
@@ -224,7 +229,7 @@ function restoreImages(element) {
      var text = element.value;
     var count = text.length;
     var characterCountElement = document.getElementById("character-count");
-    characterCountElement.textContent = count + "/400";
+    characterCountElement.textContent = count + "/400（最高文字数）";
 
                         // エラーメッセージの表示とボタンの無効化
             var errorMessageElement = document.getElementById("comment-error");
@@ -357,6 +362,44 @@ document.getElementById('submitReviewButton').addEventListener('click', function
 })
 
 }
+
+//　アップロードボタン装飾
+      const buttonElement = document.querySelector(".custom-file-upload");
+
+    buttonElement.addEventListener("click", () => {
+        document.querySelector("#photo").click();
+    });
+
+    // Space / Enter キーで click イベントを発火できるようにする
+    buttonElement.addEventListener("keydown", (event) => {
+        if (!buttonElement.isEqualNode(event.target)) {
+            return;
+        }
+
+        if (event.keyCode === 32 || event.keyCode === 13) {
+            event.preventDefault();
+            document.querySelector("#photo").click();
+        }
+    });
+
+    // ドラッグオーバー時のイベントハンドラ
+    function handleDragOver(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    ドロップ時のイベントハンドラ
+    function handleFileDrop(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const file = event.dataTransfer.files[0];
+        if (file) {
+            const inputElement = document.querySelector("#photo");
+            inputElement.files = event.dataTransfer.files;
+            inputElement.dispatchEvent(new Event("change"));
+        }
+    }
 
 
 
