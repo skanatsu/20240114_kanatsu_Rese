@@ -24,13 +24,31 @@
         </div>
 
 @if (Auth::check() && Auth::user()->type == 'manage')
+
+
+{{-- <div class="csv">
+    <form action="{{ route('shops.import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <p class="csv__title">【店舗情報のアップロード】</p>
+        <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()">
+        <button type="submit" class="csv__import disabled">CSVをインポート</button>
+        
+        
+
+    </form>
+</div> --}}
+
 <div class="csv">
     <form action="{{ route('shops.import') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="file" name="csv_file" accept=".csv">
-        <button type="submit">CSVをインポート</button>
+        <p class="csv__title">【店舗情報のアップロード】</p>
+        <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()">
+        <button type="submit" class="csv__import disabled" id="importButton" style="display: none;">CSVをインポート</button>
+        {{-- <span id="fileUploadedMessage">{{ $a ?? 0 }}</span> --}}
     </form>
 </div>
+
+
 @endif
 
 @if ($errors->any())
@@ -44,15 +62,27 @@
 @endif
 
         @if (Auth::check() && Auth::user()->type == 'general')
-        <div class="sort">
-                        <select id="sort" class="sort__select" name="sort" onchange="handleSortChange()">
-                <option value="ランダム">ランダム</option>
-                <option value="評価が高い順">評価が高い順</option>
-                <option value="評価が低い順">評価が低い順</option>
-            </select>
-        </div>
+
+<div class="sort">
+    <button class="sort__button" onclick="toggleSelect()">並び替え：評価/低</button>
+
+
+        <select id="sort" size="3" class="sort__select  custom-select" name="sort" onchange="handleSortChange()" style = 'display:none'>
+            <option value="ランダム">ランダム</option>
+            <option value="評価が高い順">評価が高い順</option>
+            <option value="評価が低い順">評価が低い順</option>
+        </select>
+
+
+</div>
         @endif
+
+
+
         <div class="search">
+
+
+
             <select id="area" class="search__select" name="area" onchange="filterShops()">
                 <option value="allarea">All area</option>
                 <option value="東京都">東京都</option>
@@ -228,8 +258,38 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+    function toggleSelect() {
+        var select = document.getElementById("sort");
+        select.style.display = select.style.display === "none" ? "block" : "none";
+    }
 
-    </script>
+
+
+// let a = 0;
+
+    // function handleFileSelect() {
+    //     var fileInput = document.getElementById('fileInput');
+    //     var fileUploadedMessage = document.getElementById('fileUploadedMessage');
+    //     if (fileInput.files.length > 0) {
+    //         fileUploadedMessage.textContent = '1'; // ファイルが選択されたら1を表示
+    //     } else {
+    //         fileUploadedMessage.textContent = '0'; // ファイルが選択されていない場合は0を表示
+    //     }
+    // }
+
+        function handleFileSelect() {
+        var fileInput = document.getElementById('fileInput');
+        var importButton = document.getElementById('importButton');
+        if (fileInput.files.length > 0) {
+            // ファイルが選択されたらボタンを表示
+            importButton.style.display = 'block';
+        } else {
+            // ファイルが選択されていない場合はボタンを非表示
+            importButton.style.display = 'none';
+        }
+    }
+
+</script>
 
 </body>
 

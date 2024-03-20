@@ -7,6 +7,7 @@ body {
 .header {
     display: flex;
     justify-content: flex-start;
+    position: relative;
 }
 
 .logo {
@@ -29,12 +30,144 @@ body {
     margin-top: 35px;
     padding: 15px;
     background-color: white;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 4px #0000001a;
     height: 25px;
-    margin-left: 600px;
+    margin-left: 570px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
     border-radius: 10px;
 }
+
+
+.sort option {
+    background: white;
+}
+
+.sort__button {
+    position: absolute;
+    top: 35px;
+     left: 460px;
+    /* margin-left: -250px; */
+        padding: 15px;
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    height: 25px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
+    border: none;
+    height: 55px;
+    width: 230px;
+    font-size: 17px;
+
+}
+
+.csv__title {
+    position: absolute;
+    top: 20px;
+     left: 260px;
+}
+
+.error-messages {
+    position: absolute;
+    top: 60px;
+     left: 180px;
+     color: red;
+     width: 270px;
+     background-color: white;
+     padding-right: 10px;
+}
+
+.csv__select {
+        position: absolute;
+    top: 20px;
+     left: 460px;
+    /* margin-left: -250px; */
+        padding: 15px;
+    /* background-color: white; */
+    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557); */
+    border-radius: 10px;
+    border: none;
+    height: 15px;
+    /* width: 230px; */
+}
+
+.csv__import {
+            position: absolute;
+    top: 70px;
+     left: 475px;
+     background-color: rgb(177, 236, 217);
+    /* margin-left: -250px; */
+        padding: 5px;
+    /* background-color: white; */
+    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557); */
+    border-radius: 10px;
+    border: none;
+    height: 30px;
+    /* width: 230px; */
+}
+
+
+
+.sort__select {
+    position: absolute;
+    top: 80px;
+     left: 440px;
+    /* margin-left: -250px; */
+        /* padding: 15px; */
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    height: 25px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
+    border-color: darkgray;
+    height: 125px;
+    width: 330px;
+}
+
+       /* セレクトボックスのスクロールバー非表示 */
+        select {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+
+        /* Firefox向けのスクロールバー非表示 */
+        select::-webkit-scrollbar {
+            display: none;
+        }
+
+/* カスタムセレクトボックス */
+.custom-select {
+    /* 下部の矢印を非表示にする */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* カスタムセレクトボックスがフォーカスされた時のスタイル */
+.custom-select:focus {
+    /* outline: none; */
+    /* border-color: rgb(76, 117, 246); 
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);  */
+}
+
+.custom-select option {
+    /* 背景色 */
+    /* background-color: white; */
+    /* パディング */
+    padding: 11px 20px;
+
+    /* !important を使用して優先順位を強制 */
+}
+
+    
+
+
+.custom-select option:hover {
+    /* ホバー時の背景色 */
+    background-color: rgb(76, 117, 246);
+    color: white;
+}
+
+
 
 .bar {
     display: inline;
@@ -56,7 +189,7 @@ body {
 
 .search__shopname {
     border: none;
-    width: 405px;
+    width: 300px;
     background-image: url("/images/search_shopname.png");
     background-size: 20px;
     background-repeat: no-repeat;
@@ -159,4 +292,40 @@ body {
         margin: 0 0 20px;
         float: none;
     }
+
+    .sort__button {
+    position: absolute;
+    top: 35px;
+     left: 215px;
+    /* margin-left: -250px; */
+        padding: 15px;
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    height: 25px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
+    border: none;
+    height: 55px;
+    width: 180px;
+    font-size: 15px;
+
 }
+
+
+.sort__select {
+    position: absolute;
+    top: 80px;
+     left: 200px;
+    /* margin-left: -250px; */
+        /* padding: 15px; */
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    height: 25px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
+    border-color: darkgray;
+    height: 125px;
+    width: 200px;
+}
+}
+
