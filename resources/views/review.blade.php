@@ -116,10 +116,11 @@ document.getElementById('comment').value = '{{ $review->comment }}';
 </div>
 <input type="file"  name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)" class="image__upload__button" style="display: none;">
 
-
-        <div id="photo-preview"></div>
-        <div id="photo-error" class="error-message" style="color: red;"></div>
         <button id="clearPhotoButton"  class="image__delete__button" onclick="clearPhoto()">画像を削除</button>
+
+        <div id="photo-preview" class="photo__preview"></div>
+        <div id="photo-error" class="error-message" style="color: red;"></div>
+
 
     <button type="submit" class="submit__button" id="submitReviewButton">口コミを投稿</button>
 

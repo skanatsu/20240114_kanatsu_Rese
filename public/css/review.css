@@ -251,6 +251,12 @@ review__comment. {
     width: 400px;
 } */
 
+#photo-preview img {
+        max-width: 100px; /* プレビュー画像の最大幅を指定 */
+        max-height: 100px; /* プレビュー画像の最大高さを指定 */
+        margin-left: 450px;
+}
+
 .alert {
     color: red;
     width: 500px;
@@ -264,6 +270,7 @@ review__comment. {
     border-radius: 7px;
     margin-top: 5px;
     border: none;
+    display: inline-block;
 }
 
 .submit__button {
@@ -495,4 +502,10 @@ position: static;
     margin-bottom: 30px;
 }
 
+#photo-preview img {
+        max-width: 100px; /* プレビュー画像の最大幅を指定 */
+        max-height: 100px; /* プレビュー画像の最大高さを指定 */
+        margin-left: 0px;
+        margin-bottom: 30px;
+}
 }
