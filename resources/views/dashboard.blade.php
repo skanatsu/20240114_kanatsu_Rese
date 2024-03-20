@@ -26,24 +26,12 @@
 @if (Auth::check() && Auth::user()->type == 'manage')
 
 
-{{-- <div class="csv">
-    <form action="{{ route('shops.import') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <p class="csv__title">【店舗情報のアップロード】</p>
-        <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()">
-        <button type="submit" class="csv__import disabled">CSVをインポート</button>
-        
-        
-
-    </form>
-</div> --}}
-
 <div class="csv">
     <form action="{{ route('shops.import') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <p class="csv__title">【店舗情報のアップロード】</p>
         <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()">
-        <button type="submit" class="csv__import disabled" id="importButton" style="display: none;">CSVをインポート</button>
+        <button type="submit" class="csv__import" id="importButton" style="display: none;">CSVをインポート</button>
         {{-- <span id="fileUploadedMessage">{{ $a ?? 0 }}</span> --}}
     </form>
 </div>

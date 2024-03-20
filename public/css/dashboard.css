@@ -68,11 +68,11 @@ body {
 
 .error-messages {
     position: absolute;
-    top: 60px;
+    top: 65px;
      left: 180px;
      color: red;
      width: 270px;
-     background-color: white;
+     background-color: yellow;
      padding-right: 10px;
 }
 
@@ -293,7 +293,55 @@ body {
         float: none;
     }
 
-    .sort__button {
+.csv__title {
+    position: absolute;
+    top: 20px;
+     left: 200px;
+}
+
+    .csv__select {
+    position: absolute;
+    top: 47px;
+     left: 190px;
+    /* margin-left: -250px; */
+        /* padding: 15px; */
+    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); */
+    /* height: 25px; */
+    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px; */
+    border: none;
+    /* height: 55px; */
+    /* width: 180px; */
+    font-size: 15px;
+
+}
+
+.csv__import {
+            position: absolute;
+    top: 95px;
+     left: 205px;
+     background-color: rgb(177, 236, 217);
+    /* margin-left: -250px; */
+        padding: 5px;
+    /* background-color: white; */
+    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557); */
+    border-radius: 10px;
+    border: none;
+    height: 30px;
+    /* width: 230px; */
+}
+
+.error-messages {
+    position: absolute;
+    top: 130px;
+     left: 205px;
+     color: red;
+     width: 150px;
+     background-color: yellow;
+     padding-right: 10px;
+}
+
+    .sort__button{
     position: absolute;
     top: 35px;
      left: 215px;
@@ -310,6 +358,7 @@ body {
     font-size: 15px;
 
 }
+
 
 
 .sort__select {
