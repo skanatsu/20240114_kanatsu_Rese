@@ -60,7 +60,7 @@ class ReviewController extends Controller
             'score' => 'required|integer|min:1|max:5', // scoreは必須で1から5の整数であることを検証
             'comment' => 'required|string|max:400', // commentは必須で400文字以内であることを検証
             'shop_id' => 'required|exists:shops,id', // shop_idは必須で、存在するshop_idであることを検証
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像ファイルのバリデーションを追加
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 画像ファイルのバリデーションを追加
         ]);
 
         // 口コミデータを作成または更新する
@@ -72,6 +72,7 @@ class ReviewController extends Controller
             // 既存の口コミがある場合は、口コミデータを更新
             $review->score = $validatedData['score'];
             $review->comment = $validatedData['comment'];
+            $review->review_image_url = $validatedData['review_image_ur'];
             $review->save();
         } else {
             // 既存の口コミがない場合は、新しい口コミデータを作成

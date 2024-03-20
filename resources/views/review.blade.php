@@ -119,6 +119,15 @@ document.getElementById('comment').value = '{{ $review->comment }}';
         <button id="clearPhotoButton"  class="image__delete__button" onclick="clearPhoto()">画像を削除</button>
 
         <div id="photo-preview" class="photo__preview"></div>
+
+        <p id="review_image_name">{{ $review->review_image_url }}</p>
+
+        @if (isset($review))
+<script>
+document.getElementById('review_image_url').value = '{{ $review->review_image_url }}';
+</script>
+@endif
+        
         <div id="photo-error" class="error-message" style="color: red;"></div>
 
 
@@ -408,8 +417,6 @@ document.getElementById('submitReviewButton').addEventListener('click', function
             inputElement.dispatchEvent(new Event("change"));
         }
     }
-
-
 
 
     </script>
