@@ -22,15 +22,12 @@ class ImportCsvRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'csv_file' => ['required', 'file', 'mimetypes:text/plain', 'mimes:csv,txt'],
             'csv_file' => ['required', 'file', 'mimes:csv', 'mimetypes:text/csv,application/csv'],
-
             'csv_array' => ['required', 'array'],
             'csv_array.*.shopname' => ['required', 'string', 'max:50'],
             'csv_array.*.area' => ['required', Rule::in(['東京都', '大阪府', '福岡県'])],
             'csv_array.*.genre' => ['required', Rule::in(['寿司', '焼肉', 'イタリアン', '居酒屋', 'ラーメン'])],
             'csv_array.*.description' => ['required', 'string', 'max:400'],
-            // 'csv_array.*.image_url' => ['required', 'mimes:jpeg,jpg,png'],
             'csv_array.*.image_url' => ['required', 'active_url', 'regex:/\.(jpeg|jpg|png)$/'],
 
 

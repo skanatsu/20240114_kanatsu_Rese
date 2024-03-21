@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Database\Seeders\ShopCsvSeeder;

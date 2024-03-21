@@ -58,7 +58,7 @@ Route::prefix('reservation')->group(function () {
     Route::put('/update/{id}', [ReservationController::class, 'update'])->name('reservation.update');
 });
 
-Route::post('/reservation/{id}/evaluate', [ReviewController::class, 'evaluate'])->name('reservation.evaluate');
+// Route::post('/reservation/{id}/evaluate', [ReviewController::class, 'evaluate'])->name('reservation.evaluate');
 
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 
@@ -68,13 +68,11 @@ Route::get('/reservation/{id}/pay', [ReservationController::class, 'pay'])->name
 
 Route::get('review/{id}', [ReviewController::class, 'show'])->name('review');
 
-Route::post('/upload-photo', [ReviewController::class, 'uploadPhoto'])->name('upload.photo');
+// Route::post('/upload-photo', [ReviewController::class, 'uploadPhoto'])->name('upload.photo');
 
 Route::post('/review/submit', [ReviewController::class, 'submit'])->name('review.submit');
 
 Route::post('/review/fetch', [ReviewController::class, 'fetchReview'])->name('review.fetch');
-
-// Route::get('/review/delete/{id}', 'ReviewController@delete')->name('review.delete');
 
 Route::get('/review/delete/{id}', [ReviewController::class, 'delete'])->name('review.delete');
 
