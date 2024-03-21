@@ -89,6 +89,7 @@
     <textarea name="comment" id="comment" rows="3" class="review__comment__input" placeholder="カジュアルな夜のお出かけにおすすめのスポット" oninput="countCharacters(this)"></textarea>
     <div id="character-count" class="character-count">0/400（最高文字数）</div>
 
+    
     <!-- エラーメッセージを表示する要素 -->
                 <div id="comment-error" class="error-message" style="color: red;"></div>
 
@@ -104,13 +105,6 @@ document.getElementById('comment').value = '{{ $review->comment }}';
                 <h3 class="image__attach">画像の追加</h3>
 
 
-
-{{-- <label for="photo" class="custom-file-upload">
-    クリックして写真を選択またはドラッグ＆ドロップ
-<input type="file" name="photo" id="photo" accept="image/*"  onchange="previewPhoto(event)" class="image__upload__button">
-</label> --}}
-
-
 <div role="button" tabindex="0" class="custom-file-upload" ondragover="handleDragOver(event)" ondrop="handleFileDrop(event)">
     <span>クリックして写真を追加<br>またはドラッグアンドドロップ</span>
 </div>
@@ -120,7 +114,11 @@ document.getElementById('comment').value = '{{ $review->comment }}';
 
         <div id="photo-preview" class="photo__preview"></div>
 
-        <p id="review_image_name">{{ $review->review_image_url }}</p>
+        {{-- <p id="review_image_name">{{ $review->review_image_url }}</p> --}}
+
+@if (isset($review->review_image_url))
+    <p id="review_image_name">{{ $review->review_image_url }}</p>
+@endif
 
         @if (isset($review))
 <script>
@@ -150,6 +148,7 @@ document.getElementById('review_image_url').value = '{{ $review->review_image_ur
     commentTextarea.addEventListener('input', function() {
         countCharacters(this); // textareaに入力がある度に文字数をカウントして表示
     });
+    
         });
 
         function updateTable() {
@@ -163,28 +162,7 @@ document.getElementById('review_image_url').value = '{{ $review->review_image_ur
             reservationPeople.innerHTML = document.getElementById('people').value + "人";
         }
 
-        // function submitForm() {
-        //     var form = document.getElementById('reservationForm');
-        //     var formData = new FormData(form);
-        //     fetch(form.action, {
-        //             method: 'POST',
-        //             body: formData,
-        //             headers: {
-        //                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
-        //             },
-        //         })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             if (data.success) {
-        //                 window.location.href = data.redirect;
-        //             } else {
-        //                 displayErrorMessages(data.errors);
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error('予約時にエラーが発生しました', error);
-        //         });
-        // }
+     
 
         function displayErrorMessages(errors) {
             var errorContainer = document.getElementById('errorMessages');
@@ -239,7 +217,9 @@ function restoreImages(element) {
 
     // textareaに入力がある度に文字数をカウントして表示
     document.getElementById('comment').addEventListener('input', function() {
+        
         countCharacters(this);
+
     });
 
                 function countCharacters(element) {
@@ -262,19 +242,6 @@ function restoreImages(element) {
             }
         }
 
-
-// function previewPhoto(event) {
-//     var input = event.target;
-//     var reader = new FileReader();
-//     reader.onload = function () {
-//         var photoPreview = document.getElementById('photo-preview');
-//         var img = document.createElement('img');
-//         img.src = reader.result;
-//         photoPreview.innerHTML = '';
-//         photoPreview.appendChild(img);
-//     };
-//     reader.readAsDataURL(input.files[0]);
-// }
 
 function previewPhoto(event) {
     var input = event.target;
@@ -334,10 +301,8 @@ document.getElementById('submitReviewButton').addEventListener('click', function
 
         function postReview() {
 
-                // 送信中フラグを立てる
-    // isSubmitting = true;
-
-    var comment = document.getElementById('comment').value; // コメントを取得
+            
+      var comment = document.getElementById('comment').value; // コメントを取得
     var score = document.getElementById('reviewScore').value; // 評価スコアを取得
 
     // フォームデータを作成
@@ -352,6 +317,9 @@ document.getElementById('submitReviewButton').addEventListener('click', function
         var photoFile = photoInput.files[0];
         formData.append('photo', photoFile);
     }
+
+
+
 
     // フォームデータを送信するAjaxリクエストを作成
     fetch("{{ route('review.submit') }}", {
@@ -379,6 +347,10 @@ document.getElementById('submitReviewButton').addEventListener('click', function
 })
 
 }
+
+
+
+
 
 //　アップロードボタン装飾
       const buttonElement = document.querySelector(".custom-file-upload");

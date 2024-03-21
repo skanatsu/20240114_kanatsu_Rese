@@ -38,10 +38,17 @@
             </div>
             <p class="shop__description">{{ $shop->description }}</p>
             @if (Auth::check() && Auth::user()->type == 'general')
-    <div class="review__page">
+    
+    
+ 
+    
+            <div class="review__page">
         <a href="{{ route('review', ['id' => $shop->id]) }}" class="review__page__a">口コミを投稿する</a>
     </div>
 @endif
+
+
+
 
 
             <div class="review">

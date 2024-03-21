@@ -133,10 +133,10 @@
                             $currentDateTime = strtotime(date('Y-m-d H:i:s'));
                             $isReservationPast = $currentDateTime > $reservationDateTime;
                         @endphp
-                        @if (!$reservation->review && $isReservationPast)
+                        {{-- @if (!$reservation->review && $isReservationPast)
                             <button class="reservation__evaluate"
                                 data-reservation-id="{{ $reservation->id }}">評価を送る</button>
-                        @endif
+                        @endif --}}
                         {{-- <div class="reservation__evaluate-form" style="display: none;">
                             @if (!$reservation->review)
                                 <form action="{{ route('reservation.evaluate', ['id' => $reservation->id]) }}"
@@ -221,12 +221,12 @@
             });
         });
 
-        document.querySelectorAll('.reservation__evaluate').forEach(function(evaluateButton) {
-            evaluateButton.addEventListener('click', function() {
-                var evaluateForm = this.nextElementSibling;
-                evaluateForm.style.display = 'block';
-            });
-        });
+        // document.querySelectorAll('.reservation__evaluate').forEach(function(evaluateButton) {
+        //     evaluateButton.addEventListener('click', function() {
+        //         var evaluateForm = this.nextElementSibling;
+        //         evaluateForm.style.display = 'block';
+        //     });
+        // });
     </script>
 </body>
 
