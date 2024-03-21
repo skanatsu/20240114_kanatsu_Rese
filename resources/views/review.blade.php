@@ -163,28 +163,28 @@ document.getElementById('review_image_url').value = '{{ $review->review_image_ur
             reservationPeople.innerHTML = document.getElementById('people').value + "人";
         }
 
-        function submitForm() {
-            var form = document.getElementById('reservationForm');
-            var formData = new FormData(form);
-            fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        window.location.href = data.redirect;
-                    } else {
-                        displayErrorMessages(data.errors);
-                    }
-                })
-                .catch(error => {
-                    console.error('予約時にエラーが発生しました', error);
-                });
-        }
+        // function submitForm() {
+        //     var form = document.getElementById('reservationForm');
+        //     var formData = new FormData(form);
+        //     fetch(form.action, {
+        //             method: 'POST',
+        //             body: formData,
+        //             headers: {
+        //                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        //             },
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             if (data.success) {
+        //                 window.location.href = data.redirect;
+        //             } else {
+        //                 displayErrorMessages(data.errors);
+        //             }
+        //         })
+        //         .catch(error => {
+        //             console.error('予約時にエラーが発生しました', error);
+        //         });
+        // }
 
         function displayErrorMessages(errors) {
             var errorContainer = document.getElementById('errorMessages');
