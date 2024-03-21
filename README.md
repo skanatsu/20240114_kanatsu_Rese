@@ -15,6 +15,7 @@ Reseは企業のグループ会社の飲食店予約サービスです。
 - 飲食店一覧ページ：<http://localhost/>
 - 飲食店詳細ページ：<http://localhost/detail/1>
 - 予約完了ページ：<http://localhost/done>
+- 評価ページ：<http://localhost/review/1>
 - メニューページ：<http://localhost/menu>
 
 ### 注意事項
