@@ -265,6 +265,10 @@ document.addEventListener('DOMContentLoaded', function() {
     //     }
     // }
 
+
+    // <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()">
+    //     <button type="submit" class="csv__import" id="importButton" style="display: none;">CSVをインポート</button>
+
         function handleFileSelect() {
         var fileInput = document.getElementById('fileInput');
         var importButton = document.getElementById('importButton');

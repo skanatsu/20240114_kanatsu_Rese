@@ -126,7 +126,10 @@ document.getElementById('comment').value = '{{ $review->comment }}';
 </div>
 <input type="file"  name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)" class="image__upload__button" style="display: none;">
 
-        <button id="clearPhotoButton"  class="image__delete__button" onclick="clearPhoto()">画像を削除</button>
+        {{-- <button id="clearPhotoButton"  class="image__delete__button" onclick="clearPhoto()" style="display: none;">画像を削除</button> --}}
+
+        <button id="clearPhotoButton" class="image__delete__button" onclick="clearPhoto(event)" style="display: none;">画像を削除</button>
+
 
         <div id="photo-preview" class="photo__preview"></div>
 
@@ -169,16 +172,16 @@ document.getElementById('review_image_url').value = '{{ $review->review_image_ur
     
         });
 
-        function updateTable() {
-            var shopNameCell = document.getElementById('shopNameCell');
-            var reservationDate = document.getElementById('reservationDate');
-            var reservationTime = document.getElementById('reservationTime');
-            var reservationPeople = document.getElementById('reservationPeople');
-            shopNameCell.innerHTML = initialShopName;
-            reservationDate.innerHTML = document.getElementById('date').value;
-            reservationTime.innerHTML = document.getElementById('time').value;
-            reservationPeople.innerHTML = document.getElementById('people').value + "人";
-        }
+        // function updateTable() {
+        //     var shopNameCell = document.getElementById('shopNameCell');
+        //     var reservationDate = document.getElementById('reservationDate');
+        //     var reservationTime = document.getElementById('reservationTime');
+        //     var reservationPeople = document.getElementById('reservationPeople');
+        //     shopNameCell.innerHTML = initialShopName;
+        //     reservationDate.innerHTML = document.getElementById('date').value;
+        //     reservationTime.innerHTML = document.getElementById('time').value;
+        //     reservationPeople.innerHTML = document.getElementById('people').value + "人";
+        // }
 
      
 
@@ -262,6 +265,23 @@ function restoreImages(element) {
 
 
 function previewPhoto(event) {
+
+
+
+        var photo = document.getElementById('photo');
+        var clearPhotoButton = document.getElementById('clearPhotoButton');
+        if (photo.files.length > 0) {
+            // ファイルが選択されたらボタンを表示
+            clearPhotoButton.style.display = 'block';
+        } else {
+            // ファイルが選択されていない場合はボタンを非表示
+            clearPhotoButton.style.display = 'none';
+          }
+
+
+
+
+
     var input = event.target;
     var file = input.files[0];
     var reader = new FileReader();
@@ -291,7 +311,8 @@ function previewPhoto(event) {
 }
 
 
-function clearPhoto() {
+function clearPhoto(event) {
+    event.preventDefault();
     // プレビュー用の要素を取得
     var photoPreview = document.getElementById('photo-preview');
     // プレビュー用の要素の中身をクリア
@@ -301,79 +322,9 @@ function clearPhoto() {
     fileInput.value = '';
     // エラーメッセージをクリア
     document.getElementById('photo-error').innerText = '';
+    // 画像を削除ボタンを非表示にする
+    document.getElementById('clearPhotoButton').style.display = 'none';
 }
-
-
-
-
-
-document.getElementById('submitReviewButton').addEventListener('click', function (event) {
-    // event.preventDefault(); 
-    // if (!isSubmitting) { // 送信中でない場合のみ処理を実行
-    //     postReview(); // 口コミを投稿する関数を呼び出す
-    // }
-
-    
-});
-
-
-
-
-
-
-
-//         function postReview() {
-
-            
-//       var comment = document.getElementById('comment').value; // コメントを取得
-//     var score = document.getElementById('reviewScore').value; // 評価スコアを取得
-
-//     // フォームデータを作成
-//     var formData = new FormData();
-//     formData.append('score', score); // 評価スコアを追加
-//     formData.append('comment', comment); // コメントを追加
-//     formData.append('shop_id', {{ $shop->id }});
-
-//     // 画像ファイルを取得してフォームデータに追加
-//     var photoInput = document.getElementById('photo');
-//     if (photoInput.files.length > 0) {
-//         var photoFile = photoInput.files[0];
-//         formData.append('photo', photoFile);
-//     }
-
-
-
-
-//     // フォームデータを送信するAjaxリクエストを作成
-//     fetch("{{ route('review.submit') }}", {
-//         method: 'POST',
-//         body: formData,
-//         headers: {
-//             'X-CSRF-TOKEN': '{{ csrf_token() }}',
-//         },
-//     })
-//     .then(response => response.json())
-//  .then(data => {
-//     // 成功時の処理
-//     if (data.success) {
-//         // リダイレクト先の詳細ページ URL を構築してリダイレクト
-//         var shopId = "{{ $shop->id }}"; // Blade テンプレートからショップの ID を取得
-//         var redirectUrl = "{{ url('/detail/') }}" + '/' + shopId;
-//         window.location.href = redirectUrl;
-//     } else {
-//         // エラーメッセージを表示するなどの処理
-//         console.error('口コミの投稿に失敗しました:', data.message);
-//     }
-// })
-//     .catch(error => {
-//     console.error('口コミの投稿時にエラーが発生しました', error);
-// })
-
-// }
-
-
-
-
 
 //　アップロードボタン装飾
       const buttonElement = document.querySelector(".custom-file-upload");
@@ -414,6 +365,32 @@ document.getElementById('submitReviewButton').addEventListener('click', function
     }
 
 
+
+
+
+
+// <div role="button" tabindex="0" class="custom-file-upload" ondragover="handleDragOver(event)" ondrop="handleFileDrop(event)">
+//     <span>クリックして写真を追加<br>またはドラッグアンドドロップ</span>
+// </div>
+// <input type="file"  name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)" class="image__upload__button" style="display: none;">
+
+//         <button id="clearPhotoButton"  class="image__delete__button" onclick="clearPhoto()">画像を削除</button>
+
+
+    //  function previewPhoto(event) {
+        // var photo = document.getElementById('photo');
+        // var clearPhotoButton = document.getElementById('clearPhotoButton');
+        // if (photo.files.length > 0) {
+        //     // ファイルが選択されたらボタンを表示
+        //     clearPhotoButton.style.display = 'block';
+        // } else {
+        //     // ファイルが選択されていない場合はボタンを非表示
+        //     clearPhotoButton.style.display = 'none';
+        //   }
+    // }
+
+
+    
     </script>
 
     
