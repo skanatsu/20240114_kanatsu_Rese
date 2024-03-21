@@ -72,7 +72,10 @@ class ReviewController extends Controller
             // 既存の口コミがある場合は、口コミデータを更新
             $review->score = $validatedData['score'];
             $review->comment = $validatedData['comment'];
-            $review->review_image_url = $validatedData['review_image_ur'];
+            // $review->review_image_url = $validatedData['review_image_url'];
+            if (isset($validatedData['review_image_url'])) {
+                $review->review_image_url = $validatedData['review_image_url'];
+            }
             $review->save();
         } else {
             // 既存の口コミがない場合は、新しい口コミデータを作成
@@ -81,6 +84,9 @@ class ReviewController extends Controller
             $review->shop_id = $validatedData['shop_id']; // shop_idを設定
             $review->score = $validatedData['score']; // バリデーション済みのscoreを設定
             $review->comment = $validatedData['comment']; // バリデーション済みのcommentを設定
+            if (isset($validatedData['review_image_url'])) {
+                $review->review_image_url = $validatedData['review_image_url'];
+            }
             $review->save(); // データベースに保存
         }
 
@@ -89,7 +95,7 @@ class ReviewController extends Controller
             $fileName = $file->getClientOriginalName(); // アップロードされたファイルのオリジナル名を取得
             $path = $file->store('public/images'); // ファイルを保存し、保存先のパスを取得
             $review->review_image_url = $fileName; // ファイル名をreview_image_urlに設定
-            $review->save(); 
+            $review->save();
         }
 
         // $review->save(); // データベースに保存
