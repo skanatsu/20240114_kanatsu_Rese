@@ -3,44 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Reservation;
 use App\Models\Review;
 use App\Models\Shop;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
-    // public function evaluate(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'score' => 'required|integer|min:1|max:5',
-    //         'comment' => 'required|string|max:255',
-    //     ]);
-
-    //     $reservation = Reservation::find($id);
-
-    //     if (!$reservation) {
-    //         return redirect()->back()->with('error', '予約が見つかりませんでした');
-    //     }
-
-    //     $review = Review::where('reservation_id', $reservation->id)->first();
-
-    //     if ($review) {
-    //         $review->score = $request->input('score');
-    //         $review->comment = $request->input('comment');
-    //         $review->save();
-    //     } else {
-    //         $review = new Review([
-    //             'reservation_id' => $reservation->id,
-    //             'score' => $request->input('score'),
-    //             'comment' => $request->input('comment'),
-    //         ]);
-    //         $review->save();
-    //     }
-
-    //     return redirect()->back()->with('success', '評価が保存されました');
-    // }
 
     public function show($id)
     {
@@ -148,7 +116,7 @@ class ReviewController extends Controller
             $review = new Review();
             $review->user_id = auth()->id();
             $review->shop_id = $validatedData['shop_id'];
-            $review->score = $request->input('score', 0); // デフォルト値は0
+            $review->score = $request->input('score', 1); // デフォルト値は1
             $review->comment = $request->input('comment', ''); // デフォルト値は空文字列
             $review->review_image_url = $request->input('review_image_url', ''); // デフォルト値は空文字列
             $review->save();

@@ -21,10 +21,6 @@ return new class extends Migration
         });
     }
 
-            // $table->unsignedBigInteger('reservation_id');
-                // $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
-
-                
     public function down(): void
     {
         Schema::dropIfExists('reviews');

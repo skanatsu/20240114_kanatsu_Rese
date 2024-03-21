@@ -60,11 +60,11 @@
                     
                         {{-- <form id="reviewForm" method="POST"> --}}
     @csrf
-    <input type="hidden" name="score" id="reviewScore" value="0"> <!-- 評価スコアを保持するための隠しフィールド -->
+    <input type="hidden" name="score" id="reviewScore" value="1"> <!-- 評価スコアを保持するための隠しフィールド -->
 
                 <h3 class="reservation">体験を評価してください</h3>
 
-<img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
+<img class="rating-star" src="{{ asset('images/bluestar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
 <img class="rating-star" src="{{ asset('images/greystar.png') }}" onmouseover="changeImages(this)" onmouseout="restoreImages(this)" onclick="saveClickedImage(this)">
@@ -93,7 +93,9 @@
 @endif
 
 
-
+@php
+    $score = $review ? $review->score : 1; // 既存の口コミがあればそのスコアを取得し、なければデフォルト値1を設定
+@endphp
 
 
 
@@ -160,7 +162,6 @@ document.getElementById('review_image_url').value = '{{ $review->review_image_ur
         document.addEventListener('DOMContentLoaded', function() {
 
 
-
             
     var commentTextarea = document.getElementById('comment');
     countCharacters(commentTextarea); // ページ読み込み時に文字数をカウントして表示
@@ -206,8 +207,11 @@ document.getElementById('review_image_url').value = '{{ $review->review_image_ur
 function changeImages(element) {
     var imgs = document.getElementsByClassName("rating-star");
     var index = Array.prototype.indexOf.call(imgs, element);
+    // var score = 1;
     var score = index + 1; // クリックされた画像の位置に応じて評価を設定
     document.getElementById('reviewScore').value = score; // 隠しフィールドに評価をセット
+
+    
     for (var i = 0; i <= index; i++) {
         imgs[i].src = "{{ asset('images/bluestar.png') }}";
     }
