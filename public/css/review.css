@@ -273,6 +273,12 @@ review__comment. {
     display: inline-block;
 }
 
+.error__message__image {
+    position: absolute;
+    top: 780px;
+    left: 830px;
+}
+
 .submit__button {
         position: absolute;
             top: 870px;
@@ -507,5 +513,10 @@ position: static;
         max-height: 100px; /* プレビュー画像の最大高さを指定 */
         margin-left: 0px;
         margin-bottom: 30px;
+}
+
+.error__message__image {
+    position: static;
+    margin-bottom: 10px;
 }
 }

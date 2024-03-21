@@ -128,7 +128,7 @@ document.getElementById('review_image_url').value = '{{ $review->review_image_ur
 </script>
 @endif
         
-        <div id="photo-error" class="error-message" style="color: red;"></div>
+        <div id="photo-error" class="error__message__image" style="color: red;"></div>
 
 
     <button type="submit" class="submit__button" id="submitReviewButton">口コミを投稿</button>
