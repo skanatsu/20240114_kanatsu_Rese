@@ -222,6 +222,8 @@ body {
 .review__set__comment {
     margin-top: 10px;
     margin-bottom: 20px;
+    /* width: 400px; */
+    word-wrap: break-word; /* 長い単語を折り返す */
 }
 
 .review__star {

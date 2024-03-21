@@ -24,4 +24,15 @@ return new class extends Migration
     {
         Schema::dropIfExists('users');
     }
+
+    // public function down(): void
+    // {
+    //     Schema::table('reservations', function (Blueprint $table) {
+    //         // 'reservations_user_id_foreign' という名前の外部キー制約を削除
+    //         $table->dropForeign('reservations_user_id_foreign');
+    //     });
+
+    //     Schema::dropIfExists('users');
+    // }
+
 };

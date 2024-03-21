@@ -126,8 +126,6 @@ document.getElementById('comment').value = '{{ $review->comment }}';
 </div>
 <input type="file"  name="photo" id="photo" accept="image/*" onchange="previewPhoto(event)" class="image__upload__button" style="display: none;">
 
-        {{-- <button id="clearPhotoButton"  class="image__delete__button" onclick="clearPhoto()" style="display: none;">画像を削除</button> --}}
-
         <button id="clearPhotoButton" class="image__delete__button" onclick="clearPhoto(event)" style="display: none;">画像を削除</button>
 
 
@@ -265,8 +263,6 @@ function restoreImages(element) {
 
 
 function previewPhoto(event) {
-
-
 
         var photo = document.getElementById('photo');
         var clearPhotoButton = document.getElementById('clearPhotoButton');

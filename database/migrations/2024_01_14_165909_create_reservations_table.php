@@ -12,14 +12,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('shop_id');
-            $table->unsignedBigInteger('reservation_id')->nullable();
             $table->date('date');
             $table->time('time');
             $table->integer('number');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
-            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
         });
     }
 
@@ -27,4 +25,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('reservations');
     }
+
+
 };
