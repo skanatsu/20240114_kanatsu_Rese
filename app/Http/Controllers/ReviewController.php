@@ -56,60 +56,123 @@ class ReviewController extends Controller
     }
 
 
+    // public function submit(Request $request)
+    // {
+    //     // バリデーションを行う
+    //     $validatedData = $request->validate([
+    //         'score' => 'required|integer|min:1|max:5', // scoreは必須で1から5の整数であることを検証
+    //         'comment' => 'required|string|max:400', // commentは必須で400文字以内であることを検証
+    //         'shop_id' => 'required|exists:shops,id', // shop_idは必須で、存在するshop_idであることを検証
+    //         'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 画像ファイルのバリデーションを追加
+    //     ]);
+
+
+
+    //     // 口コミデータを作成または更新する
+    //     $review = Review::where('user_id', auth()->id())
+    //         ->where('shop_id', $validatedData['shop_id'])
+    //         ->first();
+
+    //     if ($review) {
+    //         // 既存の口コミがある場合は、口コミデータを更新
+    //         $review->score = $validatedData['score'];
+    //         $review->comment = $validatedData['comment'];
+    //         // $review->review_image_url = $validatedData['review_image_url'];
+    //         if (isset($validatedData['review_image_url'])) {
+    //             $review->review_image_url = $validatedData['review_image_url'];
+    //         }
+    //         $review->save();
+    //     } else {
+    //         // 既存の口コミがない場合は、新しい口コミデータを作成
+    //         $review = new Review();
+    //         $review->user_id = auth()->id(); // ログインユーザーのIDを取得し、口コミのuser_idに設定
+    //         $review->shop_id = $validatedData['shop_id']; // shop_idを設定
+    //         $review->score = $validatedData['score']; // バリデーション済みのscoreを設定
+    //         $review->comment = $validatedData['comment']; // バリデーション済みのcommentを設定
+    //         if (isset($validatedData['review_image_url'])) {
+    //             $review->review_image_url = $validatedData['review_image_url'];
+    //         }
+    //         $review->save(); // データベースに保存
+    //     }
+
+    //     if ($request->hasFile('photo')) {
+    //         $file = $request->file('photo');
+    //         $fileName = $file->getClientOriginalName(); // アップロードされたファイルのオリジナル名を取得
+    //         $path = $file->store('public/images'); // ファイルを保存し、保存先のパスを取得
+    //         $review->review_image_url = $fileName; // ファイル名をreview_image_urlに設定
+    //         $review->save();
+    //     }
+
+    //     // $review->save(); // データベースに保存
+
+    //     // リダイレクト先のURLを構築してリダイレクト
+    //     $shopId = $validatedData['shop_id'];
+    //     $redirectUrl = route('detail', ['id' => $shopId]); // 'detail' ルートに shop_id を渡して遷移先のURLを構築
+    //     return redirect($redirectUrl);
+    // }
+
+
     public function submit(Request $request)
     {
         // バリデーションを行う
         $validatedData = $request->validate([
-            'score' => 'required|integer|min:1|max:5', // scoreは必須で1から5の整数であることを検証
-            'comment' => 'required|string|max:400', // commentは必須で400文字以内であることを検証
             'shop_id' => 'required|exists:shops,id', // shop_idは必須で、存在するshop_idであることを検証
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 画像ファイルのバリデーションを追加
         ]);
 
-        // 口コミデータを作成または更新する
+        // 口コミデータを取得する
         $review = Review::where('user_id', auth()->id())
-            ->where('shop_id', $validatedData['shop_id'])
+        ->where('shop_id', $validatedData['shop_id'])
             ->first();
 
+        // 口コミデータが存在する場合
         if ($review) {
-            // 既存の口コミがある場合は、口コミデータを更新
-            $review->score = $validatedData['score'];
-            $review->comment = $validatedData['comment'];
-            // $review->review_image_url = $validatedData['review_image_url'];
-            if (isset($validatedData['review_image_url'])) {
-                $review->review_image_url = $validatedData['review_image_url'];
+            // スコアがリクエストに含まれていれば更新する
+            if ($request->has('score')) {
+                $review->score = $request->input('score');
             }
+
+            // コメントがリクエストに含まれていれば更新する
+            if ($request->has('comment')) {
+                $review->comment = $request->input('comment');
+            }
+
+            // レビュー画像 URL がリクエストに含まれていれば更新する
+            if ($request->has('review_image_url')) {
+                $review->review_image_url = $request->input('review_image_url');
+            }
+
             $review->save();
         } else {
-            // 既存の口コミがない場合は、新しい口コミデータを作成
+            // 口コミデータが存在しない場合は新しく作成する
             $review = new Review();
-            $review->user_id = auth()->id(); // ログインユーザーのIDを取得し、口コミのuser_idに設定
-            $review->shop_id = $validatedData['shop_id']; // shop_idを設定
-            $review->score = $validatedData['score']; // バリデーション済みのscoreを設定
-            $review->comment = $validatedData['comment']; // バリデーション済みのcommentを設定
-            if (isset($validatedData['review_image_url'])) {
-                $review->review_image_url = $validatedData['review_image_url'];
-            }
-            $review->save(); // データベースに保存
-        }
-
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $fileName = $file->getClientOriginalName(); // アップロードされたファイルのオリジナル名を取得
-            $path = $file->store('public/images'); // ファイルを保存し、保存先のパスを取得
-            $review->review_image_url = $fileName; // ファイル名をreview_image_urlに設定
+            $review->user_id = auth()->id();
+            $review->shop_id = $validatedData['shop_id'];
+            $review->score = $request->input('score', 0); // デフォルト値は0
+            $review->comment = $request->input('comment', ''); // デフォルト値は空文字列
+            $review->review_image_url = $request->input('review_image_url', ''); // デフォルト値は空文字列
             $review->save();
         }
 
-        // $review->save(); // データベースに保存
+        // 画像がアップロードされた場合は、処理を行う
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->getClientOriginalName();
+            $path = $file->store('public/images');
+            $review->review_image_url = $fileName;
+            $review->save();
+        }
 
         // リダイレクト先のURLを構築してリダイレクト
         $shopId = $validatedData['shop_id'];
-        $redirectUrl = route('detail', ['id' => $shopId]); // 'detail' ルートに shop_id を渡して遷移先のURLを構築
+        $redirectUrl = route('detail', ['id' => $shopId]);
         return redirect($redirectUrl);
     }
 
 
+
+
+    
     public function fetchReview(Request $request)
     {
         // ユーザーIDとショップIDを取得
