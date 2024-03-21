@@ -52,7 +52,7 @@
         @if (Auth::check() && Auth::user()->type == 'general')
 
 <div class="sort">
-    <button class="sort__button" onclick="toggleSelect()">並び替え：評価/低</button>
+    <button class="sort__button" onclick="toggleSelect()">並び替え：評価高/低</button>
 
 
         <select id="sort" size="3" class="sort__select  custom-select" name="sort" onchange="handleSortChange()" style = 'display:none'>
