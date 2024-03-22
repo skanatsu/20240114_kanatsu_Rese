@@ -30,7 +30,9 @@
     <form action="{{ route('shops.import') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <p class="csv__title">【店舗情報のアップロード】</p>
-        <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()">
+        {{-- <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()"> --}}
+        <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+
         <button type="submit" class="csv__import" id="importButton" style="display: none;">CSVをインポート</button>
         {{-- <span id="fileUploadedMessage">{{ $a ?? 0 }}</span> --}}
     </form>
@@ -280,6 +282,15 @@ document.addEventListener('DOMContentLoaded', function() {
             importButton.style.display = 'none';
         }
     }
+
+function handleDragOver(event) {
+    event.preventDefault(); // デフォルトの動作をキャンセル
+}
+
+function handleDrop(event) {
+    event.preventDefault(); // デフォルトの動作をキャンセル
+}
+
 
 </script>
 

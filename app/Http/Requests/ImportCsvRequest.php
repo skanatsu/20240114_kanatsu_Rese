@@ -50,6 +50,7 @@ class ImportCsvRequest extends FormRequest
                 SplFileObject::SKIP_EMPTY |       // 空行を読み飛ばす
                 SplFileObject::DROP_NEW_LINE      // 行末の改行を読み飛ばす
         );
+        
         foreach ($file as $index => $line) {
             // ヘッダーを取得
             if (empty($header)) {
