@@ -19,14 +19,11 @@ class ShopController extends Controller
     {
         $user = Auth::user();
         $shops = Shop::with('favorites')->get();
-
-        // 各店舗のレビューの平均スコアを取得
         $shopsWithAverageScore = Shop::with('favorites')
-        ->select('shops.*', DB::raw('COALESCE(AVG(reviews.score), 0) as average_score'))
-        ->leftJoin('reviews', 'shops.id', '=', 'reviews.shop_id')
-        ->groupBy('shops.id')
-        ->get();
-
+            ->select('shops.*', DB::raw('COALESCE(AVG(reviews.score), 0) as average_score'))
+            ->leftJoin('reviews', 'shops.id', '=', 'reviews.shop_id')
+            ->groupBy('shops.id')
+            ->get();
 
         return view('dashboard', compact('shops', 'user', 'shopsWithAverageScore'));
     }
@@ -35,11 +32,8 @@ class ShopController extends Controller
     {
         $shop = Shop::findOrFail($id);
         $reservationIds = Reservation::where('shop_id', $id)->pluck('id');
-        // $reviews = Review::whereIn('reservation_id', $reservationIds)->get();
-        $reviews = Review::where('shop_id', $id)->get(); // ショップに関連するレビューを取得
-
-        // return view('detail', compact('shop'));
-        return view('detail', compact('shop', 'reviews')); // レビューもビューに渡す
+        $reviews = Review::where('shop_id', $id)->get();
+        return view('detail', compact('shop', 'reviews'));
     }
 
     public function toggleFavorite($shopId)
@@ -71,19 +65,15 @@ class ShopController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        // CSVファイルを取得し、一時的に保存する
         $file = $request->file('csv_file');
         $fileName = 'shops.csv';
         Storage::putFileAs('temp', $file, $fileName);
 
-        // CSVファイルの処理をShopCsvSeederに委譲する
         $seeder = new ShopCsvSeeder;
         $seeder->run();
 
-        // 一時ファイルを削除する
         Storage::delete('temp/' . $fileName);
 
         return redirect()->route('dashboard')->with('success', 'CSVファイルが正常にインポートされました');
     }
-
 }

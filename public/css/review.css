@@ -28,7 +28,6 @@ body {
 .shop-details {
     width: 450px;
     padding-right: 100px;
-    /* border-right: 1px solid black; */
 }
 
 .detail__content__reservation {
@@ -44,7 +43,6 @@ body {
 
 .reservation {
     font-size: 25px;
-    /* margin-left: 30px; */
     margin-top: 30px;
 }
 
@@ -131,19 +129,15 @@ body {
     height: 510px;
 }
 
-
 .shop {
-    /* max-width: 350px; */
     width: 600px;
     background-color: white;
-    /* width: calc(50% - 20px); */
     margin: 30px 60px 50px 60px;
     height: 320px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
     border-radius: 10px;
     box-sizing: border-box;
     float: left;
-    /* border-right: 1px solid black; */
 }
 
 .shop__detail__shopname {
@@ -181,13 +175,6 @@ body {
     width: 600px;
 }
 
-.detail__content__shop {
-    /* border-right: 1px solid black; */
-    /* height: 500px; */
-    /* margin-top: 600px; */
-    /* padding-top: 300px; */
-}
-
 .shop__detail {
     background-color: rgb(42, 70, 231);
     color: white;
@@ -216,7 +203,8 @@ body {
     font-size: 25px;
 }
 
-.review__comment, .image__attach {
+.review__comment,
+.image__attach {
     font-size: 25px;
     margin-top: 40px;
 }
@@ -230,31 +218,18 @@ body {
 }
 
 .character-count {
-    /* width: 650px; */
     text-align: right;
 }
-
-/* .review__table,
-.review__score,
-review__comment. {
-    border-collapse: collapse;
-    border: 1px solid black;
-    padding: 8px;
-} */
 
 .review__score {
     width: 100px;
     text-align: center;
 }
 
-/* .review__comment {
-    width: 400px;
-} */
-
 #photo-preview img {
-        max-width: 100px; /* プレビュー画像の最大幅を指定 */
-        max-height: 100px; /* プレビュー画像の最大高さを指定 */
-        margin-left: 450px;
+    max-width: 100px;
+    max-height: 100px;
+    margin-left: 450px;
 }
 
 .alert {
@@ -280,8 +255,8 @@ review__comment. {
 }
 
 .submit__button {
-        position: absolute;
-            top: 870px;
+    position: absolute;
+    top: 870px;
     left: 350px;
     background-color: white;
     border: none;
@@ -290,6 +265,57 @@ review__comment. {
     border-radius: 30px;
 }
 
+.shop {
+    background-color: white;
+    max-width: 350px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    height: 320px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
+    border-radius: 10px;
+}
+
+.shops-container {
+    margin-left: -10px;
+}
+
+.shop__image {
+    width: 100%;
+    object-fit: cover;
+    height: 170px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.shop__name {
+    font-size: 20px;
+    font-weight: bold;
+    height: 1px;
+    margin-left: 20px;
+}
+
+.shop__tag {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.shop__area {
+    margin-right: 5px;
+    margin-left: 20px;
+}
+
+.custom-file-upload {
+    background-color: white;
+    padding: 50px 190px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    width: 300px;
+}
+
+.custom-file-upload span {
+    pointer-events: none;
+}
 
 @media (max-width: 768px) {
     .detail__content {
@@ -325,7 +351,6 @@ review__comment. {
     .detail__content__shop {
         flex-direction: column;
         max-width: 600px;
-        
     }
 
     .shop__image {
@@ -352,136 +377,55 @@ review__comment. {
     .reservation__check {
         max-width: 450px;
     }
-}
 
-.shop {
-    background-color: white;
-    max-width: 350px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    height: 320px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.557);
-    border-radius: 10px;
-    
-}
-
-.shops-container {
-    margin-left: -10px;
-}
-
-.shop__image {
-    width: 100%;
-    object-fit: cover;
-    height: 170px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-}
-
-.shop__name {
-    font-size: 20px;
-    font-weight: bold;
-    height: 1px;
-    margin-left: 20px;
-}
-
-.shop__tag {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.shop__area {
-    margin-right: 5px;
-    margin-left: 20px;
-}
-
-
-
-/* .image__upload__button {
-    width: 500px;
-    height: 100px;
-
-    
-} */
-
-.custom-file-upload {
-    background-color: white; /* 背景色 */
-    padding: 50px 190px; /* 内側の余白 */
-    cursor: pointer; /* カーソルをポインターに変更 */
-    display: inline-block; /* インラインブロック要素にする */
-    text-align: center; /* テキストを中央揃えにする */
-    width: 300px; 
-
-}
-
-.custom-file-upload span {
-    pointer-events: none; /* テキストがクリック可能でないようにする */
-}
-
-
-@media (max-width: 768px) {
     .detail__content__shop {
-        border-right: none; /* 768px以下では縦線を非表示にする */
-        height: auto; /* 高さを自動に設定 */
+        border-right: none;
+        height: auto;
     }
 
     .vertical__line {
-        display: none; /* 768px以下では縦線を非表示にする */
+        display: none;
     }
 
-    /* その他の要素に対するスタイル調整 */
     .shop__detail__shopname {
-        padding-top: 20px; /* ショップ名の上部の余白を追加 */
+        padding-top: 20px;
     }
 
     .review__form {
-        margin-top: 20px; /* 口コミフォームの上部の余白を追加 */
+        margin-top: 20px;
         margin-left: 55px;
     }
 
-    .review__comment__input{
+    .review__comment__input {
         width: 300px;
     }
 
-        .character-count {
+    .character-count {
         text-align: left;
     }
 
-    .custom-file-upload, .image__upload__button {
+    .custom-file-upload,
+    .image__upload__button {
         width: 300px;
         padding: 20px 20px;
     }
 
     .submit__button {
-position: static;
+        position: static;
         background-color: white;
         border: none;
         padding: 15px 30px;
         font-size: 20px;
         border-radius: 30px;
         max-width: calc(100% - 10px);
-
     }
 
-        .shop {
+    .shop {
         width: calc(100% - 100px);
-        /* margin: 0 30px 20px 0; */
     }
 
     .shop__name {
         font-size: 18px;
-        /* margin-left: 10px; */
-    }
-
-    .shop__tag {
-        /* margin-left: 10px; */
-    }
-
-    .shop__detail {
-        /* margin-left: 10px; */
-    }
-
-    .heart {
-        /* margin-right: 10px; */
     }
 
     .shop__detail__title {
@@ -489,34 +433,35 @@ position: static;
     }
 
     .shop-details {
-    padding-right: 5px;
-    width: calc(100% - 60px);
-}
+        padding-right: 5px;
+        width: calc(100% - 60px);
+    }
 
-.review__comment__input {
-    width: calc(100% - 60px);
-    max-width: 300px;
-}
+    .review__comment__input {
+        width: calc(100% - 60px);
+        max-width: 300px;
+    }
 
-.custom-file-upload, .image__upload__button {
-    width: calc(100% - 60px);
-    max-width: 300px;
-}
+    .custom-file-upload,
+    .image__upload__button {
+        width: calc(100% - 60px);
+        max-width: 300px;
+    }
 
-.image__delete__button {
-    display: block;
-    margin-bottom: 30px;
-}
+    .image__delete__button {
+        display: block;
+        margin-bottom: 30px;
+    }
 
-#photo-preview img {
-        max-width: 100px; /* プレビュー画像の最大幅を指定 */
-        max-height: 100px; /* プレビュー画像の最大高さを指定 */
+    #photo-preview img {
+        max-width: 100px;
+        max-height: 100px;
         margin-left: 0px;
         margin-bottom: 30px;
-}
+    }
 
-.error__message__image {
-    position: static;
-    margin-bottom: 10px;
-}
+    .error__message__image {
+        position: static;
+        margin-bottom: 10px;
+    }
 }

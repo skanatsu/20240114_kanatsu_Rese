@@ -52,5 +52,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function boot()
     {
         parent::boot();
-   }
+    }
 }

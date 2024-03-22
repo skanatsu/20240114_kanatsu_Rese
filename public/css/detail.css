@@ -222,8 +222,7 @@ body {
 .review__set__comment {
     margin-top: 10px;
     margin-bottom: 20px;
-    /* width: 400px; */
-    word-wrap: break-word; /* 長い単語を折り返す */
+    word-wrap: break-word;
 }
 
 .review__star {
@@ -308,27 +307,25 @@ body {
         max-width: 450px;
     }
 
-.review {
-    width: calc(100% - 20px);
-    margin-left: 0;
-    margin-right: 0;
+    .review {
+        width: calc(100% - 20px);
+        margin-left: 0;
+        margin-right: 0;
+    }
 
-}
-
-.review__content {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.review__wrap {
+    .review__content {
         width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-}
+        margin-left: 0;
+        margin-right: 0;
+    }
 
-.review__set {
-    max-width: calc(100% - 50px);
-}
+    .review__wrap {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
 
+    .review__set {
+        max-width: calc(100% - 50px);
+    }
 }

@@ -108,7 +108,10 @@
                                                 @for ($minute = 0; $minute < 60; $minute += 30)
                                                     @php
                                                         $timeValue = sprintf('%02d:%02d', $hour, $minute);
-                                                        $selected = $timeValue === date('H:i', strtotime($reservation->time)) ? 'selected' : '';
+                                                        $selected =
+                                                            $timeValue === date('H:i', strtotime($reservation->time))
+                                                                ? 'selected'
+                                                                : '';
                                                     @endphp
                                                     <option value="{{ $timeValue }}" {{ $selected }}>
                                                         {{ $timeValue }}</option>
@@ -133,29 +136,6 @@
                             $currentDateTime = strtotime(date('Y-m-d H:i:s'));
                             $isReservationPast = $currentDateTime > $reservationDateTime;
                         @endphp
-                        {{-- @if (!$reservation->review && $isReservationPast)
-                            <button class="reservation__evaluate"
-                                data-reservation-id="{{ $reservation->id }}">評価を送る</button>
-                        @endif --}}
-                        {{-- <div class="reservation__evaluate-form" style="display: none;">
-                            @if (!$reservation->review)
-                                <form action="{{ route('reservation.evaluate', ['id' => $reservation->id]) }}"
-                                    method="post">
-                                    @csrf
-                                    <label for="rating" class="review__item">▼ 評価スコア（5：満足 〜 1：不満）</label>
-                                    <select name="score" id="rating" class="review__score">
-                                        @for ($i = 5; $i >= 1; $i--)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
-                                    <br>
-                                    <label for="comment" class="review__item">▼ 評価コメント</label>
-                                    <textarea name="comment" id="comment" rows="3" class="review__comment"></textarea>
-                                    <br>
-                                    <button type="submit" class="review__submit">評価送信</button>
-                                </form>
-                            @endif
-                        </div> --}}
                         @if (!$isReservationPast)
                             <div class="reservation__pay">
                                 <a href="{{ route('reservation.pay', ['id' => $reservation->id]) }}"
@@ -220,13 +200,6 @@
                 location.reload();
             });
         });
-
-        // document.querySelectorAll('.reservation__evaluate').forEach(function(evaluateButton) {
-        //     evaluateButton.addEventListener('click', function() {
-        //         var evaluateForm = this.nextElementSibling;
-        //         evaluateForm.style.display = 'block';
-        //     });
-        // });
     </script>
 </body>
 

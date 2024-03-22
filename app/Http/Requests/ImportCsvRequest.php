@@ -18,7 +18,7 @@ class ImportCsvRequest extends FormRequest
         return true;
     }
 
-    
+
     public function rules()
     {
         return [
@@ -29,8 +29,6 @@ class ImportCsvRequest extends FormRequest
             'csv_array.*.genre' => ['required', Rule::in(['寿司', '焼肉', 'イタリアン', '居酒屋', 'ラーメン'])],
             'csv_array.*.description' => ['required', 'string', 'max:400'],
             'csv_array.*.image_url' => ['required', 'active_url', 'regex:/\.(jpeg|jpg|png)$/'],
-
-
         ];
     }
 
@@ -42,17 +40,15 @@ class ImportCsvRequest extends FormRequest
     protected function prepareForValidation()
     {
         $file_path = $this->file('csv_file')->path();
-        // CSV取得
         $file = new SplFileObject($file_path);
         $file->setFlags(
-            SplFileObject::READ_CSV |         // CSVとして行を読み込み
-                SplFileObject::READ_AHEAD |       // 先読み／巻き戻しで読み込み
-                SplFileObject::SKIP_EMPTY |       // 空行を読み飛ばす
-                SplFileObject::DROP_NEW_LINE      // 行末の改行を読み飛ばす
+            SplFileObject::READ_CSV |
+                SplFileObject::READ_AHEAD |
+                SplFileObject::SKIP_EMPTY |
+                SplFileObject::DROP_NEW_LINE
         );
-        
+
         foreach ($file as $index => $line) {
-            // ヘッダーを取得
             if (empty($header)) {
                 $header = $line;
                 continue;
@@ -63,8 +59,9 @@ class ImportCsvRequest extends FormRequest
             $csv_array[$index]['description'] = $line[3];
             $csv_array[$index]['image_url'] = $line[4];
         }
+
         $this->merge([
-            'csv_array' => $csv_array,     //requestに項目追加
+            'csv_array' => $csv_array,
         ]);
     }
 
@@ -88,5 +85,4 @@ class ImportCsvRequest extends FormRequest
             'csv_array.*.image_url.regex' => '画像URLはjpeg, jpg, pngのいずれかの形式を指定してください。',
         ];
     }
-
 }

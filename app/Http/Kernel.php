@@ -65,7 +65,6 @@ class Kernel extends HttpKernel
     ];
 
     protected $routeMiddleware = [
-        // 他のミドルウェア...
         'user.type' => \App\Http\Middleware\UserTypeMiddleware::class,
     ];
 }

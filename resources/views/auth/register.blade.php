@@ -76,16 +76,20 @@
                             </div>
                         </div>
                         <div class="register__item">
-                                <img src="{{ asset('images/username.png') }}" class="item__image">
-                                <div class="col-md-6">
-        <select id="type" class="item__form @error('type') is-invalid @enderror" name="type" required>
-            <option value="" selected disabled>ユーザータイプ</option>
-            <option value="general" {{ old('type') == 'general' ? 'selected' : '' }}>一般ユーザー</option>
-            <option value="shop" {{ old('type') == 'shop' ? 'selected' : '' }}>店舗ユーザー</option>
-            <option value="manage" {{ old('type') == 'manage' ? 'selected' : '' }}>管理者ユーザー</option>
-        </select>
-                                 </div>
+                            <img src="{{ asset('images/username.png') }}" class="item__image">
+                            <div class="col-md-6">
+                                <select id="type" class="item__form @error('type') is-invalid @enderror"
+                                    name="type" required>
+                                    <option value="" selected disabled>ユーザータイプ</option>
+                                    <option value="general" {{ old('type') == 'general' ? 'selected' : '' }}>一般ユーザー
+                                    </option>
+                                    <option value="shop" {{ old('type') == 'shop' ? 'selected' : '' }}>店舗ユーザー
+                                    </option>
+                                    <option value="manage" {{ old('type') == 'manage' ? 'selected' : '' }}>管理者ユーザー
+                                    </option>
+                                </select>
                             </div>
+                        </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="register__button">

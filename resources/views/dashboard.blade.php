@@ -23,56 +23,42 @@
             </div>
         </div>
 
-@if (Auth::check() && Auth::user()->type == 'manage')
-
-
-<div class="csv">
-    <form action="{{ route('shops.import') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <p class="csv__title">【店舗情報のアップロード】</p>
-        {{-- <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()"> --}}
-        <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
-
-        <button type="submit" class="csv__import" id="importButton" style="display: none;">CSVをインポート</button>
-        {{-- <span id="fileUploadedMessage">{{ $a ?? 0 }}</span> --}}
-    </form>
-</div>
-
-
-@endif
-
-@if ($errors->any())
-<div class="error-messages">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
-        @if (Auth::check() && Auth::user()->type == 'general')
-
-<div class="sort">
-    <button class="sort__button" onclick="toggleSelect()">並び替え：評価高/低</button>
-
-
-        <select id="sort" size="3" class="sort__select  custom-select" name="sort" onchange="handleSortChange()" style = 'display:none'>
-            <option value="ランダム">ランダム</option>
-            <option value="評価が高い順">評価が高い順</option>
-            <option value="評価が低い順">評価が低い順</option>
-        </select>
-
-
-</div>
+        @if (Auth::check() && Auth::user()->type == 'manage')
+            <div class="csv">
+                <form action="{{ route('shops.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <p class="csv__title">【店舗情報のアップロード】</p>
+                    <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput"
+                        onchange="handleFileSelect()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+                    <button type="submit" class="csv__import" id="importButton"
+                        style="display: none;">CSVをインポート</button>
+                </form>
+            </div>
         @endif
 
+        @if ($errors->any())
+            <div class="error-messages">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
+        @if (Auth::check() && Auth::user()->type == 'general')
+            <div class="sort">
+                <button class="sort__button" onclick="toggleSelect()">並び替え：評価高/低</button>
+                <select id="sort" size="3" class="sort__select  custom-select" name="sort"
+                    onchange="handleSortChange()" style = 'display:none'>
+                    <option value="ランダム">ランダム</option>
+                    <option value="評価が高い順">評価が高い順</option>
+                    <option value="評価が低い順">評価が低い順</option>
+                </select>
+            </div>
+        @endif
 
         <div class="search">
-
-
-
             <select id="area" class="search__select" name="area" onchange="filterShops()">
                 <option value="allarea">All area</option>
                 <option value="東京都">東京都</option>
@@ -96,19 +82,14 @@
 
     <div class="shops-container">
         @foreach ($shops as $shop)
-
-        @php
-            // $shopsWithAverageScoreから該当する店舗の平均スコアを取得
-            $averageScore = $shopsWithAverageScore->firstWhere('id', $shop->id)->average_score ?? 0;
-        @endphp
-
+            @php
+                $averageScore = $shopsWithAverageScore->firstWhere('id', $shop->id)->average_score ?? 0;
+            @endphp
             <div class="shop" data-area="{{ $shop->area }}" data-genre="{{ $shop->genre }}"
                 data-shopname="{{ $shop->shopname }}">
                 <img src="{{ asset($shop->image_url) }}" class="shop__image" alt="{{ $shop->shopname }}">
                 <p class="shop__name">{{ $shop->shopname }}</p>
-
-                <p class="shop__average-score">{{ $averageScore }}</p> <!-- 平均スコアを表示 -->
-
+                <p class="shop__average-score">{{ $averageScore }}</p>
                 <div class="shop__tag">
                     <p class="shop__area">#{{ $shop->area }}</p>
                     <p>#{{ $shop->genre }}</p>
@@ -184,115 +165,83 @@
             });
         }
 
-function shuffleShops() {
-    var shopsContainer = document.querySelector('.shops-container');
-    var shops = Array.from(shopsContainer.querySelectorAll('.shop'));
-    var randomShops = shops.sort(() => Math.random() - 0.5); // ランダムにシャッフル
+        function shuffleShops() {
+            var shopsContainer = document.querySelector('.shops-container');
+            var shops = Array.from(shopsContainer.querySelectorAll('.shop'));
+            var randomShops = shops.sort(() => Math.random() - 0.5);
 
-    // シャッフルされた店舗をDOMに追加
-    shopsContainer.innerHTML = '';
-    randomShops.forEach(shop => {
-        shopsContainer.appendChild(shop);
-    });
-}
+            shopsContainer.innerHTML = '';
+            randomShops.forEach(shop => {
+                shopsContainer.appendChild(shop);
+            });
+        }
 
-function handleSortChange() {
-    var selectedValue = document.getElementById('sort').value;
-    if (selectedValue === 'ランダム') {
-        shuffleShops();
-    } else if (selectedValue === '評価が高い順') {
-        // 平均評価で降順に並べ替え
-        var shops = Array.from(document.querySelectorAll('.shop'));
-        shops.sort((a, b) => {
-            var averageScoreA = parseFloat(a.querySelector('.shop__average-score').textContent);
-            var averageScoreB = parseFloat(b.querySelector('.shop__average-score').textContent);
-            return averageScoreB - averageScoreA;
-        });
+        function handleSortChange() {
+            var selectedValue = document.getElementById('sort').value;
+            if (selectedValue === 'ランダム') {
+                shuffleShops();
+            } else if (selectedValue === '評価が高い順') {
+                var shops = Array.from(document.querySelectorAll('.shop'));
+                shops.sort((a, b) => {
+                    var averageScoreA = parseFloat(a.querySelector('.shop__average-score').textContent);
+                    var averageScoreB = parseFloat(b.querySelector('.shop__average-score').textContent);
+                    return averageScoreB - averageScoreA;
+                });
 
-        // 並び替え後のショップをDOMに追加
-        var shopsContainer = document.querySelector('.shops-container');
-        shopsContainer.innerHTML = '';
-        shops.forEach(shop => {
-            shopsContainer.appendChild(shop);
-        });
-    } else if (selectedValue === '評価が低い順') {
-         // 平均評価で昇順に並べ替え
-        var shops = Array.from(document.querySelectorAll('.shop'));
-        shops.sort((a, b) => {
-            var averageScoreA = parseFloat(a.querySelector('.shop__average-score').textContent);
-            var averageScoreB = parseFloat(b.querySelector('.shop__average-score').textContent);
-            // 平均評価が0の場合、評価を6として扱う
-            if (averageScoreA === 0) {
-                averageScoreA = 6;
+                var shopsContainer = document.querySelector('.shops-container');
+                shopsContainer.innerHTML = '';
+                shops.forEach(shop => {
+                    shopsContainer.appendChild(shop);
+                });
+            } else if (selectedValue === '評価が低い順') {
+                var shops = Array.from(document.querySelectorAll('.shop'));
+                shops.sort((a, b) => {
+                    var averageScoreA = parseFloat(a.querySelector('.shop__average-score').textContent);
+                    var averageScoreB = parseFloat(b.querySelector('.shop__average-score').textContent);
+                    if (averageScoreA === 0) {
+                        averageScoreA = 6;
+                    }
+                    if (averageScoreB === 0) {
+                        averageScoreB = 6;
+                    }
+                    return averageScoreA - averageScoreB;
+                });
+
+                var shopsContainer = document.querySelector('.shops-container');
+                shopsContainer.innerHTML = '';
+                shops.forEach(shop => {
+                    shopsContainer.appendChild(shop);
+                });
             }
-            if (averageScoreB === 0) {
-                averageScoreB = 6;
-            }
-            return averageScoreA - averageScoreB;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('sort').addEventListener('change', handleSortChange);
         });
 
-
-        // 並び替え後のショップをDOMに追加
-        var shopsContainer = document.querySelector('.shops-container');
-        shopsContainer.innerHTML = '';
-        shops.forEach(shop => {
-            shopsContainer.appendChild(shop);
-        });
-    }
-}
-
-// ページ読み込み時にはランダムシャッフルを行わないため、DOMContentLoadedイベントリスナーを使用します
-document.addEventListener('DOMContentLoaded', function() {
-    // ランダムオプションが選択されたときにシャッフル
-    document.getElementById('sort').addEventListener('change', handleSortChange);
-});
-
-
-    function toggleSelect() {
-        var select = document.getElementById("sort");
-        select.style.display = select.style.display === "none" ? "block" : "none";
-    }
-
-
-
-// let a = 0;
-
-    // function handleFileSelect() {
-    //     var fileInput = document.getElementById('fileInput');
-    //     var fileUploadedMessage = document.getElementById('fileUploadedMessage');
-    //     if (fileInput.files.length > 0) {
-    //         fileUploadedMessage.textContent = '1'; // ファイルが選択されたら1を表示
-    //     } else {
-    //         fileUploadedMessage.textContent = '0'; // ファイルが選択されていない場合は0を表示
-    //     }
-    // }
-
-
-    // <input type="file" name="csv_file" accept=".csv" class="csv__select" id="fileInput" onchange="handleFileSelect()">
-    //     <button type="submit" class="csv__import" id="importButton" style="display: none;">CSVをインポート</button>
+        function toggleSelect() {
+            var select = document.getElementById("sort");
+            select.style.display = select.style.display === "none" ? "block" : "none";
+        }
 
         function handleFileSelect() {
-        var fileInput = document.getElementById('fileInput');
-        var importButton = document.getElementById('importButton');
-        if (fileInput.files.length > 0) {
-            // ファイルが選択されたらボタンを表示
-            importButton.style.display = 'block';
-        } else {
-            // ファイルが選択されていない場合はボタンを非表示
-            importButton.style.display = 'none';
+            var fileInput = document.getElementById('fileInput');
+            var importButton = document.getElementById('importButton');
+            if (fileInput.files.length > 0) {
+                importButton.style.display = 'block';
+            } else {
+                importButton.style.display = 'none';
+            }
         }
-    }
 
-function handleDragOver(event) {
-    event.preventDefault(); // デフォルトの動作をキャンセル
-}
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
 
-function handleDrop(event) {
-    event.preventDefault(); // デフォルトの動作をキャンセル
-}
-
-
-</script>
+        function handleDrop(event) {
+            event.preventDefault();
+        }
+    </script>
 
 </body>
 

@@ -12,16 +12,10 @@ class Review extends Model
     protected $fillable = [
         'user_id',
         'shop_id',
-        // 'reservation_id',
         'score',
         'comment',
         'review_image_url',
     ];
-
-     // public function reservation()
-    // {
-    //     return $this->belongsTo(Reservation::class, 'reservation_id');
-    // }
 
     public function review()
     {
